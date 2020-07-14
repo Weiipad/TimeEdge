@@ -1,11 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerControll : MonoBehaviour
 {
-    public float maxDistanceDelta = 1f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +20,14 @@ public class PlayerControll : MonoBehaviour
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0;
         if (!GameCursor.IsInView(pos))
-            return;
-        transform.position = Vector2.MoveTowards(transform.position, pos, maxDistanceDelta);
+        {
+            //获取相机右上的点
+            Vector2 cameraUpRightPoint = Camera.main.ViewportToWorldPoint(Vector2.one);
+            //获取相机左下的点
+            Vector2 cameraBottomLeftPoint = Camera.main.ViewportToWorldPoint(Vector2.zero);
+
+            pos = pos.Clamp(pos, cameraBottomLeftPoint, cameraUpRightPoint);
+        }
+        transform.position = pos;
     }
 }
