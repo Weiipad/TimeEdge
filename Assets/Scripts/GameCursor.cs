@@ -4,41 +4,26 @@ using UnityEngine;
 
 public class GameCursor
 {
+
+    private static bool isCursorHide = false;
+
     /// <summary>
     /// 防止外部初始化
     /// </summary>
     private GameCursor() { }
 
     /// <summary>
-    /// 单例
-    /// </summary>
-    private static GameCursor instance;
-    public static GameCursor getInstance
-    {
-        get
-        {
-            if(instance == null)
-            {
-                instance = new GameCursor();
-            }
-            return instance;
-        }
-    }
-    private bool isPointerHide = false;
-    public bool IsPointerHide { get { return isPointerHide; } }
-
-    /// <summary>
     /// 是否隐藏鼠标指针
     /// </summary>
     /// <param name="value"></param>
-    public void HidePointer(bool value)
+    public static void HideCursor(bool value)
     {
-        isPointerHide = value;
-        if (isPointerHide)
+        isCursorHide = value;
+        if (isCursorHide)
         {
             Cursor.visible = false;
         }
-        else if (!isPointerHide)
+        else if (!isCursorHide)
         {
             Cursor.visible = true;
         }
@@ -49,7 +34,7 @@ public class GameCursor
     /// </summary>
     /// <param name="worldPos">物体位置</param>
     /// <returns></returns>
-    public bool IsInView(Vector3 worldPos)
+    public static bool IsInView(Vector3 worldPos)
     {
         Transform camTransform = Camera.main.transform;
         Vector2 viewPos = Camera.main.WorldToViewportPoint(worldPos);
@@ -60,5 +45,21 @@ public class GameCursor
             return true;
         else
             return false;
+    }
+
+    /// <summary>
+    /// 锁住鼠标指针
+    /// </summary>
+    public static void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    /// <summary>
+    /// 解锁鼠标指针
+    /// </summary>
+    public static void UnLockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
     }
 }
