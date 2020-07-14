@@ -37,13 +37,7 @@ public class Player : MonoBehaviour
         {
             load += 1;
         }
-        FollowMouse();
     }
 
-    private void FollowMouse()
-    {
-        var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var mousePosition = new Vector3(pos.x, pos.y);
-        transform.position = Vector3.Lerp(transform.position, mousePosition, speed);
-    }
+    
 }
