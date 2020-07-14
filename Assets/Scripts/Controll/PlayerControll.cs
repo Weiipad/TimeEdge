@@ -9,7 +9,7 @@ public class PlayerControll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameCursor.getInstance.HidePointer(true);
+        GameCursor.HideCursor(true);
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class PlayerControll : MonoBehaviour
     {
         var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         pos.z = 0;
-        if (!GameCursor.getInstance.IsInView(pos))
+        if (!GameCursor.IsInView(pos))
             return;
         transform.position = Vector2.MoveTowards(transform.position, pos, maxDistanceDelta);
     }
