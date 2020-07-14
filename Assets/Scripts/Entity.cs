@@ -21,14 +21,14 @@ public class Entity : MonoBehaviour
         if ((gameObject.CompareTag("Enemy") && collision.CompareTag("Bullet0")) || (gameObject.CompareTag("Player") && collision.CompareTag("Bullet1")))
         {
             // 受伤
-            Hurt();
+            Hurt(collision.GetComponent<GunBullet>());
             Destroy(collision.gameObject);
         }
     }
 
-    private void Hurt()
+    private void Hurt(GunBullet bullet)
     {
-        currentHP -= 1;
+        currentHP -= bullet.data.power;
         if (currentHP <= 0)
         {
             Destroy(gameObject);

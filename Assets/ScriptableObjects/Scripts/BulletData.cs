@@ -8,4 +8,5 @@ public class BulletData : ScriptableObject
     public Sprite sprite;
     public float velocity;
     public float duration;
+    public int power;
 }
