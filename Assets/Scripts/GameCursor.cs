@@ -19,14 +19,7 @@ public class GameCursor
     public static void HideCursor(bool value)
     {
         isCursorHide = value;
-        if (isCursorHide)
-        {
-            Cursor.visible = false;
-        }
-        else if (!isCursorHide)
-        {
-            Cursor.visible = true;
-        }
+        Cursor.visible = !isCursorHide;
     }
 
     /// <summary>
