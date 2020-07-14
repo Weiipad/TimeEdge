@@ -10,7 +10,7 @@ public class PlayerControll : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         FollowMouse();
     }
@@ -26,7 +26,8 @@ public class PlayerControll : MonoBehaviour
             //获取相机左下的点
             Vector2 cameraBottomLeftPoint = Camera.main.ViewportToWorldPoint(Vector2.zero);
 
-            pos = pos.Clamp(pos, cameraBottomLeftPoint, cameraUpRightPoint);
+            pos.x = Mathf.Clamp(pos.x, cameraBottomLeftPoint.x, cameraUpRightPoint.x);
+            pos.y = Mathf.Clamp(pos.y, cameraBottomLeftPoint.y, cameraUpRightPoint.y);
         }
         transform.position = pos;
     }
