@@ -38,6 +38,4 @@ public class Player : MonoBehaviour
             load += 1;
         }
     }
-
-    
 }
