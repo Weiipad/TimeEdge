@@ -6,7 +6,6 @@ public class PlayerControll : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameCursor.HideCursor(true);
     }
 
     // Update is called once per frame
@@ -14,21 +13,29 @@ public class PlayerControll : MonoBehaviour
     {
         FollowMouse();
     }
-
+    
     private void FollowMouse()
     {
-        var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        pos.z = 0;
-        if (!GameCursor.IsInView(pos))
-        {
-            //获取相机右上的点
-            Vector2 cameraUpRightPoint = Camera.main.ViewportToWorldPoint(Vector2.one);
-            //获取相机左下的点
-            Vector2 cameraBottomLeftPoint = Camera.main.ViewportToWorldPoint(Vector2.zero);
+        //获取相机右上的点
+        Vector2 cameraUpRightPoint = Camera.main.ViewportToWorldPoint(Vector2.one);
+        //获取相机左下的点
+        Vector2 cameraBottomLeftPoint = Camera.main.ViewportToWorldPoint(Vector2.zero);
 
-            pos.x = Mathf.Clamp(pos.x, cameraBottomLeftPoint.x, cameraUpRightPoint.x);
-            pos.y = Mathf.Clamp(pos.y, cameraBottomLeftPoint.y, cameraUpRightPoint.y);
+        var mouseMovement = new Vector3(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        var currentPosition = transform.position;
+
+        currentPosition += mouseMovement;
+
+        if (currentPosition.x < cameraBottomLeftPoint.x || currentPosition.x > cameraUpRightPoint.x)
+        {
+            currentPosition.x = transform.position.x;
         }
-        transform.position = pos;
+
+        if (currentPosition.y < cameraBottomLeftPoint.y || currentPosition.y > cameraUpRightPoint.y)
+        {
+            currentPosition.y = transform.position.y;
+        }
+
+        transform.position = currentPosition;
     }
 }
