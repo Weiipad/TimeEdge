@@ -6,7 +6,7 @@ public class BulletGenerator : MonoBehaviour
 {
     public GameObject bullet;
     public int bulletNumber;
-    public void Shoot()
+    public virtual void Shoot()
     {
         Quaternion old = transform.rotation;
         float angle;
@@ -21,7 +21,8 @@ public class BulletGenerator : MonoBehaviour
         for (int i = 1; i <= bulletNumber; i++)
         {
             transform.Rotate(new Vector3(0, 0, angle));
-            Instantiate(bullet, transform.position, transform.rotation);
+            var bulletGO = Instantiate(bullet, transform.position, transform.rotation);
+            bulletGO.GetComponent<Rigidbody2D>().velocity = bulletGO.GetComponent<GunBullet>().data.velocity * Time.deltaTime * transform.up;
             transform.rotation = old;
             angle += 10;
         }

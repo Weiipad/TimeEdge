@@ -2,14 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class EntityMono : MonoBehaviour
 {
     public int maxHP;
     public int currentHP;
 
+    public int maxShield;
+    public int currentShield;
+    private Animation anim;
     private void Start()
     {
         currentHP = maxHP;
+        anim = GetComponent<Animation>();
     }
 
     /// <summary>
@@ -24,11 +28,36 @@ public class Entity : MonoBehaviour
             Hurt(collision.GetComponent<GunBullet>());
             Destroy(collision.gameObject);
         }
+        else if(gameObject.CompareTag("Player") && collision.CompareTag("ShieldBuff"))
+        {
+            currentShield += 10;
+            Destroy(collision.gameObject);
+        }
     }
 
     private void Hurt(GunBullet bullet)
     {
-        currentHP -= bullet.data.power;
+        var damage = bullet.data.power;
+        if(currentShield > 0)
+        {
+            if (currentShield > damage)
+            {
+                currentShield -= damage;
+                damage = 0;
+            }
+            else
+            {
+                damage -= currentShield;
+                currentShield = 0;
+            }
+        }
+
+        if(damage != 0)
+        {
+            currentHP -= damage;
+        }
+        
+        anim.Play();
         if (currentHP <= 0)
         {
             Destroy(gameObject);

@@ -7,6 +7,7 @@ TagManager:
   - Enemy
   - Bullet0
   - Bullet1
+  - ShieldBuff
   layers:
   - Default
   - TransparentFX
