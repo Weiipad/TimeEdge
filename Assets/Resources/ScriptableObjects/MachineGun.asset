@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ammunition: {fileID: 734876988625924029, guid: 15f1de08965c9be448f103b4c790f455,
     type: 3}
-  fullLoad: 0
-  baseLoadSpeed: 0
+  fullLoad: 1
+  baseLoadSpeed: 1
+  bulletVelocity: 20

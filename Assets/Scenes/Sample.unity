@@ -444,10 +444,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e31f6825203e3542913e9ae5602fc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 734876988625924029, guid: 15f1de08965c9be448f103b4c790f455, type: 3}
-  load: 0
-  finishLoading: 10
-  speed: 0.005
+  loadSpeedScale: 1
 --- !u!114 &520759997
 MonoBehaviour:
   m_ObjectHideFlags: 0

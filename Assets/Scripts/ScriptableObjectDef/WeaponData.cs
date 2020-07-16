@@ -5,10 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Bullet", menuName = "Time Edge/WeaponData")]
+[CreateAssetMenu(fileName = "NewWeaponData", menuName = "Time Edge/WeaponData")]
 public class WeaponData : ScriptableObject
 {
-    public GameObject ammunition;
+    public Bullet ammunition;
     public float fullLoad;
     public float baseLoadSpeed;
+
+    public float bulletVelocity;
 }

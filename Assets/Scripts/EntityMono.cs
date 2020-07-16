@@ -25,7 +25,7 @@ public class EntityMono : MonoBehaviour
         if ((gameObject.CompareTag("Enemy") && collision.CompareTag("Bullet0")) || (gameObject.CompareTag("Player") && collision.CompareTag("Bullet1")))
         {
             // 受伤
-            Hurt(collision.GetComponent<GunBullet>());
+            Hurt(collision.GetComponent<Bullet>());
             Destroy(collision.gameObject);
         }
         else if(gameObject.CompareTag("Player") && collision.CompareTag("ShieldBuff"))
@@ -35,7 +35,7 @@ public class EntityMono : MonoBehaviour
         }
     }
 
-    private void Hurt(GunBullet bullet)
+    private void Hurt(Bullet bullet)
     {
         var damage = bullet.data.power;
         if(currentShield > 0)

@@ -22,7 +22,7 @@ public class BulletGenerator : MonoBehaviour
         {
             transform.Rotate(new Vector3(0, 0, angle));
             var bulletGO = Instantiate(bullet, transform.position, transform.rotation);
-            bulletGO.GetComponent<Rigidbody2D>().velocity = bulletGO.GetComponent<GunBullet>().data.velocity * Time.deltaTime * transform.up;
+            bulletGO.GetComponent<Rigidbody2D>().velocity = bulletGO.GetComponent<Bullet>().data.velocity * Time.deltaTime * transform.up;
             transform.rotation = old;
             angle += 10;
         }

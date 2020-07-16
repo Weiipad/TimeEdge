@@ -11,11 +11,13 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(null);
+        weapon = new MachineGun(this);
+        var a = MachineGun.class;
     }
 
     // Update is called once per frame
     void Update()
     {
+        weapon.Update();
     }
 }
