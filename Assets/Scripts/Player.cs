@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         weapon = new MachineGun(this);
-        var a = MachineGun.class;
     }
 
     // Update is called once per frame
