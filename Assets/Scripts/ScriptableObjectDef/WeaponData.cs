@@ -12,5 +12,8 @@ public class WeaponData : ScriptableObject
     public float fullLoad;
     public float baseLoadSpeed;
 
+    // Bullet data
     public float bulletVelocity;
+    public float bulletDamage;
+    public float bulletDuration;
 }

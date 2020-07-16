@@ -12,6 +12,7 @@ public class MachineGun : Weapon
     public override void Shoot()
     {
         Bullet bullet = Object.Instantiate(data.ammunition, player.transform.position, player.transform.rotation);
+        bullet.weaponData = data;
         bullet.rigidbody.velocity = data.bulletVelocity * bullet.transform.up;
     }
 }

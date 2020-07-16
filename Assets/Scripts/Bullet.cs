@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public BulletData data;
-
     private float timeAccumulator;
 
     [HideInInspector]
     public new Rigidbody2D rigidbody;
+
+    [HideInInspector]
+    public WeaponData weaponData;
 
     void Awake()
     {
@@ -18,8 +19,10 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
+        if (weaponData.bulletDuration <= 0) return;
+
         timeAccumulator += Time.deltaTime;
-        if (timeAccumulator >= data.duration)
+        if (timeAccumulator >= weaponData.bulletDuration)
         {
             Destroy(transform.gameObject);
         }

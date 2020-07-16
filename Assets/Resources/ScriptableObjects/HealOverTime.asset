@@ -9,10 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23bc1e99995ffbe409f3180c9f531d82, type: 3}
-  m_Name: GunBulletData
+  m_Script: {fileID: 11500000, guid: e0dbaf7d8801fd248b34f4ff16947307, type: 3}
+  m_Name: HealOverTime
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: a6b9f2d154e516c45b67faee388c4364, type: 3}
-  velocity: 5000
-  duration: 1
-  power: 3
+  duration: 10

@@ -2,24 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityMono : MonoBehaviour
+public class GameEntity : MonoBehaviour
 {
-    public int maxHP;
-    public int currentHP;
+    public float maxHP;
+    public float currentHP;
 
-    public int maxShield;
-    public int currentShield;
+    public float HP 
+    {
+        get => currentHP;
+        set 
+        {
+            if (value >= maxHP) currentHP = maxHP;
+            else if (value >= 0) currentHP = value;
+            else currentHP = 0;
+        }
+    }
+
+    public float maxShield;
+    public float currentShield;
+
+    private List<Effect> effects = new List<Effect>();
+
+    // Performance data
     private Animation anim;
+
     private void Start()
     {
         currentHP = maxHP;
         anim = GetComponent<Animation>();
+
+        if (CompareTag("Enemy")) effects.Add(new HealOverTime(this, 5.0f));
     }
 
-    /// <summary>
-    /// 伤害
-    /// </summary>
-    /// <param name="collision">碰撞的碰撞体</param>
+    private void Update()
+    {
+        foreach(var effect in effects)
+        {
+            effect.Update();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        foreach(var effect in effects)
+        {
+            if (effect.Deprecated) continue;
+            effect.Affect();
+        }
+        
+        effects.RemoveAll(e => e.Deprecated);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if ((gameObject.CompareTag("Enemy") && collision.CompareTag("Bullet0")) || (gameObject.CompareTag("Player") && collision.CompareTag("Bullet1")))
@@ -35,9 +68,14 @@ public class EntityMono : MonoBehaviour
         }
     }
 
+    public void AddEffect(Effect effect)
+    {
+        effects.Add(effect);
+    }
+
     private void Hurt(Bullet bullet)
     {
-        var damage = bullet.data.power;
+        var damage = bullet.weaponData.bulletDamage;
         if(currentShield > 0)
         {
             if (currentShield > damage)
