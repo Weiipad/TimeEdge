@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MachineGun : Weapon
 {
-    public MachineGun(GameEntity owner) : base(owner)
+    public MachineGun(GameEntity owner, string dataPath = "ScriptableObjects/MachineGun") : base(owner)
     {
-        data = Resources.Load("ScriptableObjects/MachineGun") as WeaponData;
+        data = Resources.Load(dataPath) as WeaponData;
     }
 
     protected override void Shoot()

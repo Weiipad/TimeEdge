@@ -56,8 +56,7 @@ public class GameEntity : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        Bullet bullet = collision.GetComponent<Bullet>();
-        if ((gameObject.CompareTag("Enemy") && bullet.isFromPlayer) || (gameObject.CompareTag("Player") && !bullet.isFromPlayer))
+        if ((gameObject.CompareTag("Enemy") && collision.CompareTag("Bullet0")) || (gameObject.CompareTag("Player") && collision.CompareTag("Bullet1")))
         {
             // 受伤
             Hurt(collision.GetComponent<Bullet>());
