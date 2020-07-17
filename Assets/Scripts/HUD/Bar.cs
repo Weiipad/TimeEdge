@@ -76,8 +76,6 @@ public class Bar : MonoBehaviour
         childImage = transform.GetChild(0).GetComponent<Image>();
 
         var rectTransformSizeDelta = GetComponent<RectTransform>().sizeDelta;
-        Debug.Log(rectTransformSizeDelta);
-
         if (rectTransformSizeDelta != Vector2.zero)
         {
             maxBarWidth = rectTransformSizeDelta.x;
