@@ -51,3 +51,6 @@ TagManager:
   - name: Ship
     uniqueID: 3379875455
     locked: 0
+  - name: HUD
+    uniqueID: 1777235193
+    locked: 0

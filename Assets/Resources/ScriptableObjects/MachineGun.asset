@@ -18,4 +18,4 @@ MonoBehaviour:
   baseLoadSpeed: 10
   bulletVelocity: 10
   bulletDamage: 10
-  bulletDuration: 0.5
+  bulletDuration: 1
