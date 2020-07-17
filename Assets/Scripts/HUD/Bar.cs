@@ -37,6 +37,12 @@ public class Bar : MonoBehaviour
     /// 游戏物体标签，按照标签寻找物体
     /// </summary>
     public string EntityTag;
+
+    /// <summary>
+    /// 镜像显示
+    /// </summary>
+    public bool Mirror = false;
+
     private GameEntity targetEntity;
     private Weapon weapon;
     private bool isGetEntity;
@@ -57,6 +63,16 @@ public class Bar : MonoBehaviour
         }
 
         currentBar = transform.GetChild(0).GetComponent<RectTransform>();
+        if (Mirror)
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+
+        }
+    
         childImage = transform.GetChild(0).GetComponent<Image>();
 
         var rectTransformSizeDelta = GetComponent<RectTransform>().sizeDelta;

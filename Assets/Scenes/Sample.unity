@@ -707,12 +707,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2223575293701774c8b44a6cf8b2f03b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barType: 3
+  barType: 1
   barDirect: 1
   BloodBarColor: {r: 1, g: 0, b: 0, a: 1}
   ShieldBarColor: {r: 0, g: 0, b: 1, a: 1}
   LoadBulletColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  EntityTag: Player
+  EntityTag: Enemy
+  Mirror: 0
 --- !u!1 &1324542887
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +859,7 @@ GameObject:
   - component: {fileID: 1356707776}
   - component: {fileID: 1356707775}
   m_Layer: 5
-  m_Name: -------------Hud-------------
+  m_Name: Hud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
