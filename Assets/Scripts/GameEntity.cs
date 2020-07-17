@@ -32,7 +32,7 @@ public class GameEntity : MonoBehaviour
         currentHP = maxHP;
         anim = GetComponent<Animation>();
 
-        if (CompareTag("Enemy")) effects.Add(new HealOverTime(this, 5.0f));
+        //if (CompareTag("Enemy")) effects.Add(new HealOverTime(this, 5.0f));
     }
 
     protected virtual void Update()
@@ -83,11 +83,11 @@ public class GameEntity : MonoBehaviour
             if (currentShield > damage)
             {
                 currentShield -= damage;
-                damage = 0;
+                damage /= 2;
             }
             else
             {
-                damage -= currentShield;
+                damage -= currentShield / 2;
                 currentShield = 0;
             }
         }
