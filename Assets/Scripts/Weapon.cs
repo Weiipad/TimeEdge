@@ -5,10 +5,10 @@ using UnityEngine;
 public abstract class Weapon
 {
     protected GameEntity owner;
-
-    // TODO: WeaponData -- A ScriptableObject class to describe basic data of a weapon.
     protected WeaponData data = null;
     protected float load;
+
+    private bool readyToFire = false;
 
     public float Load
     {
@@ -29,13 +29,19 @@ public abstract class Weapon
         if (data == null) return;
 
         load += data.baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
-        if (load >= data.fullLoad && Input.GetKey(KeyCode.Mouse0))
+        if (load >= data.fullLoad && readyToFire)
         {
             Shoot();
             load = 0;
         }
-
+        readyToFire = false;
     }
 
-    public abstract void Shoot();
+    // Must be called before Update.
+    public void Fire()
+    {
+        readyToFire = true;
+    }
+    
+    protected abstract void Shoot();
 }

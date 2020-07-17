@@ -77,7 +77,7 @@ public class GameEntity : MonoBehaviour
 
     protected void Hurt(Bullet bullet)
     {
-        var damage = bullet.data.damage;
+        var damage = bullet.weaponData.bulletDamage;
         if(currentShield > 0)
         {
             if (currentShield > damage)

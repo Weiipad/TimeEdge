@@ -2,27 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : GameEntity
+public class Player : MonoBehaviour
 {
 
     private Weapon weapon;
     public Weapon GetWeapon { get => weapon; }
     // Start is called before the first frame update
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-        weapon = new MachineGun(this);
+        weapon = new MachineGun(GetComponent<GameEntity>());
     }
 
     // Update is called once per frame
-    protected override void Update()
+    void Update()
     {
-        base.Update();
+        if (Input.GetKey(KeyCode.Mouse0)) weapon.Fire();
         weapon.Update();
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
     }
 }

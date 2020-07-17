@@ -6,7 +6,6 @@ public class Bullet : MonoBehaviour
 {
     private float timeAccumulator;
     public bool isFromPlayer;
-    public BulletData data;
 
     [HideInInspector]
     public new Rigidbody2D rigidbody;
@@ -21,10 +20,10 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        if (data.duration <= 0) return;
+        if (weaponData.bulletDuration <= 0) return;
 
         timeAccumulator += Time.deltaTime;
-        if (timeAccumulator >= data.duration)
+        if (timeAccumulator >= weaponData.bulletDuration)
         {
             Destroy(transform.gameObject);
         }

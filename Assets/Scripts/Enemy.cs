@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : GameEntity
+public class Enemy : MonoBehaviour
 {
     private Weapon weapon;
-    protected override void Start()
+    void Start()
     {
-        base.Start();
-        weapon = new MachineGun(this);
+        weapon = new MachineGun(GetComponent<GameEntity>());
     }
 
-    protected override void Update()
+    void Update()
     {
-        base.Update();
+        weapon.Fire();
         weapon.Update();
-    }
-    protected override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
     }
 }

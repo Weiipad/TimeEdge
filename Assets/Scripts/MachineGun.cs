@@ -9,10 +9,11 @@ public class MachineGun : Weapon
         data = Resources.Load("ScriptableObjects/MachineGun") as WeaponData;
     }
 
-    public override void Shoot()
+    protected override void Shoot()
     {
         Bullet bullet = Object.Instantiate(data.ammunition, owner.transform.position, owner.transform.rotation);
         bullet.isFromPlayer = owner.CompareTag("Player");
-        bullet.rigidbody.velocity = bullet.data.velocity * bullet.transform.up;
+        bullet.rigidbody.velocity = data.bulletVelocity * bullet.transform.up;
+        bullet.weaponData = data;
     }
 }
