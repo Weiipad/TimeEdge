@@ -6,7 +6,7 @@ public class Player : GameEntity
 {
 
     private Weapon weapon;
-
+    public Weapon GetWeapon { get => weapon; }
     // Start is called before the first frame update
     protected override void Start()
     {
