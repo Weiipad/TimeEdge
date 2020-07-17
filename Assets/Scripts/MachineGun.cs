@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MachineGun : Weapon
 {
-    public MachineGun(Player player) : base(player)
+    public MachineGun(GameEntity owner) : base(owner)
     {
         data = Resources.Load("ScriptableObjects/MachineGun") as WeaponData;
     }
 
     public override void Shoot()
     {
-        Bullet bullet = Object.Instantiate(data.ammunition, player.transform.position, player.transform.rotation);
-        bullet.weaponData = data;
-        bullet.rigidbody.velocity = data.bulletVelocity * bullet.transform.up;
+        Bullet bullet = Object.Instantiate(data.ammunition, owner.transform.position, owner.transform.rotation);
+        bullet.isFromPlayer = owner.CompareTag("Player");
+        bullet.rigidbody.velocity = bullet.data.velocity * bullet.transform.up;
     }
 }

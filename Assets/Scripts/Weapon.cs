@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Weapon
 {
-    protected Player player;
+    protected GameEntity owner;
 
     // TODO: WeaponData -- A ScriptableObject class to describe basic data of a weapon.
     protected WeaponData data = null;
@@ -19,16 +19,16 @@ public abstract class Weapon
     {
         get => data.fullLoad;
     }
-    public Weapon(Player player)
+    public Weapon(GameEntity owenr)
     {
-        this.player = player;
+        this.owner = owenr;
     }
 
     public void Update()
     {
         if (data == null) return;
 
-        load += data.baseLoadSpeed * player.loadSpeedScale * Time.deltaTime;
+        load += data.baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
         if (load >= data.fullLoad && Input.GetKey(KeyCode.Mouse0))
         {
             Shoot();

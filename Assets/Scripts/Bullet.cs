@@ -5,6 +5,8 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float timeAccumulator;
+    public bool isFromPlayer;
+    public BulletData data;
 
     [HideInInspector]
     public new Rigidbody2D rigidbody;
@@ -19,10 +21,10 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        if (weaponData.bulletDuration <= 0) return;
+        if (data.duration <= 0) return;
 
         timeAccumulator += Time.deltaTime;
-        if (timeAccumulator >= weaponData.bulletDuration)
+        if (timeAccumulator >= data.duration)
         {
             Destroy(transform.gameObject);
         }

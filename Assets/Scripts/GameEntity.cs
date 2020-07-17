@@ -6,6 +6,7 @@ public class GameEntity : MonoBehaviour
 {
     public float maxHP;
     public float currentHP;
+    public float loadSpeedScale;
 
     public float HP 
     {
@@ -26,7 +27,7 @@ public class GameEntity : MonoBehaviour
     // Performance data
     private Animation anim;
 
-    private void Start()
+    protected virtual void Start()
     {
         currentHP = maxHP;
         anim = GetComponent<Animation>();
@@ -34,7 +35,7 @@ public class GameEntity : MonoBehaviour
         if (CompareTag("Enemy")) effects.Add(new HealOverTime(this, 5.0f));
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         foreach(var effect in effects)
         {
@@ -42,7 +43,7 @@ public class GameEntity : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         foreach(var effect in effects)
         {
@@ -53,9 +54,10 @@ public class GameEntity : MonoBehaviour
         effects.RemoveAll(e => e.Deprecated);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if ((gameObject.CompareTag("Enemy") && collision.CompareTag("Bullet0")) || (gameObject.CompareTag("Player") && collision.CompareTag("Bullet1")))
+        Bullet bullet = collision.GetComponent<Bullet>();
+        if ((gameObject.CompareTag("Enemy") && bullet.isFromPlayer) || (gameObject.CompareTag("Player") && !bullet.isFromPlayer))
         {
             // 受伤
             Hurt(collision.GetComponent<Bullet>());
@@ -73,9 +75,9 @@ public class GameEntity : MonoBehaviour
         effects.Add(effect);
     }
 
-    private void Hurt(Bullet bullet)
+    protected void Hurt(Bullet bullet)
     {
-        var damage = bullet.weaponData.bulletDamage;
+        var damage = bullet.data.damage;
         if(currentShield > 0)
         {
             if (currentShield > damage)

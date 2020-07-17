@@ -96,7 +96,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc8228210c0ecfe4abc785015141d041, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 11400000, guid: 5d94cf75a94a8e74f9aaacd437253f5b, type: 2}
+  data: {fileID: 11400000, guid: 5487e01095a234a46b367f4dc6ae2f89, type: 2}
+  rigidbody: {fileID: 0}
+  weaponData: {fileID: 0}
 --- !u!50 &6344108184389947913
 Rigidbody2D:
   serializedVersion: 4
