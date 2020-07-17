@@ -77,6 +77,11 @@ public class Bar : MonoBehaviour
             case BarType.loadBullet :childImage.color = LoadBulletColor;break;
             default:break;
         }
+
+        if(barType == BarType.loadBullet && EntityTag != "Player")
+        {
+            throw new System.Exception("只有玩家才能使用武器装填信息条");
+        }
     }
 
     private void FixedUpdate()
@@ -116,7 +121,7 @@ public class Bar : MonoBehaviour
         {
             if(weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<Weapon>();
+                weapon = targetEntity.gameObject.GetComponent<Player>().GetWeapon;
                 if (weapon == null)
                     return;
             }
@@ -131,6 +136,8 @@ public class Bar : MonoBehaviour
         float percent = current / max;
         if (current.Equals(0f))
             percent = 0f;
+        if(percent.Equals(1f) || percent > 1f)
+            percent = 1f;
         if (barDirect == BarDirect.horizontal)
         {
             float newWidth = maxBarWidth * percent;
