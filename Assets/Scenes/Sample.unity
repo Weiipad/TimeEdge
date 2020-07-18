@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 254554872}
   - component: {fileID: 254554871}
   - component: {fileID: 254554874}
+  - component: {fileID: 254554875}
   m_Layer: 0
   m_Name: ShieldBuff
   m_TagString: ShieldBuff
@@ -572,6 +573,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &254554875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 254554870}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36dcd11d588b9924c9a91155976d0976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &520759995
 GameObject:
   m_ObjectHideFlags: 0

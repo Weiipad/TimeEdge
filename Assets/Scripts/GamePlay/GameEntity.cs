@@ -27,7 +27,7 @@ public class GameEntity : MonoBehaviour
     // Performance data
     private Animation anim;
 
-    protected virtual void Start()
+    protected void Start()
     {
         currentHP = maxHP;
         anim = GetComponent<Animation>();
@@ -35,7 +35,7 @@ public class GameEntity : MonoBehaviour
         //if (CompareTag("Enemy")) effects.Add(new HealOverTime(this, 5.0f));
     }
 
-    protected virtual void Update()
+    protected void Update()
     {
         foreach(var effect in effects)
         {
@@ -43,7 +43,7 @@ public class GameEntity : MonoBehaviour
         }
     }
 
-    protected virtual void FixedUpdate()
+    protected void FixedUpdate()
     {
         foreach(var effect in effects)
         {
@@ -51,10 +51,18 @@ public class GameEntity : MonoBehaviour
             effect.Affect();
         }
         
-        effects.RemoveAll(e => e.Deprecated);
+        effects.RemoveAll(e =>
+        {
+            if (e.Deprecated) 
+            {
+                e.OnRemove();
+                return true;
+            }
+            return false;
+        });
     }
 
-    protected virtual void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
         if ((gameObject.CompareTag("Enemy") && collision.CompareTag("Bullet0")) || (gameObject.CompareTag("Player") && collision.CompareTag("Bullet1")))
         {
@@ -62,22 +70,18 @@ public class GameEntity : MonoBehaviour
             Hurt(collision.GetComponent<Bullet>());
             Destroy(collision.gameObject);
         }
-        else if(gameObject.CompareTag("Player") && collision.CompareTag("ShieldBuff"))
-        {
-            currentShield += 10;
-            Destroy(collision.gameObject);
-        }
     }
 
     public void AddEffect(Effect effect)
     {
         effects.Add(effect);
+        effect.OnAdd();
     }
 
     protected void Hurt(Bullet bullet)
     {
         var damage = bullet.weaponData.bulletDamage;
-        if(currentShield > 0)
+        if (currentShield > 0)
         {
             if (currentShield > damage)
             {
@@ -91,7 +95,7 @@ public class GameEntity : MonoBehaviour
             }
         }
 
-        if(damage != 0)
+        if (damage > 0)
         {
             currentHP -= damage;
         }

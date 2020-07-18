@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Effect
+public class Effect
 {
     protected EffectData data;
     protected GameEntity entity;
@@ -24,5 +24,18 @@ public abstract class Effect
         timeCount += Time.deltaTime;
     }
 
-    public abstract void Affect();
+    public virtual void OnAdd()
+    {
+
+    }
+
+    public virtual void OnRemove()
+    {
+
+    }
+
+    public virtual void Affect()
+    {
+        
+    }
 }

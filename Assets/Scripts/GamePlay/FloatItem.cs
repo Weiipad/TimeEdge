@@ -4,15 +4,28 @@ using UnityEngine;
 
 public class FloatItem : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Vector2 direction = new Vector2();
+    private Rigidbody2D body;
+
+    void Awake()
     {
-        
+        body = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
     {
-        
+        direction.y = Random.Range(-2f, 0f);
+        direction.x = Random.Range(-2f, 2f);
+        body.velocity = direction;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            var entity = collision.GetComponent<GameEntity>();
+            entity.AddEffect(new AddShield(entity, 10));
+            Destroy(gameObject);
+        }
     }
 }
