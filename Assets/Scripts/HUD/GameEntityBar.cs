@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameEntityBar : Bar
 {
+    public enum EntityFrom
+    {
+        tag,
+        gameObject,
+    }
+
     public enum BarType
     {
-        none,
         blood,
         shield,
         loadBullet,
@@ -16,16 +22,26 @@ public class GameEntityBar : Bar
     /// <summary>
     /// 显示的类别
     /// </summary>
-    public BarType barType = BarType.none;
+    public BarType barType = BarType.blood;
 
-    public Color BloodBarColor = Color.red;
-    public Color ShieldBarColor = Color.blue;
-    public Color LoadBulletColor = Color.gray;
+    /// <summary>
+    /// 实体数据来自标签或游戏物体
+    /// </summary>
+    public EntityFrom entityFrom = EntityFrom.tag;
 
     /// <summary>
     /// 游戏物体标签，按照标签寻找物体
     /// </summary>
     public string EntityTag;
+
+    /// <summary>
+    /// 指定的游戏物体
+    /// </summary>
+    public GameObject targetEntityObject;
+
+    public Color BloodBarColor = Color.red;
+    public Color ShieldBarColor = Color.blue;
+    public Color LoadBulletColor = Color.gray;
 
     private GameEntity targetEntity;
     private Weapon weapon;
@@ -43,32 +59,31 @@ public class GameEntityBar : Bar
 
     protected override void BarInit()
     {
-        currentBar = transform.GetChild(0).GetComponent<RectTransform>();
-        if (Mirror)
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 180f));
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
-
-        }
-
         childImage = transform.GetChild(0).GetComponent<Image>();
+        if (childImage.sprite == null)
+            childImage.sprite = Resources.Load<Sprite>("Pictures/WhiteBoard");
 
-        var rectTransformSizeDelta = GetComponent<RectTransform>().sizeDelta;
-        if (rectTransformSizeDelta != Vector2.zero)
+        if (childImage.type != Image.Type.Filled)
         {
-            maxBarWidth = rectTransformSizeDelta.x;
-            maxBarHeight = rectTransformSizeDelta.y;
-            currentBar.sizeDelta = rectTransformSizeDelta;
-            currentBar.anchoredPosition = new Vector2(0f, -rectTransformSizeDelta.y);
+            childImage.type = Image.Type.Filled;
         }
-
-        if (EntityTag != null)
+        if (entityFrom == EntityFrom.tag)
         {
-            targetEntity = GameObject.FindGameObjectWithTag(EntityTag).GetComponent<GameEntity>();
-            isGetEntity = true;
+            if (EntityTag != null)
+            {
+                targetEntity = GameObject.FindGameObjectWithTag(EntityTag).GetComponent<GameEntity>();
+                if (targetEntity != null)
+                    isGetEntity = true;
+            }
+        }
+        else if(entityFrom == EntityFrom.gameObject)
+        {
+            if(targetEntityObject != null)
+            {
+                targetEntity = GameObject.FindGameObjectWithTag(EntityTag).GetComponent<GameEntity>();
+                if(targetEntity != null)
+                    isGetEntity = true;
+            }
         }
 
         switch (barType)
@@ -91,7 +106,7 @@ public class GameEntityBar : Bar
 
     protected override void BarStatusUpdate()
     {
-        if (barType == BarType.none || targetEntity == null || currentBar == null || maxBarWidth.Equals(0f) || maxValue.Equals(0f))
+        if (targetEntity == null || maxValue.Equals(0f) || !isGetEntity)
         {
             if (targetEntity == null)
             {
@@ -111,21 +126,10 @@ public class GameEntityBar : Bar
         {
             OnValueChange();
         }
-        float percent = currentValue / maxValue;
-        if (currentValue.Equals(0f))
-            percent = 0f;
-        if (percent.Equals(1f) || percent > 1f)
-            percent = 1f;
-        if (barDirect == BarDirect.horizontal)
-        {
-            float newWidth = maxBarWidth * percent;
-            currentBar.sizeDelta = new Vector2(newWidth, currentBar.sizeDelta.y);
-        }
-        else if (barDirect == BarDirect.vertical)
-        {
-            float newHeight = maxBarHeight * percent;
-            currentBar.sizeDelta = new Vector2(currentBar.sizeDelta.x, newHeight);
-        }
+        float percent = 0f;
+        if (!maxValue.Equals(0f))
+            percent = Mathf.Clamp(currentValue / maxValue, 0f, 1f);
+        childImage.fillAmount = percent;
     }
 
     protected override float GetCurrentValue()
