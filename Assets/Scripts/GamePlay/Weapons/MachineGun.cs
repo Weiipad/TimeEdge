@@ -12,7 +12,7 @@ public class MachineGun : Weapon
     protected override void Shoot()
     {
         Bullet bullet = Object.Instantiate(data.ammunition, owner.transform.position, owner.transform.rotation);
-        bullet.isFromPlayer = owner.CompareTag("Player");
+        bullet.damage = data.bulletDamage * owner.damageRate;
         bullet.rigidbody.velocity = data.bulletVelocity * bullet.transform.up;
         bullet.weaponData = data;
     }

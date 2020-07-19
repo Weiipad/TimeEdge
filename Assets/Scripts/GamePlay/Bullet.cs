@@ -5,13 +5,14 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float timeAccumulator;
-    public bool isFromPlayer;
+    public float damage;
 
     [HideInInspector]
     public new Rigidbody2D rigidbody;
 
     [HideInInspector]
     public WeaponData weaponData;
+
 
     void Awake()
     {

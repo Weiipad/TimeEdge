@@ -906,6 +906,8 @@ MonoBehaviour:
   maxHP: 200
   currentHP: 0
   loadSpeedScale: 1
+  defenseRate: 1
+  damageRate: 1
   maxShield: 10
   currentShield: 0
 --- !u!1 &541896675
@@ -1057,7 +1059,7 @@ PrefabInstance:
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 7.2485
+      value: 7.2485046
       objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
@@ -1504,6 +1506,8 @@ MonoBehaviour:
   maxHP: 200
   currentHP: 0
   loadSpeedScale: 0
+  defenseRate: 1
+  damageRate: 1
   maxShield: 200
   currentShield: 100
 --- !u!58 &1324542891
@@ -1929,6 +1933,8 @@ MonoBehaviour:
   maxHP: 200
   currentHP: 0
   loadSpeedScale: 1
+  defenseRate: 1
+  damageRate: 80
   maxShield: 10
   currentShield: 0
 --- !u!1 &1595134675

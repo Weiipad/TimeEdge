@@ -7,6 +7,8 @@ public class GameEntity : MonoBehaviour
     public float maxHP;
     public float currentHP;
     public float loadSpeedScale;
+    public float defenseRate = 1f;
+    public float damageRate = 1f;
 
     public float HP 
     {
@@ -37,7 +39,11 @@ public class GameEntity : MonoBehaviour
 
     protected void Update()
     {
-        foreach(var effect in effects)
+        if (currentHP <= 0)
+        {
+            Destroy(gameObject);
+        }
+        foreach (var effect in effects)
         {
             effect.Update();
         }
@@ -80,7 +86,7 @@ public class GameEntity : MonoBehaviour
 
     protected void Hurt(Bullet bullet)
     {
-        var damage = bullet.weaponData.bulletDamage;
+        var damage = bullet.damage*defenseRate;
         if (currentShield > 0)
         {
             if (currentShield > damage)
@@ -101,9 +107,5 @@ public class GameEntity : MonoBehaviour
         }
         
         anim.Play();
-        if (currentHP <= 0)
-        {
-            Destroy(gameObject);
-        }
     }
 }
