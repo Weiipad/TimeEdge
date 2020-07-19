@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0dbaf7d8801fd248b34f4ff16947307, type: 3}
   m_Name: HealOverTime
   m_EditorClassIdentifier: 
+  image: {fileID: 2800000, guid: cdd106c0965baea4cb89573520691df2, type: 3}
   duration: 10
