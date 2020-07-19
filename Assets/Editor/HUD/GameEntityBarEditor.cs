@@ -9,26 +9,28 @@ public class GameEntityBarEditor : Editor
     SerializedObject barObject;
 
     SerializedProperty barType;
+    SerializedProperty entityFrom;
+    SerializedProperty entityTag;
+    SerializedProperty targetEntityObject;
+
     SerializedProperty bloodBarColor;
     SerializedProperty shieldBarColor;
     SerializedProperty loadBulletBarColor;
-    SerializedProperty barDirect;
-    SerializedProperty entityTag;
-    SerializedProperty mirror;
+
+    
     private void OnEnable()
     {
         barObject = new SerializedObject(target);
         if (barObject != null)
         {
             barType = barObject.FindProperty("barType");
+            entityFrom = barObject.FindProperty("entityFrom");
+            entityTag = barObject.FindProperty("EntityTag");
+            targetEntityObject = barObject.FindProperty("targetEntityObject");
+
             bloodBarColor = barObject.FindProperty("BloodBarColor");
             shieldBarColor = barObject.FindProperty("ShieldBarColor");
             loadBulletBarColor = barObject.FindProperty("LoadBulletColor");
-
-            barDirect = barObject.FindProperty("barDirect");
-            entityTag = barObject.FindProperty("EntityTag");
-            
-            mirror = barObject.FindProperty("Mirror");
         }
     }
 
@@ -41,9 +43,16 @@ public class GameEntityBarEditor : Editor
             {
                 EditorGUILayout.PropertyField(barType);
                 BarTypeOnInspectorGUI(barType.enumValueIndex);
-                EditorGUILayout.PropertyField(barDirect);
-                EditorGUILayout.PropertyField(entityTag);
-                EditorGUILayout.PropertyField(mirror);
+
+                EditorGUILayout.PropertyField(entityFrom);
+                if (entityFrom.enumValueIndex == 0)
+                {
+                    EditorGUILayout.PropertyField(entityTag);
+                }
+                else if (entityFrom.enumValueIndex == 1)
+                {
+                    EditorGUILayout.PropertyField(targetEntityObject);
+                }
             }
             barObject.ApplyModifiedProperties();
         }
@@ -53,20 +62,15 @@ public class GameEntityBarEditor : Editor
     {
         if (index == 0)
         {
-            return;
-        }
-        else if (index == 1)
-        {
             EditorGUILayout.PropertyField(bloodBarColor);
         }
-        else if(index == 2)
+        else if(index == 1)
         {
             EditorGUILayout.PropertyField(shieldBarColor);
         }
-        else if(index == 3)
+        else if(index == 2)
         {
             EditorGUILayout.PropertyField(loadBulletBarColor);
         }
-
     }
 }
