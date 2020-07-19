@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(Bar))]
-public class BarEditor : Editor
+[CustomEditor(typeof(GameEntityBar))]
+public class GameEntityBarEditor : Editor
 {
     SerializedObject barObject;
 
@@ -27,6 +27,7 @@ public class BarEditor : Editor
 
             barDirect = barObject.FindProperty("barDirect");
             entityTag = barObject.FindProperty("EntityTag");
+            
             mirror = barObject.FindProperty("Mirror");
         }
     }
