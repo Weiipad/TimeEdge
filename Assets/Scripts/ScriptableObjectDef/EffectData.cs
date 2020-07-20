@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewEffectData", menuName = "Time Edge/EffectData")]
 public class EffectData : ScriptableObject
 {
-    public Texture2D image;
+    public Sprite image;
     // if the duration <= 0 then it is a permanent effect
     public float duration;
 }
