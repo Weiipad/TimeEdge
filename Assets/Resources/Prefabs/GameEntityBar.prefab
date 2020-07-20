@@ -88,14 +88,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0724a754285609429f959c3704e1c5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  barDirect: 1
-  Mirror: 0
-  IsMaxValueOnStart: 1
   barType: 0
+  entityFrom: 0
+  EntityTag: 
+  targetEntityObject: {fileID: 0}
   BloodBarColor: {r: 1, g: 0, b: 0, a: 1}
   ShieldBarColor: {r: 0, g: 0, b: 1, a: 1}
   LoadBulletColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  EntityTag: 
 --- !u!1 &5991515353156699675
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,11 +159,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: ff9cc168e6e6e1e40ac7c48b19b969fe, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0

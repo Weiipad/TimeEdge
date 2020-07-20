@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -61,7 +60,11 @@ public class GameEntityBar : Bar
     {
         childImage = transform.GetChild(0).GetComponent<Image>();
         if (childImage.sprite == null)
+        {
             childImage.sprite = Resources.Load<Sprite>("Pictures/WhiteBoard");
+            childImage.type = Image.Type.Filled;
+            childImage.fillMethod = Image.FillMethod.Horizontal;
+        }
 
         if (childImage.type != Image.Type.Filled)
         {
@@ -102,6 +105,8 @@ public class GameEntityBar : Bar
         UpdateMaxValue();
 
         currentValue = GetCurrentValue();
+
+        isGetEntity = true;
     }
 
     protected override void BarStatusUpdate()
