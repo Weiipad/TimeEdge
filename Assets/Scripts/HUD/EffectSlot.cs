@@ -11,15 +11,29 @@ public class EffectSlot : MonoBehaviour
     public float timeElapsed = 0;
     public Image image;
     
+    public void InitSlot()
+    {
+        if (data == null) 
+        {
+            ResetSlot();
+            gameObject.SetActive(false);
+            return;
+        }
+        image.sprite = data.image;
+        timeElapsed = 0;
+        gameObject.SetActive(true);
+    }
+
     public void ResetSlot()
     {
-        image.sprite = data.image;
+        data = null;
+        image.sprite = null;
         timeElapsed = 0;
     }
 
     void Start()
     {
-        if (data != null) ResetSlot();
+        if (data != null) InitSlot();
         else gameObject.SetActive(false);
     }
 

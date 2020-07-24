@@ -24,7 +24,8 @@ public class GameEntity : MonoBehaviour
     public float maxShield;
     public float currentShield;
 
-    private List<Effect> effects = new List<Effect>();
+    [HideInInspector]
+    public List<Effect> effects = new List<Effect>();
 
     // Performance data
     private Animation anim;

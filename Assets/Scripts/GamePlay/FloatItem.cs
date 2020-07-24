@@ -24,7 +24,7 @@ public class FloatItem : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             var entity = collision.GetComponent<GameEntity>();
-            entity.AddEffect(new IncreaseDefense(entity));
+            entity.AddEffect(new HealOverTime(entity));
             Destroy(gameObject);
         }
     }

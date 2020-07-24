@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Effect
 {
-    protected EffectData data;
+    public EffectData data;
     protected GameEntity entity;
-    private float timeCount = 0;
+    public float timeCount = 0;
 
     public bool Deprecated 
     {

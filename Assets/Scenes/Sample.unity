@@ -530,7 +530,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectSlotPrefab: {fileID: 6685968976610736941, guid: ee5ff6f1f2737074b80c5af26bcaea10,
     type: 3}
-  effectImages: []
+  target: {fileID: 520760002}
+  effectImages:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &520759995
 GameObject:
   m_ObjectHideFlags: 0
