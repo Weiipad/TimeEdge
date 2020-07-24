@@ -6,6 +6,7 @@ public class FloatItem : MonoBehaviour
 {
     private Vector2 direction = new Vector2();
     private Rigidbody2D body;
+    public Effect effect;
 
     void Awake()
     {
@@ -24,7 +25,8 @@ public class FloatItem : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             var entity = collision.GetComponent<GameEntity>();
-            entity.AddEffect(new HealOverTime(entity));
+            effect.entity = entity;
+            entity.AddEffect(effect);
             Destroy(gameObject);
         }
     }

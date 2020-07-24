@@ -5,7 +5,7 @@ using UnityEngine;
 public class Effect
 {
     public EffectData data;
-    protected GameEntity entity;
+    public GameEntity entity;
     public float timeCount = 0;
 
     public bool Deprecated 
