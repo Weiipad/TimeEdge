@@ -25,7 +25,10 @@ public class FloatItem : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             var entity = collision.GetComponent<GameEntity>();
-            effect.entity = entity;
+            if (effect == null)
+                effect = new AddShield(entity);
+            else
+                effect.entity = entity;
             entity.AddEffect(effect);
             Destroy(gameObject);
         }
