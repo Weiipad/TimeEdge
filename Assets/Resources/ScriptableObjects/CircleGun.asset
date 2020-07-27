@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd950ab80bb2c547a86ab1b59a2c4b2, type: 3}
   m_Name: CircleGun
   m_EditorClassIdentifier: 
-  ammunition: {fileID: 0}
-  fullLoad: 0
-  baseLoadSpeed: 0
-  bulletVelocity: 0
-  bulletDamage: 0
-  bulletDuration: 0
+  ammunition: {fileID: -4629710830114083070, guid: 657aa14d97ae4a14abdd8a37c1967c69,
+    type: 3}
+  fullLoad: 1
+  baseLoadSpeed: 1
+  bulletVelocity: 10
+  bulletDamage: 1
+  bulletDuration: 2
