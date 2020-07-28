@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MachineGun : Weapon
 {
-    public MachineGun(GameEntity owner, string dataPath = "ScriptableObjects/MachineGun") : base(owner)
+    public MachineGun(GameEntity owner, string dataPath = "ScriptableObjects/WeaponData/MachineGun") : base(owner)
     {
         data = Resources.Load(dataPath) as WeaponData;
     }
