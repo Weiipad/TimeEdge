@@ -87,7 +87,7 @@ public class GameEntity : MonoBehaviour
 
     protected void Hurt(Bullet bullet)
     {
-        var damage = bullet.damage*defenseRate;
+        var damage = bullet.damage * defenseRate;
         if (currentShield > 0)
         {
             if (currentShield > damage)
@@ -101,6 +101,8 @@ public class GameEntity : MonoBehaviour
                 currentShield = 0;
             }
         }
+
+        Debug.Log($"Damage: {bullet.damage}");
 
         if (damage > 0)
         {

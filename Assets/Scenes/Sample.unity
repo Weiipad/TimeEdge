@@ -1090,7 +1090,7 @@ MonoBehaviour:
   currentHP: 0
   loadSpeedScale: 1
   defenseRate: 1
-  damageRate: 80
+  damageRate: 1
   maxShield: 10
   currentShield: 0
 --- !u!61 &1066293858
@@ -1735,6 +1735,6 @@ MonoBehaviour:
   currentHP: 0
   loadSpeedScale: 1
   defenseRate: 1
-  damageRate: 80
+  damageRate: 1
   maxShield: 10
   currentShield: 0

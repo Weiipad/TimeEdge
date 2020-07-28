@@ -7,7 +7,7 @@ public class UniversePlane : MonoBehaviour
     private Weapon weapon;
     void Start()
     {
-        weapon = new CircleGun(GetComponent<GameEntity>(), "ScriptableObjects/CircleGun");
+        weapon = new CircleGun(GetComponent<GameEntity>(), "ScriptableObjects/WeaponData/CircleGun");
     }
 
     void Update()

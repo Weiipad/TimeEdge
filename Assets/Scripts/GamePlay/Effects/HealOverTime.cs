@@ -8,7 +8,7 @@ public class HealOverTime : Effect
     public HealOverTime(GameEntity target, float healSpeed = 1f) : base(target) 
     {
         speed = healSpeed;
-        data = Resources.Load("ScriptableObjects/HealOverTime") as EffectData;
+        data = Resources.Load("ScriptableObjects/EffectData/HealOverTime") as EffectData;
     }
 
     public override void Affect()

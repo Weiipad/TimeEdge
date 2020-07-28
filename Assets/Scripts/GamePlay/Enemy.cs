@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
     private Weapon weapon;
     void Start()
     {
-        weapon = new MachineGun(GetComponent<GameEntity>(), "ScriptableObjects/EnemyMachineGun");
+        weapon = new MachineGun(GetComponent<GameEntity>(), "ScriptableObjects/WeaponData/EnemyMachineGun");
     }
 
     void Update()

@@ -8,7 +8,7 @@ public class IncreaseDamage : Effect
     public IncreaseDamage(GameEntity target, float rate = 0.5f) : base(target)
     {
         this.rate = rate;
-        data = Resources.Load("ScriptableObjects/IncreaseDamage") as EffectData;
+        data = Resources.Load("ScriptableObjects/EffectData/IncreaseDamage") as EffectData;
     }
     public override void OnAdd()
     {

@@ -8,7 +8,7 @@ public class AddShield : Effect
     public AddShield(GameEntity target, float quantity = 10f) : base(target)
     {
         this.quantity = quantity;
-        data = Resources.Load("ScriptableObjects/AddShield") as EffectData;
+        data = Resources.Load("ScriptableObjects/EffectData/AddShield") as EffectData;
     }
 
     public override void OnAdd()
