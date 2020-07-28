@@ -13,7 +13,7 @@ public class CircleGun : Weapon
     {
         float angleRate = 10f;
         float angle = 0f;
-        for(int i = 0;i < 360f / angleRate; i ++)
+        for(int i = 0; i < 360f / angleRate; i ++)
         {
             Bullet bullet = Object.Instantiate(data.ammunition, owner.transform.position, owner.transform.rotation);
             bullet.damage = data.bulletDamage * owner.damageRate;

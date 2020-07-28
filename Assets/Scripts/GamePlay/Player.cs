@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
+    public Test test;
     private Weapon weapon;
     public Weapon GetWeapon { get => weapon; }
     // Start is called before the first frame update
