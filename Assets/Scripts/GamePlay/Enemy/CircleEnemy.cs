@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UniversePlane : MonoBehaviour
+public class CircleEnemy : MonoBehaviour
 {
     public Weapon weapon;
     void Start()
