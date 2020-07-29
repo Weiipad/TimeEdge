@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "NewMachineGun", menuName = "Time Edge/Weapon/MachineGun")]
 public class MachineGun : Weapon
 {
-    public MachineGun(GameEntity owner, string dataPath = "ScriptableObjects/WeaponData/MachineGun") : base(owner)
-    {
-        data = Resources.Load(dataPath) as WeaponData;
-    }
-
     protected override void Shoot()
     {
-        Bullet bullet = Object.Instantiate(data.ammunition, owner.transform.position, owner.transform.rotation);
-        bullet.damage = data.bulletDamage * owner.damageRate;
-        bullet.rigidbody.velocity = data.bulletVelocity * bullet.transform.up;
-        bullet.weaponData = data;
+        Bullet bullet = Object.Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
+        bullet.damage = bulletDamage * owner.damageRate;
+        bullet.rigidbody.velocity = bulletVelocity * bullet.transform.up;
+        bullet.duration = bulletDuration;
     }
 }

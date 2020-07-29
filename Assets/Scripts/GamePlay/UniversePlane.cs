@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class UniversePlane : MonoBehaviour
 {
-    private Weapon weapon;
+    public Weapon weapon;
     void Start()
     {
-        weapon = new CircleGun(GetComponent<GameEntity>(), "ScriptableObjects/WeaponData/CircleGun");
+        weapon.Equip(GetComponent<GameEntity>());
     }
 
     void Update()

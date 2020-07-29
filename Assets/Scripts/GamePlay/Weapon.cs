@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Weapon
+public abstract class Weapon : ScriptableObject
 {
-    protected GameEntity owner;
-    protected WeaponData data = null;
-    protected float load;
+    public Bullet ammunition;
+    public float fullLoad;
+    public float baseLoadSpeed;
 
+    public float bulletVelocity;
+    public float bulletDamage;
+    public float bulletDuration;
+
+    protected GameEntity owner;
+    protected float load;
     private bool readyToFire = false;
 
     public float Load
@@ -15,21 +21,15 @@ public abstract class Weapon
         get => load;
     }
 
-    public float FullLoad
+    public void Equip(GameEntity owner)
     {
-        get => data.fullLoad;
-    }
-    public Weapon(GameEntity owenr)
-    {
-        this.owner = owenr;
+        this.owner = owner;
     }
 
     public void Update()
     {
-        if (data == null) return;
-
-        load += data.baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
-        if (load >= data.fullLoad && readyToFire)
+        load += baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
+        if (load >= fullLoad && readyToFire)
         {
             Shoot();
             load = 0;

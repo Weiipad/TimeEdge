@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Weapon weapon;
+    public Weapon weapon;
     void Start()
     {
-        weapon = new MachineGun(GetComponent<GameEntity>(), "ScriptableObjects/WeaponData/EnemyMachineGun");
+        weapon.Equip(GetComponent<GameEntity>());
     }
 
     void Update()

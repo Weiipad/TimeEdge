@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public Test test;
-    private Weapon weapon;
-    public Weapon GetWeapon { get => weapon; }
+    public Weapon weapon;
     // Start is called before the first frame update
     void Start()
     {
-        weapon = new MachineGun(GetComponent<GameEntity>());
+        weapon.Equip(GetComponent<GameEntity>());
     }
 
     // Update is called once per frame

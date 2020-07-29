@@ -148,7 +148,7 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<Player>().GetWeapon;
+                weapon = targetEntity.gameObject.GetComponent<Player>().weapon;
                 if (weapon == null)
                     return current;
             }
@@ -172,11 +172,11 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<Player>().GetWeapon;
+                weapon = targetEntity.gameObject.GetComponent<Player>().weapon;
                 if (weapon == null)
                     return;
             }
-            maxValue = weapon.FullLoad;
+            maxValue = weapon.fullLoad;
         }
     }
 }

@@ -9,13 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bd950ab80bb2c547a86ab1b59a2c4b2, type: 3}
-  m_Name: MachineGun
+  m_Script: {fileID: 11500000, guid: 2129de220268158498bb5d02b9c7f051, type: 3}
+  m_Name: EnemyMachineGun
   m_EditorClassIdentifier: 
-  ammunition: {fileID: 5932569958338663460, guid: 15f1de08965c9be448f103b4c790f455,
+  ammunition: {fileID: 5415349726203385416, guid: 6b1c3eb03ce702540b6bcd2060722e3e,
     type: 3}
   fullLoad: 1
-  baseLoadSpeed: 10
+  baseLoadSpeed: 1
   bulletVelocity: 10
-  bulletDamage: 1
-  bulletDuration: 1
+  bulletDamage: 2
+  bulletDuration: 2

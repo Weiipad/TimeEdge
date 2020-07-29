@@ -102,8 +102,6 @@ public class GameEntity : MonoBehaviour
             }
         }
 
-        Debug.Log($"Damage: {bullet.damage}");
-
         if (damage > 0)
         {
             currentHP -= damage;
