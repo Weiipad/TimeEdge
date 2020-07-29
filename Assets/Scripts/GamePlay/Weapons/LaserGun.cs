@@ -16,8 +16,13 @@ public class LaserGun : Weapon
 
     protected override void Shoot()
     {
-        if (bullet == null)
+        if (laser == null)
         {
+            if(bullet != null)
+            {
+                Destroy(bullet.gameObject);
+                bullet = null;
+            }
             bullet = Object.Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
             bullet.transform.parent = owner.transform;
             bullet.damage = bulletDamage;
