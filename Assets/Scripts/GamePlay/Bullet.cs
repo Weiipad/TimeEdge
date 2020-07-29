@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float timeAccumulator;
+    [HideInInspector]
     public float damage;
 
     [HideInInspector]
@@ -12,14 +13,20 @@ public class Bullet : MonoBehaviour
 
     [HideInInspector]
     public float duration;
-
+    [HideInInspector]
+    public float velocity;
 
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+    void FixedUpdate()
+    {
+        rigidbody.velocity = velocity * transform.up;
+    }
+
+    protected virtual void Update()
     {
         if (duration <= 0) return;
 

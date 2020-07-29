@@ -15,7 +15,7 @@ public class CircleGun : Weapon
             Bullet bullet = Object.Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
             bullet.damage = bulletDamage * owner.damageRate;
             bullet.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-            bullet.rigidbody.velocity = bulletVelocity * bullet.transform.up;
+            bullet.velocity = bulletVelocity;
             bullet.duration = bulletDuration;
             angle += angleRate;
         }
