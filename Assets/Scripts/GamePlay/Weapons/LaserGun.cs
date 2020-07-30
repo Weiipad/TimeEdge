@@ -27,12 +27,14 @@ public class LaserGun : Weapon
             bullet.transform.parent = owner.transform;
             bullet.damage = bulletDamage;
             bullet.duration = bulletDuration;
-            offSet = powerLoadSpeed * Time.deltaTime * Mathf.Abs(bullet.transform.localScale.x - 0.6f);
+            
 
             laser = bullet.gameObject.transform.GetChild(0).GetComponent<Bullet>();
             laser.damage = bulletDamage;
             laser.duration = bulletDuration;
         }
+
+        offSet = powerLoadSpeed * Time.deltaTime * Mathf.Abs(bullet.transform.localScale.x - 0.6f);
 
         if (bullet != null && bullet.transform.localScale.x <0.6f)
         {

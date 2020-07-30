@@ -19,4 +19,4 @@ MonoBehaviour:
   bulletVelocity: 100
   bulletDamage: 1
   bulletDuration: 100000
-  powerLoadSpeed: 1
+  powerLoadSpeed: 2
