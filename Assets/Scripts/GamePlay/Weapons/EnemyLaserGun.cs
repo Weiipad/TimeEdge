@@ -9,10 +9,37 @@ public class EnemyLaserGun : Weapon
     public float powerLoadSpeed = 1f;
 
     private float offSet;
-    private bool isPowerLoad = false;
+    private float curDuration = 0f;
 
     private Bullet bullet = null;
     private Bullet laser = null;
+
+    private bool isShoot = false;
+    private bool isPowerLoad = false;
+    public override void Update()
+    {
+        if (load < fullLoad && !isShoot)
+            load += baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
+        if(!isShoot && load >= fullLoad)
+        {
+            Shoot();
+        }
+
+        if(isShoot)
+        {
+            curDuration += bulletDuration * 0.1f * Time.deltaTime;
+            if(curDuration >= bulletDuration)
+            {
+                load = 0f;
+                curDuration = 0f;
+                isShoot = false;
+                if (bullet != null)
+                    Destroy(bullet.gameObject);
+                bullet = null;
+                laser = null;
+            }
+        }
+    }
 
     protected override void Shoot()
     {
@@ -26,12 +53,12 @@ public class EnemyLaserGun : Weapon
             bullet = Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
             bullet.transform.parent = owner.transform;
             bullet.damage = bulletDamage;
-            bullet.duration = bulletDuration;
+            bullet.duration = Mathf.Infinity;
             
 
             laser = bullet.gameObject.transform.GetChild(0).GetComponent<Bullet>();
             laser.damage = bulletDamage;
-            laser.duration = bulletDuration;
+            laser.duration = Mathf.Infinity;
         }
 
         offSet = powerLoadSpeed * Time.deltaTime * Mathf.Abs(bullet.transform.localScale.x - 0.6f);
@@ -49,6 +76,10 @@ public class EnemyLaserGun : Weapon
         {
             laser.transform.localScale = new Vector3(laser.transform.localScale.x, laser.transform.localScale.y + Time.deltaTime * bulletVelocity);
             laser.transform.localPosition = new Vector3(laser.transform.localPosition.x, laser.transform.localPosition.y + Time.deltaTime * bulletVelocity * 0.05f);
+            if (laser.transform.localScale.y >= 200f)
+            {
+                isShoot = true;
+            }
         }
     }
 }

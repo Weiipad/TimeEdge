@@ -72,7 +72,7 @@ public class GameEntityBar : Bar
         }
         if (entityFrom == EntityFrom.tag)
         {
-            if (EntityTag != null)
+            if (EntityTag != null && EntityTag != "")
             {
                 targetEntity = GameObject.FindGameObjectWithTag(EntityTag).GetComponent<GameEntity>();
                 if (targetEntity != null)
@@ -83,7 +83,7 @@ public class GameEntityBar : Bar
         {
             if(targetEntityObject != null)
             {
-                targetEntity = GameObject.FindGameObjectWithTag(EntityTag).GetComponent<GameEntity>();
+                targetEntity = targetEntityObject.GetComponent<GameEntity>();
                 if(targetEntity != null)
                     isGetEntity = true;
             }
@@ -97,10 +97,10 @@ public class GameEntityBar : Bar
             default: break;
         }
 
-        if (barType == BarType.loadBullet && EntityTag != "Player")
-        {
-            throw new System.Exception("只有玩家才能使用武器装填信息条");
-        }
+        //if (barType == BarType.loadBullet && EntityTag != "Player")
+        //{
+        //    throw new System.Exception("只有玩家才能使用武器装填信息条");
+        //}
 
         UpdateMaxValue();
 
@@ -148,7 +148,7 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<Player>().weapon;
+                weapon = targetEntity.gameObject.GetComponent<WeaponPos>().weapon;
                 if (weapon == null)
                     return current;
             }
@@ -172,7 +172,7 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<Player>().weapon;
+                weapon = targetEntity.gameObject.GetComponent<WeaponPos>().weapon;
                 if (weapon == null)
                     return;
             }

@@ -2,14 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : WeaponPos
 {
-    public Weapon weapon;
-    void Start()
-    {
-        weapon.Equip(GetComponent<GameEntity>());
-    }
-
     void Update()
     {
         weapon.Fire();
