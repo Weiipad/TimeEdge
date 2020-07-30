@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8053392251787469223}
   - component: {fileID: 8053392251787469216}
   - component: {fileID: 5405251707375000855}
-  - component: {fileID: -4889091654174872017}
   - component: {fileID: 8576213409932814261}
+  - component: {fileID: 7212087283900276921}
   m_Layer: 0
   m_Name: LaserLightBall
   m_TagString: Bullet1
@@ -101,21 +101,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-4889091654174872017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8053392251787469217}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc8228210c0ecfe4abc785015141d041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  rigidbody: {fileID: 0}
-  duration: 0
 --- !u!50 &8576213409932814261
 Rigidbody2D:
   serializedVersion: 4
@@ -137,6 +122,22 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7212087283900276921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053392251787469217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ebd3696953a0d43b8b6f212a34be9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  rigidbody: {fileID: 0}
+  duration: 0
+  velocity: 0
 --- !u!1 &8053392253405961324
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,8 +149,8 @@ GameObject:
   - component: {fileID: 8053392253405961315}
   - component: {fileID: 8053392253405961314}
   - component: {fileID: 5949597813862720452}
-  - component: {fileID: 6919393532263533381}
   - component: {fileID: 4487879199853674582}
+  - component: {fileID: 8320788674689944802}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Bullet1
@@ -247,21 +248,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
---- !u!114 &6919393532263533381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8053392253405961324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc8228210c0ecfe4abc785015141d041, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 0
-  rigidbody: {fileID: 0}
-  duration: 0
 --- !u!50 &4487879199853674582
 Rigidbody2D:
   serializedVersion: 4
@@ -283,3 +269,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8320788674689944802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8053392253405961324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ebd3696953a0d43b8b6f212a34be9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 0
+  rigidbody: {fileID: 0}
+  duration: 0
+  velocity: 0

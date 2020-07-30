@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewLaserGun", menuName = "Time Edge/Weapon/LaserGun")]
-public class LaserGun : Weapon
+[CreateAssetMenu(fileName = "NewEnemyLaserGun", menuName = "Time Edge/Weapon/EnemyLaserGun")]
+public class EnemyLaserGun : Weapon
 {
     private float powerLoad = 0f;
     public float powerLoadSpeed = 1f;

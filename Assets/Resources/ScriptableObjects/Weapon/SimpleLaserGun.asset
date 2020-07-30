@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59977576461acf847881afc350a35c69, type: 3}
   m_Name: SimpleLaserGun
   m_EditorClassIdentifier: 
-  ammunition: {fileID: -4889091654174872017, guid: d3f19d3250847f546aef0df720d34205,
+  ammunition: {fileID: 7212087283900276921, guid: d3f19d3250847f546aef0df720d34205,
     type: 3}
   fullLoad: 1
   baseLoadSpeed: 1000000

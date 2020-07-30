@@ -16,9 +16,12 @@ public class Bullet : MonoBehaviour
     [HideInInspector]
     public float velocity;
 
+    private LayerMask layerMask;
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        layerMask = new LayerMask();
+        layerMask.value = LayerMask.NameToLayer("Default");
     }
 
     void FixedUpdate()
