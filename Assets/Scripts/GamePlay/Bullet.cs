@@ -26,6 +26,20 @@ public class Bullet : MonoBehaviour
         rigidbody.velocity = velocity * transform.up;
     }
 
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if ((collision.CompareTag("Enemy") && gameObject.CompareTag("Bullet0")) || (collision.CompareTag("Player") && gameObject.CompareTag("Bullet1")))
+        {
+            OnCollide(collision.GetComponent<GameEntity>());
+        }
+    }
+
+    protected virtual void OnCollide(GameEntity e)
+    {
+        e.Hurt(this);
+        Destroy(gameObject);
+    }
+
     protected virtual void Update()
     {
         if (duration <= 0) return;

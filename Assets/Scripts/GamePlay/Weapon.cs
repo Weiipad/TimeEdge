@@ -14,7 +14,7 @@ public abstract class Weapon : ScriptableObject
 
     protected GameEntity owner;
     protected float load;
-    private bool readyToFire = false;
+    protected bool readyToFire = false;
 
     public float Load
     {
@@ -26,7 +26,7 @@ public abstract class Weapon : ScriptableObject
         this.owner = owner;
     }
 
-    public void Update()
+    public virtual void Update()
     {
         load += baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
         if (load >= fullLoad && readyToFire)

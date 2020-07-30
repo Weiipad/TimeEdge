@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e31f6825203e3542913e9ae5602fc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 56f51416a38a7644f9639fc469a23f14, type: 2}
+  weapon: {fileID: 11400000, guid: 0f3cc2e0f0a4d0c4c8f7c208e3225221, type: 2}
 --- !u!114 &520759997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1335,7 +1335,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!1 &1066293854
 GameObject:
@@ -1357,7 +1357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!111 &1066293855
 Animation:
   m_ObjectHideFlags: 0

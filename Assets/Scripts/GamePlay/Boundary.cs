@@ -8,7 +8,7 @@ public class Boundary : MonoBehaviour
     {
         if (collision.CompareTag("Bullet0") || collision.CompareTag("Bullet1"))
         {
-            Destroy(collision.gameObject);
+            if (collision.name != "Light") Destroy(collision.gameObject);
         }
     }
 }

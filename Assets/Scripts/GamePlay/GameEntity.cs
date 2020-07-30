@@ -69,23 +69,13 @@ public class GameEntity : MonoBehaviour
         });
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
-    {
-        if ((gameObject.CompareTag("Enemy") && collision.CompareTag("Bullet0")) || (gameObject.CompareTag("Player") && collision.CompareTag("Bullet1")))
-        {
-            // 受伤
-            Hurt(collision.GetComponent<Bullet>());
-            Destroy(collision.gameObject);
-        }
-    }
-
     public void AddEffect(Effect effect)
     {
         effects.Add(effect);
         effect.OnAdd();
     }
 
-    protected void Hurt(Bullet bullet)
+    public void Hurt(Bullet bullet)
     {
         var damage = bullet.damage * defenseRate;
         if (currentShield > 0)
