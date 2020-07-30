@@ -27,7 +27,7 @@ public class EnemyLaserGun : Weapon
 
         if(isShoot)
         {
-            curDuration += bulletDuration * 0.1f * Time.deltaTime;
+            curDuration += Time.deltaTime;
             if(curDuration >= bulletDuration)
             {
                 load = 0f;
@@ -37,6 +37,15 @@ public class EnemyLaserGun : Weapon
                     Destroy(bullet.gameObject);
                 bullet = null;
                 laser = null;
+            }
+            else
+            {
+                if(bullet == null)
+                {
+                    isShoot = false;
+                    load = 0f;
+                    curDuration = 0f;
+                }
             }
         }
     }
