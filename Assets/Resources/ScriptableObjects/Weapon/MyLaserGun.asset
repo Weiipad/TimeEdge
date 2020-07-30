@@ -16,6 +16,6 @@ MonoBehaviour:
     type: 3}
   fullLoad: 10
   baseLoadSpeed: 2
-  bulletVelocity: 1
+  bulletVelocity: 5
   bulletDamage: 1
-  bulletDuration: -1
+  bulletDuration: 0.2

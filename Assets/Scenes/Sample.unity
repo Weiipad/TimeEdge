@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e31f6825203e3542913e9ae5602fc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 0f3cc2e0f0a4d0c4c8f7c208e3225221, type: 2}
+  weapon: {fileID: 11400000, guid: 08778cd63df80c147a3bdb51e7dce0d4, type: 2}
 --- !u!114 &520759997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,8 +697,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -915091841
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cbfa3e9cd51fce142b5a6854d457397f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -757,7 +757,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.09
+  m_Radius: 0.05
 --- !u!114 &520760002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,7 +963,7 @@ Transform:
   m_GameObject: {fileID: 701437570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 520759999}
   m_RootOrder: 0
@@ -1048,22 +1048,22 @@ PrefabInstance:
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
@@ -1083,7 +1083,7 @@ PrefabInstance:
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136457, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
@@ -1144,6 +1144,21 @@ PrefabInstance:
         type: 3}
       propertyPath: barType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991515352703136458, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
+        type: 3}
+      propertyPath: LoadBulletColor.r
+      value: 0.6509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991515352703136458, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
+        type: 3}
+      propertyPath: LoadBulletColor.g
+      value: 0.6509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991515352703136458, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
+        type: 3}
+      propertyPath: LoadBulletColor.b
+      value: 0.6509434
       objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136459, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
@@ -1999,7 +2014,7 @@ Transform:
   m_GameObject: {fileID: 1523201705}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: -4.78, y: 3.68, z: 0}
-  m_LocalScale: {x: 1.0143538, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6

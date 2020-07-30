@@ -17,4 +17,9 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.Mouse0)) weapon.Fire();
         weapon.Update();
     }
+
+    private void LateUpdate()
+    {
+        weapon.LateUpdate();
+    }
 }

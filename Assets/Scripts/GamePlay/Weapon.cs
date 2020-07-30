@@ -34,7 +34,6 @@ public abstract class Weapon : ScriptableObject
             Shoot();
             load = 0;
         }
-        readyToFire = false;
     }
 
     // Must be called before Update.
@@ -42,6 +41,11 @@ public abstract class Weapon : ScriptableObject
     {
         readyToFire = true;
     }
-    
+
+    public virtual void LateUpdate()
+    {
+        readyToFire = false;
+    }
+
     protected abstract void Shoot();
 }

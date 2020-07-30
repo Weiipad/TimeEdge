@@ -6,28 +6,27 @@ using UnityEngine;
 public class MyLaserGun : Weapon
 {
     Bullet light = null;
-
     public override void Update()
     {
-        load += baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
+        if (load <= fullLoad) load += baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
+        else load = fullLoad;
         if (readyToFire)
         {
-            Shoot();
-            load -= bulletVelocity * Time.deltaTime;
+            if (load > -0.1) load -= bulletVelocity * Time.deltaTime;
+            if (load >= 0) Shoot();
         }
-        readyToFire = false;
-        if (light != null) light.gameObject.SetActive(false);
+        
     }
 
     protected override void Shoot()
     {
-        if (light == null)
+        if (light == null) 
         {
-            light = Instantiate(ammunition, owner.transform.position + owner.transform.up * 10, owner.transform.rotation);
+            light = Instantiate(ammunition, owner.transform.position + owner.transform.up * 10.3f, owner.transform.rotation);
             light.transform.SetParent(owner.transform);
             light.damage = bulletDamage;
             light.velocity = 0;
+            light.duration = bulletDuration;
         }
-        light.gameObject.SetActive(true);
     }
 }

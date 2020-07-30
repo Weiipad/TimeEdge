@@ -23,7 +23,7 @@ public class LaserGun : Weapon
                 Destroy(bullet.gameObject);
                 bullet = null;
             }
-            bullet = Object.Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
+            bullet = Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
             bullet.transform.parent = owner.transform;
             bullet.damage = bulletDamage;
             bullet.duration = bulletDuration;

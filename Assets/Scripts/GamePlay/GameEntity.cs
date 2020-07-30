@@ -34,8 +34,6 @@ public class GameEntity : MonoBehaviour
     {
         currentHP = maxHP;
         anim = GetComponent<Animation>();
-
-        //if (CompareTag("Enemy")) effects.Add(new HealOverTime(this, 5.0f));
     }
 
     protected void Update()
