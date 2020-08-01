@@ -70,9 +70,9 @@ public class EnemyLaserGun : Weapon
             laser.duration = Mathf.Infinity;
         }
 
-        offSet = powerLoadSpeed * Time.deltaTime * Mathf.Abs(bullet.transform.localScale.x - 0.6f);
+        offSet = powerLoadSpeed * Time.deltaTime * Mathf.Abs(bullet.transform.localScale.x - 1f);
 
-        if (bullet != null && bullet.transform.localScale.x <0.6f)
+        if (bullet != null && bullet.transform.localScale.x < 1f)
         {
             powerLoad += powerLoadSpeed * Time.deltaTime;
             bullet.transform.localScale = new Vector3(bullet.transform.localScale.x + offSet, bullet.transform.localScale.y + offSet, 0f);
@@ -81,13 +81,13 @@ public class EnemyLaserGun : Weapon
                 isPowerLoad = true;
             }
         }
-        if (laser != null && isPowerLoad && laser.transform.localScale.y <= 200f)
+        if (laser != null && isPowerLoad && laser.transform.localScale.y <= 10f)
         {
             laser.transform.localScale = new Vector3(laser.transform.localScale.x, laser.transform.localScale.y + Time.deltaTime * bulletVelocity);
-            laser.transform.localPosition = new Vector3(laser.transform.localPosition.x, laser.transform.localPosition.y + Time.deltaTime * bulletVelocity * 0.05f);
-            if (laser.transform.localScale.y >= 200f)
+            if (laser.transform.localScale.y >= 10f)
             {
                 isShoot = true;
+                isPowerLoad = false;
             }
         }
     }
