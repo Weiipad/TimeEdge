@@ -120,7 +120,7 @@ public class GameEntityBar : Bar
                     Destroy(gameObject);
                 }
             }
-            return;
+            throw new System.Exception("Can't get target!");
         }
 
         UpdateMaxValue();
@@ -150,7 +150,7 @@ public class GameEntityBar : Bar
             {
                 weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().wi;
                 if (weapon == null)
-                    return current;
+                    throw new System.Exception("Can't get weapon!");
             }
             current = weapon.load;
         }
@@ -174,7 +174,7 @@ public class GameEntityBar : Bar
             {
                 weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().wi;
                 if (weapon == null)
-                    return;
+                    throw new System.Exception("Can't get weapon!");
             }
             maxValue = weapon.fullLoad;
         }
