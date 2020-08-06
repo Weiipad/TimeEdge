@@ -5,8 +5,8 @@ using UnityEngine;
 public class Enemy : WeaponHolder
 {
     void Update()
-    {
-        weapon.Fire();
-        weapon.Update();
+    { 
+        wi.Update();
+        wi.Shoot();
     }
 }

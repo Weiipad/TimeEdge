@@ -43,7 +43,7 @@ public class GameEntityBar : Bar
     public Color LoadBulletColor = Color.gray;
 
     private GameEntity targetEntity;
-    private Weapon weapon;
+    private Weapon.WeaponInterface weapon;
     private bool isGetEntity;
 
     private void Start()
@@ -148,11 +148,11 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().weapon;
+                weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().wi;
                 if (weapon == null)
                     return current;
             }
-            current = weapon.Load;
+            current = weapon.load;
         }
         return current;
     }
@@ -172,7 +172,7 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().weapon;
+                weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().wi;
                 if (weapon == null)
                     return;
             }

@@ -16,13 +16,13 @@ public class EnemyLaserGun : Weapon
 
     private bool isShoot = false;
     private bool isPowerLoad = false;
-    public override void Update()
+    public void WUpdate(WeaponInterface wi)
     {
-        if (load < fullLoad && !isShoot)
-            load += baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
-        if(!isShoot && load >= fullLoad)
+        if (wi.load < fullLoad && !isShoot)
+            wi.load += baseLoadSpeed * wi.owner.loadSpeedScale * Time.deltaTime;
+        if(!isShoot && wi.load >= fullLoad)
         {
-            Shoot();
+            //Shoot();
         }
 
         if(isShoot)
@@ -30,7 +30,7 @@ public class EnemyLaserGun : Weapon
             curDuration += Time.deltaTime;
             if(curDuration >= bulletDuration)
             {
-                load = 0f;
+                wi.load = 0f;
                 curDuration = 0f;
                 isShoot = false;
                 if (bullet != null)
@@ -43,14 +43,15 @@ public class EnemyLaserGun : Weapon
                 if(bullet == null)
                 {
                     isShoot = false;
-                    load = 0f;
+                    wi.load = 0f;
                     curDuration = 0f;
                 }
             }
         }
     }
+    
 
-    protected override void Shoot()
+    protected override void Shoot(WeaponInterface wi)
     {
         if (laser == null)
         {
@@ -59,8 +60,8 @@ public class EnemyLaserGun : Weapon
                 Destroy(bullet.gameObject);
                 bullet = null;
             }
-            bullet = Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
-            bullet.transform.parent = owner.transform;
+            bullet = Instantiate(ammunition, wi.owner.transform.position, wi.owner.transform.rotation);
+            bullet.transform.parent = wi.owner.transform;
             bullet.damage = bulletDamage;
             bullet.duration = Mathf.Infinity;
             
