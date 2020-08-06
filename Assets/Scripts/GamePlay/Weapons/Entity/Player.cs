@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : WeaponPos
+public class Player : WeaponHolder
 {
     void Update()
     {

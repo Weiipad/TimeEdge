@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class WeaponPos : MonoBehaviour
+public class WeaponHolder : MonoBehaviour
 {
     public Weapon weapon;
     private void Start()

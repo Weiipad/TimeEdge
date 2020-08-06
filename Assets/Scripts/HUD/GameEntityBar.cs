@@ -148,7 +148,7 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<WeaponPos>().weapon;
+                weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().weapon;
                 if (weapon == null)
                     return current;
             }
@@ -172,7 +172,7 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<WeaponPos>().weapon;
+                weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().weapon;
                 if (weapon == null)
                     return;
             }
