@@ -11,41 +11,41 @@ public abstract class Weapon : ScriptableObject
     public float bulletVelocity;
     public float bulletDamage;
     public float bulletDuration;
+    protected abstract void Shoot(WeaponInterface weaponInterface);
 
-    protected GameEntity owner;
-    protected float load;
-    protected bool readyToFire = false;
-
-    public float Load
+    public class WeaponInterface 
     {
-        get => load;
-    }
+        private Weapon weapon;
+        internal GameEntity owner;
+        internal float load;
 
-    public void Equip(GameEntity owner)
-    {
-        this.owner = owner;
-    }
-
-    public virtual void Update()
-    {
-        load += baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
-        if (load >= fullLoad && readyToFire)
+        internal float fullLoad
         {
-            Shoot();
+            get => weapon.fullLoad;
+        }
+    
+        public WeaponInterface(GameEntity owner, Weapon weapon)
+        {
+            this.owner = owner;
+            this.weapon = weapon;
             load = 0;
         }
-    }
 
-    // Must be called before Update.
-    public void Fire()
-    {
-        readyToFire = true;
-    }
+        public void Update()
+        {
+            if (load < weapon.fullLoad)
+            {
+                load += weapon.baseLoadSpeed * owner.loadSpeedScale * Time.deltaTime;
+            }
+            else
+            {
+                load = weapon.fullLoad;
+            }
+        }
 
-    public virtual void LateUpdate()
-    {
-        readyToFire = false;
+        public void Shoot()
+        {
+            weapon.Shoot(this);
+        }
     }
-
-    protected abstract void Shoot();
 }

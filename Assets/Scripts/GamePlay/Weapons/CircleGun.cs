@@ -6,14 +6,23 @@ using UnityEngine;
 public class CircleGun : Weapon
 {
     private float startAngle = 0f;
-    protected override void Shoot()
+    protected override void Shoot(WeaponInterface wi)
+    {
+        if (wi.load >= wi.fullLoad)
+        {
+            GenBullet(wi);
+            wi.load = 0;
+        }
+    }
+
+    private void GenBullet(WeaponInterface wi)
     {
         float angleRate = 10f;
         float angle = 0f + startAngle;
         for (int i = 0; i < 360f / angleRate; i++)
         {
-            Bullet bullet = Object.Instantiate(ammunition, owner.transform.position, owner.transform.rotation);
-            bullet.damage = bulletDamage * owner.damageRate;
+            Bullet bullet = Object.Instantiate(ammunition, wi.owner.transform.position, wi.owner.transform.rotation);
+            bullet.damage = bulletDamage * wi.owner.damageRate;
             bullet.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             bullet.velocity = bulletVelocity;
             bullet.duration = bulletDuration;
