@@ -6,11 +6,30 @@ using UnityEngine.SceneManagement;
 public class StartScene : MonoBehaviour
 {
     public GameObject Canvas;
+    public GameObject aboutWindow;
+    public GameObject Star;
 
-    public GameObject aboutWindowPrefabs;
-    private GameObject aboutWindowInstance;
-
+    private GameObject[] stars;
     private bool isAboutGameWindowActive = false;
+
+    private void Start()
+    {
+        aboutWindow.GetComponent<AboutWindow>().OnAboutWindowActive += SetIsAboutGameWindowActiveValueFalse;
+        stars = new GameObject[Star.transform.childCount];
+        for(int i = 0;i < stars.Length;i ++)
+        {
+            stars[i] = Star.transform.GetChild(i).gameObject;
+        }
+    }
+
+    private IEnumerator ShowStars()
+    {
+        foreach(var i in stars)
+        {
+            i.SetActive(true);
+            yield return new WaitForSeconds(0.25f);
+        }
+    }
 
     public void StartGame()
     {
@@ -21,17 +40,8 @@ public class StartScene : MonoBehaviour
 
     public void AboutGame()
     {
-        if (aboutWindowPrefabs == null)
-            aboutWindowPrefabs = Resources.Load<GameObject>("Prefabs/StartScene/AboutWindow");
-        if (aboutWindowInstance == null)
-        {
-            aboutWindowInstance = GameObject.Instantiate(aboutWindowPrefabs, Canvas.transform);
-            aboutWindowInstance.GetComponent<AboutWindow>().OnAboutWindowActive += SetIsAboutGameWindowActiveValueFalse;
-        }
-        else
-            aboutWindowInstance.SetActive(true);
+        aboutWindow.SetActive(true);
         isAboutGameWindowActive = true;
-        
     }
 
     private void SetIsAboutGameWindowActiveValueFalse()

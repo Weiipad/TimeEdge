@@ -36,6 +36,12 @@ public class PauseGame : MonoBehaviour
         {
             PauseWindow.SetActive(true);
             isPauseGame = true;
+            if(!PauseWindowAnimation.isPlaying)
+            {
+                PauseWindowAnimation["PauseWindowShowUp"].time = 0;
+                PauseWindowAnimation["PauseWindowShowUp"].speed = 1f;
+                PauseWindowAnimation.Play("PauseWindowShowUp");
+            }
         }
         else
         {
@@ -56,6 +62,7 @@ public class PauseGame : MonoBehaviour
                             break;
                     }
                     isPauseGame = false;
+                    isPressButton = false;
                 }
             }
         }
@@ -81,7 +88,6 @@ public class PauseGame : MonoBehaviour
 
     private void PressButton()
     {
-        Debug.Log("PressButton");
         isPressButton = true;
 
         PauseWindowAnimation["PauseWindowShowUp"].time = PauseWindowAnimation["PauseWindowShowUp"].clip.length;
