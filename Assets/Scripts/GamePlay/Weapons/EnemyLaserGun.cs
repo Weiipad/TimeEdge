@@ -51,7 +51,7 @@ public class EnemyLaserGun : Weapon
     }
     
 
-    protected override void Shoot(WeaponInterface wi)
+    protected override void TryShoot(WeaponInterface wi)
     {
         if (laser == null)
         {

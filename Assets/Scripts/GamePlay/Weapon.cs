@@ -11,7 +11,7 @@ public abstract class Weapon : ScriptableObject
     public float bulletVelocity;
     public float bulletDamage;
     public float bulletDuration;
-    protected abstract void Shoot(WeaponInterface weaponInterface);
+    protected abstract void TryShoot(WeaponInterface weaponInterface);
 
     public class WeaponInterface 
     {
@@ -19,9 +19,17 @@ public abstract class Weapon : ScriptableObject
         internal GameEntity owner;
         internal float load;
 
+        internal bool lastShoot = false;
+        internal bool shot = false;
+
         internal float fullLoad
         {
             get => weapon.fullLoad;
+        }
+
+        internal bool Continuous
+        {
+            get => lastShoot == shot;
         }
     
         public WeaponInterface(GameEntity owner, Weapon weapon)
@@ -43,9 +51,15 @@ public abstract class Weapon : ScriptableObject
             }
         }
 
+        public void LateUpdate()
+        {
+            lastShoot = shot;
+        }
+
         public void Shoot()
         {
-            weapon.Shoot(this);
+            weapon.TryShoot(this);
+            shot = true;
         }
     }
 }

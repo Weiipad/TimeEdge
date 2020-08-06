@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewMachineGun", menuName = "Time Edge/Weapon/MachineGun")]
 public class MachineGun : Weapon
 {
-    protected override void Shoot(WeaponInterface wi)
+    protected override void TryShoot(WeaponInterface wi)
     {
         if (wi.load >= wi.fullLoad)
         {

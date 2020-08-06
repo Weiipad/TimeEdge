@@ -6,7 +6,7 @@ using UnityEngine;
 public class CircleGun : Weapon
 {
     private float startAngle = 0f;
-    protected override void Shoot(WeaponInterface wi)
+    protected override void TryShoot(WeaponInterface wi)
     {
         if (wi.load >= wi.fullLoad)
         {
