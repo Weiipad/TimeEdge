@@ -24,11 +24,21 @@ public class StartScene : MonoBehaviour
         if (aboutWindowPrefabs == null)
             aboutWindowPrefabs = Resources.Load<GameObject>("Prefabs/StartScene/AboutWindow");
         if (aboutWindowInstance == null)
+        {
             aboutWindowInstance = GameObject.Instantiate(aboutWindowPrefabs, Canvas.transform);
+            aboutWindowInstance.GetComponent<AboutWindow>().OnAboutWindowActive += SetIsAboutGameWindowActiveValueFalse;
+        }
         else
             aboutWindowInstance.SetActive(true);
         isAboutGameWindowActive = true;
+        
     }
+
+    private void SetIsAboutGameWindowActiveValueFalse()
+    {
+        isAboutGameWindowActive = false;
+    }
+
 
     public void ExitGame()
     {
