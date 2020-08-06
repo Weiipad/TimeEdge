@@ -13,9 +13,4 @@ public class WeaponHolder : MonoBehaviour
         if (weapon != null)
             wi = new Weapon.WeaponInterface(GetComponent<GameEntity>(), weapon);
     }
-
-    void LateUpdate()
-    {
-        wi.LateUpdate();
-    }
 }

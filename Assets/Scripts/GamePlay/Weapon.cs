@@ -18,18 +18,11 @@ public abstract class Weapon : ScriptableObject
         private Weapon weapon;
         internal GameEntity owner;
         internal float load;
-
-        internal bool lastShoot = false;
-        internal bool shot = false;
+        internal bool overheating = false;
 
         internal float fullLoad
         {
             get => weapon.fullLoad;
-        }
-
-        internal bool Continuous
-        {
-            get => lastShoot == shot;
         }
     
         public WeaponInterface(GameEntity owner, Weapon weapon)
@@ -51,15 +44,9 @@ public abstract class Weapon : ScriptableObject
             }
         }
 
-        public void LateUpdate()
-        {
-            lastShoot = shot;
-        }
-
         public void Shoot()
         {
             weapon.TryShoot(this);
-            shot = true;
         }
     }
 }
