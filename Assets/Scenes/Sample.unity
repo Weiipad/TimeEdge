@@ -1160,6 +1160,16 @@ PrefabInstance:
       propertyPath: LoadBulletColor.b
       value: 0.6509434
       objectReference: {fileID: 0}
+    - target: {fileID: 5991515352703136458, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
+        type: 3}
+      propertyPath: entityFrom
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991515352703136458, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
+        type: 3}
+      propertyPath: targetEntityObject
+      value: 
+      objectReference: {fileID: 520759995}
     - target: {fileID: 5991515352703136459, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_Color.r
