@@ -15,7 +15,7 @@ MonoBehaviour:
   ammunition: {fileID: 7212087283900276921, guid: d3f19d3250847f546aef0df720d34205,
     type: 3}
   fullLoad: 10
-  baseLoadSpeed: 5
+  baseLoadSpeed: 1
   bulletVelocity: 10
   bulletDamage: 1
   bulletDuration: 8

@@ -46,13 +46,17 @@ public class GameEntityBar : Bar
     private Weapon.WeaponInterface weapon;
     private bool isGetEntity;
 
-    private void Start()
+    private void OnEnable()
     {
-        BarInit();
+        
     }
 
     private void FixedUpdate()
     {
+        if(isGetEntity == false)
+        {
+            BarInit();
+        }
         BarStatusUpdate();
     }
 
