@@ -26,5 +26,6 @@ public class Player : MonoBehaviour
     private void GenShockBomb()
     {
         Instantiate(shockBombObject, transform.position, Quaternion.identity);
+        avaliableShock--;
     }
 }
