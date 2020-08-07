@@ -7,12 +7,9 @@ using UnityEngine.UI;
 public class ButtonShowUp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     new Animation animation;
-    Button button;
     void Start()
     {
         animation = GetComponent<Animation>();
-        button = GetComponent<Button>();
-        button.enabled = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -29,6 +26,5 @@ public class ButtonShowUp : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
             animation["StartSceneButton"].time = animation["StartSceneButton"].length;
         animation["StartSceneButton"].speed = -1f;
         animation.Play();
-        button.enabled = false;
     }
 }
