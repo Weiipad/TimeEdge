@@ -101,10 +101,10 @@ public class GameEntityBar : Bar
             default: break;
         }
 
-        //if (barType == BarType.loadBullet && EntityTag != "Player")
-        //{
-        //    throw new System.Exception("只有玩家才能使用武器装填信息条");
-        //}
+        if (barType == BarType.loadBullet && EntityTag != "Player")
+        {
+            throw new System.Exception("只有玩家才能使用武器装填信息条");
+        }
 
         UpdateMaxValue();
 
@@ -176,7 +176,7 @@ public class GameEntityBar : Bar
         {
             if (weapon == null)
             {
-                weapon = targetEntity.gameObject.GetComponent<WeaponHolder>().wi;
+                weapon = targetEntity.gameObject.GetComponent<Player>().wi;
                 if (weapon == null)
                     throw new System.Exception("Can't get weapon!");
             }
