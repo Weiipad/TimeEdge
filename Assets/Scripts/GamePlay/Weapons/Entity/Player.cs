@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     {
         wi.Update();
         if (Input.GetKey(KeyCode.Mouse0)) wi.Shoot();
-        if (Input.GetKeyDown(KeyCode.Mouse1)) GenShockBomb();
+        if (Input.GetKeyDown(KeyCode.Mouse1) && avaliableShock > 0) GenShockBomb();
     }
 
     private void GenShockBomb()
