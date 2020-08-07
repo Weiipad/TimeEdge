@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class TempLoadUI : MonoBehaviour
 {
     public Text text;
-    public WeaponHolder holder;
+    public Player player;
     void Start()
     {
         
@@ -15,6 +15,6 @@ public class TempLoadUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        text.text = string.Format("{0:N2}", holder.wi.load) + $"/{holder.wi.fullLoad}";
+        text.text = string.Format("{0:N2}", player.wi.load) + $"/{player.wi.fullLoad}";
     }
 }

@@ -648,6 +648,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e31f6825203e3542913e9ae5602fc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avaliableShock: 10
+  shockBombObject: {fileID: 3815508838432975250, guid: 59a998faa57766a46bb90998b616d87a,
+    type: 3}
   weapon: {fileID: 11400000, guid: 08778cd63df80c147a3bdb51e7dce0d4, type: 2}
 --- !u!114 &520759997
 MonoBehaviour:
@@ -1382,7 +1385,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!111 &1066293855
 Animation:
   m_ObjectHideFlags: 0
@@ -2170,4 +2173,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 1873496606}
-  holder: {fileID: 520759996}
+  player: {fileID: 520759996}
