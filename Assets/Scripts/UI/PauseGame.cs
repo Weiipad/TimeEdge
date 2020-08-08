@@ -51,6 +51,7 @@ public class PauseGame : MonoBehaviour
                         case 0:
                             break;
                         case 1:
+                            GameStatus.CurrentGameStatus = GameStatus.GameStatusType.none;
                             SceneManager.LoadScene(0);
                             break;
                         case 2:
