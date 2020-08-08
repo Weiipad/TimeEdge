@@ -8,12 +8,8 @@ public class PauseGame : MonoBehaviour
 {
     private int pressButtonType;
 
-
     public GameObject PauseWindow;
     public Animation PauseWindowAnimation;
-
-    private static bool isPauseGame = false;
-    public static bool IsPauseGame { get { return isPauseGame; } }
 
     private bool isPressButton = false;
 
@@ -32,10 +28,10 @@ public class PauseGame : MonoBehaviour
     {
         if (PauseWindow == null)
             return;
-        if(Input.GetKeyDown(KeyCode.Escape) && !isPauseGame)
+        if(Input.GetKeyDown(KeyCode.Escape) && GameStatus.CurrentGameStatus != GameStatus.GameStatusType.pause)
         {
             PauseWindow.SetActive(true);
-            isPauseGame = true;
+            GameStatus.CurrentGameStatus = GameStatus.GameStatusType.pause;
             if(!PauseWindowAnimation.isPlaying)
             {
                 PauseWindowAnimation["PauseWindowShowUp"].time = 0;
@@ -61,7 +57,7 @@ public class PauseGame : MonoBehaviour
                             Application.Quit();
                             break;
                     }
-                    isPauseGame = false;
+                    GameStatus.CurrentGameStatus = GameStatus.GameStatusType.playing;
                     isPressButton = false;
                 }
             }
