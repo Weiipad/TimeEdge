@@ -32,6 +32,12 @@ public abstract class Weapon : ScriptableObject
             load = 0;
         }
 
+        public void Equip(Weapon weapon)
+        {
+            this.weapon = weapon;
+            load = 0;
+        }
+
         public void Update()
         {
             if (load < weapon.fullLoad)
