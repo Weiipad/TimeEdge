@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79c2b13f48cde8f49a381ff2935b7ad6, type: 3}
-  m_Name: MoveToCenter
+  m_Script: {fileID: 11500000, guid: 02340dc7eee26ef4bad8ba67af43c12e, type: 3}
+  m_Name: Stay
   m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0}
-  speed: 0.02
+  vector: {x: 0, y: 0}
+  vectorScale: 0
+  seconds: 1
+  secondScale: 1
+  MirrorX: 0
+  MirrorY: 0

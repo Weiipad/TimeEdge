@@ -780,25 +780,6 @@ MonoBehaviour:
   damageRate: 1
   maxShield: 10
   currentShield: 0
---- !u!1 &567026621 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1036110244193432138, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
-    type: 3}
-  m_PrefabInstance: {fileID: 1036110245438473443}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &567026628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 567026621}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0b75fbefcbd53246a7e9965c47d3c9b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 520759999}
 --- !u!1001 &573329440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1584,13 +1565,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992400263}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 946046c5dcffb8c4e9ef770a2f547f90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 520759999}
   enemyPrefabs: {fileID: 1036110244193432138, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
     type: 3}
+  maxEnemy: 20
 --- !u!1 &1066293854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,7 +1624,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 227ab047e9657f246813d622ad2a4f77, type: 2}
-  actions: []
+  actions:
+  - {fileID: 11400000, guid: 37f627e7198b31d4a8f8aa482655b949, type: 2}
+  - {fileID: 11400000, guid: 04f6bb034594a72489470cda297e71a8, type: 2}
+  - {fileID: 11400000, guid: 952f4ca91a4845a4b8c4f72ecde985aa, type: 2}
 --- !u!114 &1066293857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2280,22 +2266,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 567026628, guid: bb3fa23cb5e4e8444b2b506dae0b90df, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 520759999}
     - target: {fileID: 1036110244193432138, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_Name
       value: Spiker
       objectReference: {fileID: 0}
-    - target: {fileID: 1036110244193432141, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
-        type: 3}
-      propertyPath: actions.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1036110244193432141, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
-        type: 3}
-      propertyPath: actions.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9b3d82c856d3a234b822d28de42a6784,
-        type: 2}
     - target: {fileID: 1036110244193432143, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_LocalPosition.x
