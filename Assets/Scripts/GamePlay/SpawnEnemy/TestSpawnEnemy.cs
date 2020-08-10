@@ -11,7 +11,7 @@ public class TestSpawnEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnPos = transform.position;
+        spawnPos = Vector2.zero;
         curTime = 0f;
         enemyCount = 0;
     }
