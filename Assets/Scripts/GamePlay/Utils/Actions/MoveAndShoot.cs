@@ -16,5 +16,6 @@ public class MoveAndShoot : EntityAction
             yield return 0;
         }
         list.SwitchToNext();
+        yield return 0;
     }
 }

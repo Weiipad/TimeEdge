@@ -29,7 +29,7 @@ public class ActionList
     {
         if (++pointer >= actions.Count)
         {
-            pointer = 0;
+            return;
         }
         host.StartCoroutine(actions[pointer].Act(this, host, wi));
     }

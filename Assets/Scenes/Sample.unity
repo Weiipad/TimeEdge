@@ -241,7 +241,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 24, y: 10}
+  m_Size: {x: 17.86, y: 10}
   m_EdgeRadius: 0
 --- !u!4 &190780510
 Transform:
@@ -780,6 +780,25 @@ MonoBehaviour:
   damageRate: 1
   maxShield: 10
   currentShield: 0
+--- !u!1 &567026621 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1036110244193432138, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
+    type: 3}
+  m_PrefabInstance: {fileID: 1036110245438473443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &567026628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567026621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b75fbefcbd53246a7e9965c47d3c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 520759999}
 --- !u!1001 &573329440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1565,7 +1584,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992400263}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 946046c5dcffb8c4e9ef770a2f547f90, type: 3}
   m_Name: 
@@ -1726,7 +1745,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066293854}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 9.69, y: 0.7, z: 0}
+  m_LocalPosition: {x: 7.3, y: 0.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2266,6 +2285,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spiker
       objectReference: {fileID: 0}
+    - target: {fileID: 1036110244193432141, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
+        type: 3}
+      propertyPath: actions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1036110244193432141, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
+        type: 3}
+      propertyPath: actions.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 9b3d82c856d3a234b822d28de42a6784,
+        type: 2}
     - target: {fileID: 1036110244193432143, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2294,12 +2324,12 @@ PrefabInstance:
     - target: {fileID: 1036110244193432143, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1036110244193432143, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1036110244193432143, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
@@ -2319,7 +2349,7 @@ PrefabInstance:
     - target: {fileID: 1036110244193432143, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb3fa23cb5e4e8444b2b506dae0b90df, type: 3}

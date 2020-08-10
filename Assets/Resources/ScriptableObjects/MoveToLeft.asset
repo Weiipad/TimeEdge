@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: MoveToLeft
   m_EditorClassIdentifier: 
   targetPosition: {x: -8, y: 0}
-  speed: 0.001
+  speed: 0.01

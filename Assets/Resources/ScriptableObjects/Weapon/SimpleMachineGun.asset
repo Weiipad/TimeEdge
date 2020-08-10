@@ -17,5 +17,5 @@ MonoBehaviour:
   fullLoad: 1
   baseLoadSpeed: 10
   bulletVelocity: 10
-  bulletDamage: 1
+  bulletDamage: 1000
   bulletDuration: 1
