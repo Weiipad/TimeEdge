@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public abstract class Bar : MonoBehaviour
 {
     protected Image childImage;
+    protected Text childText;
 
     protected float preValue;
     protected float currentValue;

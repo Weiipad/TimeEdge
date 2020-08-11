@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class CursorControl : MonoBehaviour
 {
+    public PauseGame pauseGameGO;
     private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        pauseGameGO.OnPressReturnGameButton += OnPressReturnGameButton;
+        pauseGameGO.OnPressReturnStartPageButton += OnPressReturnStartPageButton;
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -16,10 +20,17 @@ public class CursorControl : MonoBehaviour
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
         }
-        else if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+    }
+
+    private void OnPressReturnGameButton()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    private void OnPressReturnStartPageButton()
+    {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }

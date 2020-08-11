@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02bfbd02d7a934e4bb8985ccf344df2b, type: 3}
+  m_Name: Effects
+  m_EditorClassIdentifier: 
+  dictionary:
+  - key: HealOverTime
+    value: {fileID: 11400000, guid: 01bacd67abc290a4ba6c1aec7b8c05d3, type: 2}
+  - key: AddShield
+    value: {fileID: 11400000, guid: 8b49ea17702f23c4f8221268a36336a6, type: 2}

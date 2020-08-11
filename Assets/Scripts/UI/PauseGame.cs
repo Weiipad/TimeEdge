@@ -6,6 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PauseGame : MonoBehaviour
 {
+    public delegate void OnPressButtonDelegate();
+    public event OnPressButtonDelegate OnPressReturnGameButton;
+    public event OnPressButtonDelegate OnPressReturnStartPageButton;
+    public event OnPressButtonDelegate OnPressExitButton;
     private int pressButtonType;
 
     public GameObject PauseWindow;
@@ -49,12 +53,15 @@ public class PauseGame : MonoBehaviour
                     switch (pressButtonType)
                     {
                         case 0:
+                            OnPressReturnGameButton();
                             break;
                         case 1:
                             GameStatus.CurrentGameStatus = GameStatus.GameStatusType.none;
+                            OnPressReturnStartPageButton();
                             SceneManager.LoadScene(0);
                             break;
                         case 2:
+                            OnPressExitButton();
                             Application.Quit();
                             break;
                     }
