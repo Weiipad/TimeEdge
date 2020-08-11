@@ -13,7 +13,7 @@ public class StartScene : MonoBehaviour
     private void Start()
     {
         aboutWindow.GetComponent<AboutWindow>().OnAboutWindowActive += SetIsAboutGameWindowActiveValueFalse;
-        
+        aboutWindow.SetActive(false);
     }
 
     
