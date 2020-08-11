@@ -27,6 +27,8 @@ public class MoveVectorByTime : EntityAction
         WaitForSecondsRealtime wait = new WaitForSecondsRealtime(0.02f * secondScale);
         while (curSeconds < seconds)
         {
+            if (GameStatus.IsPauseGame())
+                continue;
             entity.transform.position = (Vector2)entity.transform.position + offset;
             yield return wait;
             curSeconds += 0.02f * secondScale;

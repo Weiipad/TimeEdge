@@ -11,6 +11,8 @@ public class Rocket : MonoBehaviour
 
     void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         if (target == null)
         {
             if (!finding) 

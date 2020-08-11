@@ -22,6 +22,8 @@ public class ShockBomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         timeElapsed += Time.deltaTime;
         if (timeElapsed >= duration)
         {

@@ -26,11 +26,15 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         rigidbody.velocity = velocity * transform.up;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)
     {
+        if (GameStatus.IsPauseGame())
+            return;
         if ((collision.CompareTag("Enemy") && gameObject.CompareTag("Bullet0")) || (collision.CompareTag("Player") && gameObject.CompareTag("Bullet1")))
         {
             OnCollide(collision.GetComponent<GameEntity>());
@@ -45,6 +49,8 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         if (duration <= 0) return;
 
         timeAccumulator += Time.deltaTime;

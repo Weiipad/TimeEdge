@@ -20,6 +20,8 @@ public class Effect
 
     public void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         if (data.duration < 0) return;
         timeCount += Time.deltaTime;
     }

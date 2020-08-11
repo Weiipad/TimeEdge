@@ -32,15 +32,22 @@ public class PauseGame : MonoBehaviour
     {
         if (PauseWindow == null)
             return;
-        if(Input.GetKeyDown(KeyCode.Escape) && GameStatus.CurrentGameStatus != GameStatus.GameStatusType.pause)
+        if(Input.GetKeyDown(KeyCode.Escape) && !isPressButton)
         {
-            PauseWindow.SetActive(true);
-            GameStatus.CurrentGameStatus = GameStatus.GameStatusType.pause;
-            if(!PauseWindowAnimation.isPlaying)
+            if (!GameStatus.IsPauseGame())
             {
-                PauseWindowAnimation["PauseWindowShowUp"].time = 0;
-                PauseWindowAnimation["PauseWindowShowUp"].speed = 1f;
-                PauseWindowAnimation.Play("PauseWindowShowUp");
+                PauseWindow.SetActive(true);
+                GameStatus.CurrentGameStatus = GameStatus.GameStatusType.pause;
+                if (!PauseWindowAnimation.isPlaying)
+                {
+                    PauseWindowAnimation["PauseWindowShowUp"].time = 0;
+                    PauseWindowAnimation["PauseWindowShowUp"].speed = 1f;
+                    PauseWindowAnimation.Play("PauseWindowShowUp");
+                }
+            }
+            else
+            {
+                PressPauseWinowReturnGameButton();
             }
         }
         else
@@ -53,15 +60,18 @@ public class PauseGame : MonoBehaviour
                     switch (pressButtonType)
                     {
                         case 0:
-                            OnPressReturnGameButton();
+                            if(OnPressReturnGameButton != null)
+                                OnPressReturnGameButton();
                             break;
                         case 1:
                             GameStatus.CurrentGameStatus = GameStatus.GameStatusType.none;
-                            OnPressReturnStartPageButton();
+                            if(OnPressReturnStartPageButton != null)
+                                OnPressReturnStartPageButton();
                             SceneManager.LoadScene(0);
                             break;
                         case 2:
-                            OnPressExitButton();
+                            if(OnPressExitButton != null)
+                               OnPressExitButton();
                             Application.Quit();
                             break;
                     }
@@ -94,7 +104,10 @@ public class PauseGame : MonoBehaviour
     {
         isPressButton = true;
 
-        PauseWindowAnimation["PauseWindowShowUp"].time = PauseWindowAnimation["PauseWindowShowUp"].clip.length;
+        if (PauseWindowAnimation["PauseWindowShowUp"].time == PauseWindowAnimation["PauseWindowShowUp"].clip.length || PauseWindowAnimation["PauseWindowShowUp"].time == 0)
+            PauseWindowAnimation["PauseWindowShowUp"].time = PauseWindowAnimation["PauseWindowShowUp"].clip.length;
+        else
+            PauseWindowAnimation["PauseWindowShowUp"].time = PauseWindowAnimation["PauseWindowShowUp"].time;
         PauseWindowAnimation["PauseWindowShowUp"].speed = -1f;
         PauseWindowAnimation.Play("PauseWindowShowUp");
     }

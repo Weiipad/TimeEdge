@@ -24,7 +24,8 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        
+        if (GameStatus.IsPauseGame())
+            return;
         wi.Update();
         wi.Shoot();
     }

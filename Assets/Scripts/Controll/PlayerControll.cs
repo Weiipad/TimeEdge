@@ -5,6 +5,8 @@ public class PlayerControll : MonoBehaviour
 {
     void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         FollowMouse();
     }
     
