@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6062e9953273416499cb3fc3382a423e, type: 3}
-  m_Name: (3,6);MoveUpByCircle
+  m_Script: {fileID: 11500000, guid: 02340dc7eee26ef4bad8ba67af43c12e, type: 3}
+  m_Name: 3_(-3,6);MirrorX;Move
   m_EditorClassIdentifier: 
-  targetPoint: {x: 3, y: 6}
-  circleCenterPosition: 0
-  radius: 3
-  seconds: 0.375
+  vector: {x: -3, y: 6}
+  vectorScale: 1
+  seconds: 0.25
   secondScale: 1
-  IsClockDirect: 0
+  MirrorX: 1
+  MirrorY: 0

@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79c2b13f48cde8f49a381ff2935b7ad6, type: 3}
-  m_Name: (0,0);MoveToCenterPoint
+  m_Script: {fileID: 11500000, guid: 6062e9953273416499cb3fc3382a423e, type: 3}
+  m_Name: 6_(3,6);MoveUpByCircle
   m_EditorClassIdentifier: 
-  targetPosition: {x: 0, y: 0}
-  speed: 0.1
+  targetPoint: {x: 3, y: 6}
+  circleCenterPosition: 0
+  radius: 3
+  seconds: 0.375
+  secondScale: 1
+  IsClockDirect: 0

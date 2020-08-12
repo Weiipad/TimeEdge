@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
-using UnityScript.Scripting.Pipeline;
 
 public class FirstLevel : Level
 {
@@ -45,7 +43,11 @@ public class FirstLevel : Level
             else
             {
                 var go = GameObject.Instantiate(EnemyPrefabs[0], transform);
-                EnemyInit(go, Vector3.zero, Weapons[0], new EntityAction[] { EntityActions[0] });
+                //EnemyInit(go, Vector3.zero, Weapons[0], new EntityAction[] { EntityActions[0] });
+                MoveVectorByTime moveVectorByTime = ScriptableObject.CreateInstance<MoveVectorByTime>();
+                moveVectorByTime.vector = new Vector2(0, -12);
+                moveVectorByTime.seconds = 1f;
+                EnemyInit(go, Vector3.zero, Weapons[0], new EntityAction[] { moveVectorByTime });
                 yield return new WaitForSeconds(1f);
                 Destroy(go);
             }
