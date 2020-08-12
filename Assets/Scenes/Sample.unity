@@ -1423,7 +1423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 11400000, guid: 61bea2b05b707a4469d813cb00e41819, type: 2}
   actions:
-  - {fileID: 11400000, guid: 8d0fbf3ec2749cd4eb62d958b3ccf3c3, type: 2}
+  - {fileID: 11400000, guid: ee05cb16cb1d4f94890287b895a85a6f, type: 2}
 --- !u!114 &842262144
 MonoBehaviour:
   m_ObjectHideFlags: 0

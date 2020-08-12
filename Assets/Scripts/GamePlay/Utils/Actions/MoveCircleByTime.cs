@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewAction", menuName = "Time Edge/Action/MoveByCircle")]
-public class MoveByCircle : EntityAction
+[CreateAssetMenu(fileName = "NewAction", menuName = "Time Edge/Action/MoveCircleByTime")]
+public class MoveCircleByTime : EntityAction
 {
     public enum CircleCenterPosition
     {
