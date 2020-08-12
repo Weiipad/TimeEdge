@@ -18,9 +18,6 @@ public class MoveByCircle : EntityAction
     public float seconds = 1f;
     public float secondScale = 1f;
 
-    public bool MirrorX;
-    public bool MirrorY;
-
     public bool IsClockDirect;
 
     public override IEnumerator Act(ActionList list, GameEntity entity, Weapon.WeaponInterface wi)
@@ -31,10 +28,6 @@ public class MoveByCircle : EntityAction
         Vector2 centerOfCircle;
         Vector2 prepenVector;
         Vector2 targetCopy = targetPoint;
-        if (MirrorX)
-            targetCopy.x = -targetCopy.x;
-        if(MirrorY)
-            targetCopy.y = -targetCopy.y;
         Vector2 entityToTargetVector = targetCopy - (Vector2)entity.transform.position;
         float vectorLength = Mathf.Sqrt(radius * radius - (entityToTargetVector.magnitude / 2f) * (entityToTargetVector.magnitude / 2f));
         if (entityToTargetVector.magnitude / 2f > radius)
@@ -55,19 +48,16 @@ public class MoveByCircle : EntityAction
         if (targetPoint.y < centerOfCircle.y)
             endAngle = -endAngle;
         float angleOffset;
-        if (!IsClockDirect)
-        {
-            if (startAngle <= endAngle)
-                angleOffset = endAngle - startAngle;
-            else
-                angleOffset = endAngle + 360f - startAngle;
-        }
+        if (startAngle <= endAngle)
+            angleOffset = endAngle - startAngle;
         else
+            angleOffset = endAngle + 360f - startAngle;
+        if (IsClockDirect)
         {
-            if (startAngle <= endAngle)
-                angleOffset = startAngle - endAngle;
+            if (angleOffset > 0f)
+                angleOffset = -(360f - angleOffset);
             else
-                angleOffset = - (360f - endAngle - startAngle);
+                angleOffset = 360f + angleOffset;
         }
         angleOffset *= (0.02f * secondScale / seconds);
         curAngle = startAngle;
@@ -82,9 +72,12 @@ public class MoveByCircle : EntityAction
             entity.transform.position = newPos;
             if (entity.transform.position.Equals(targetPoint))
                 yield break;
-            yield return new WaitForSecondsRealtime(0.02f);
-            curSeconds += 0.02f;
+            if(curAngle.Equals(endAngle))
+                yield break;
+            yield return new WaitForSecondsRealtime(0.02f * secondScale);
+            curSeconds += 0.02f * secondScale;
         }
+        list.SwitchToNext();
     }
 
     private Vector2 CalculatePos(float angle, Vector2 centerOfCircle)

@@ -12,11 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6062e9953273416499cb3fc3382a423e, type: 3}
   m_Name: MoveCircle
   m_EditorClassIdentifier: 
-  targetPoint: {x: -5.5, y: 0}
+  targetPoint: {x: -1, y: 0}
   circleCenterPosition: 0
-  radius: 3
-  seconds: 10
+  radius: 4
+  seconds: 5
   secondScale: 1
-  MirrorX: 0
-  MirrorY: 0
   IsClockDirect: 0

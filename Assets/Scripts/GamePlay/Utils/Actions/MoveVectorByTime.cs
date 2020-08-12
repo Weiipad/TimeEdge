@@ -19,7 +19,7 @@ public class MoveVectorByTime : EntityAction
         if (secondScale <= 0f)
             yield break;
         float curSeconds = 0f;
-        Vector2 offset = vector * vectorScale / (0.02f / seconds);
+        Vector2 offset = vector * vectorScale / (0.02f * secondScale / seconds);
         if (MirrorX)
             offset.x = -offset.x;
         if (MirrorY)
