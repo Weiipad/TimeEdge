@@ -1,46 +1,87 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
+using UnityScript.Scripting.Pipeline;
 
 public class FirstLevel : Level
 {
-    public AudioClip Music;
-
     private bool isStartThisLevel;
     private Coroutine preCoroutine;
 
     private AudioSource musicPlayer;
-
     public override void StartLevel()
     {
-        isStartThisLevel = true;
-        musicPlayer = GameObject.Find("AudioGroup").transform.GetChild(0).GetComponent<AudioSource>();
-        musicPlayer.clip = Music;
-        musicPlayer.Play();
-        //preCoroutine = StartCoroutine(DoFirstLevel());
+        if (!isStartThisLevel)
+        {
+            isStartThisLevel = true;
+            musicPlayer = GameObject.Find("AudioGroup").transform.GetChild(0).GetComponent<AudioSource>();
+            musicPlayer.clip = Musics[0];
+            musicPlayer.Play();
+            preCoroutine = StartCoroutine(DoFirstLevel());
+        }
     }
 
     public override void EndLevel()
     {
-        isStartThisLevel = false;
-        if(preCoroutine != null)
-            StopCoroutine(preCoroutine);
+        if (isStartThisLevel)
+        {
+            isStartThisLevel = false;
+            musicPlayer.Pause();
+            if (preCoroutine != null)
+                StopCoroutine(preCoroutine);
+        }
     }
 
     private IEnumerator DoFirstLevel()
     {
-        yield return 0;
-    }
+        for (int i = 0; i < 2; i++)
+        {
+            if (GameStatus.IsPauseGame())
+            {
+                i--;
+                yield return 0;
+            }
+            else
+            {
+                var go = GameObject.Instantiate(EnemyPrefabs[0], transform);
+                go.transform.localPosition = Vector3.zero;
+                go.transform.parent = null;
+                var enemyEntity = go.GetComponent<GameEntity>();
+                var enemy = go.GetComponent<Enemy>();
+                enemy.weapon = Weapons[0];
+                enemy.wi = new Weapon.WeaponInterface(enemyEntity, enemy.weapon);
+                enemy.actions = new List<EntityAction>();
+                enemy.actions.Add(EntityActions[0]);
+                enemy.StartAction();
+                yield return new WaitForSeconds(1f);
+                Destroy(go);
+            }
+        }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for(int i = 0;i < 1;i ++)
+        {
+            if (GameStatus.IsPauseGame())
+            {
+                i--;
+                yield return 0;
+            }
+            else
+            {
+                var go = GameObject.Instantiate(EnemyPrefabs[1], transform);
+                go.transform.localPosition = Vector3.zero;
+                go.transform.parent = null;
+                var enemyEntity = go.GetComponent<GameEntity>();
+                var enemy = go.GetComponent<Enemy>();
+                enemy.weapon = Weapons[1];
+                enemy.wi = new Weapon.WeaponInterface(enemyEntity, enemy.weapon);
+                enemy.actions = new List<EntityAction>();
+                enemy.actions.Add(EntityActions[0]);
+                enemy.StartAction();
+                yield return new WaitForSeconds(1f);
+                Destroy(go);
+            }
+        }
+        yield break;
     }
 }

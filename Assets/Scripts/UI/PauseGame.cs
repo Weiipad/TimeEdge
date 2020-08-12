@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PauseGame : MonoBehaviour
 {
     public delegate void OnPressButtonDelegate();
+    public event OnPressButtonDelegate OnPressPauseGameButton;
     public event OnPressButtonDelegate OnPressReturnGameButton;
     public event OnPressButtonDelegate OnPressReturnStartPageButton;
     public event OnPressButtonDelegate OnPressExitButton;
@@ -44,6 +45,7 @@ public class PauseGame : MonoBehaviour
                     PauseWindowAnimation["PauseWindowShowUp"].speed = 1f;
                     PauseWindowAnimation.Play("PauseWindowShowUp");
                 }
+                OnPressPauseGameButton();
             }
             else
             {

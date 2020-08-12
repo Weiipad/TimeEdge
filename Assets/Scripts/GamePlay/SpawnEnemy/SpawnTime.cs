@@ -36,9 +36,9 @@ public class SpawnTime : MonoBehaviour
             return;
         for (int i = 0;i < levels.Length;i ++)
         {
-            if (levels[i].StartTime - time <= 0.01f)
+            if (Mathf.Abs(levels[i].StartTime - time) <= 0.01f)
                 levels[i].StartLevel();
-            if (levels[i].StartTime + levels[i].Duration - time <= 0.01f)
+            if (Mathf.Abs(levels[i].StartTime + levels[i].Duration - time) <= 0.01f)
                 levels[i].EndLevel();
         }
     }
@@ -49,9 +49,8 @@ public class SpawnTime : MonoBehaviour
         {
             if (!GameStatus.IsPauseGame())
             {
-                time += 0.02f;
-                Debug.Log(time);
                 yield return new WaitForSeconds(0.02f);
+                time += 0.02f;
             }
             else
                 yield return 0;
