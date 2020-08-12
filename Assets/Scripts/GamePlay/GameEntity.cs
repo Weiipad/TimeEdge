@@ -38,6 +38,8 @@ public class GameEntity : MonoBehaviour
 
     protected void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         if (currentHP <= 0)
         {
             Destroy(gameObject);
@@ -50,7 +52,9 @@ public class GameEntity : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        foreach(var effect in effects)
+        if (GameStatus.IsPauseGame())
+            return;
+        foreach (var effect in effects)
         {
             if (effect.Deprecated) continue;
             effect.Affect();

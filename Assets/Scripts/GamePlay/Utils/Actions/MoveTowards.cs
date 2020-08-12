@@ -18,6 +18,8 @@ public class MoveTowards : EntityAction
 
         while (true)
         {
+            if (GameStatus.IsPauseGame())
+                continue;
             var curDistance = Vector3.Distance(target.position, entity.transform.position);
             if (curDistance > distance)
             {

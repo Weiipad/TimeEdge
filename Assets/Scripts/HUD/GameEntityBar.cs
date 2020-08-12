@@ -74,6 +74,9 @@ public class GameEntityBar : Bar
         {
             childImage.type = Image.Type.Filled;
         }
+
+        childText = transform.GetChild(1).GetComponent<Text>();
+
         if (entityFrom == EntityFrom.tag)
         {
             if (EntityTag != null && EntityTag != "")
@@ -99,11 +102,6 @@ public class GameEntityBar : Bar
             case BarType.shield: childImage.color = ShieldBarColor; break;
             case BarType.loadBullet: childImage.color = LoadBulletColor; break;
             default: break;
-        }
-
-        if (barType == BarType.loadBullet && EntityTag != "Player")
-        {
-            throw new System.Exception("只有玩家才能使用武器装填信息条");
         }
 
         UpdateMaxValue();
@@ -139,6 +137,7 @@ public class GameEntityBar : Bar
         if (!maxValue.Equals(0f))
             percent = Mathf.Clamp(currentValue / maxValue, 0f, 1f);
         childImage.fillAmount = percent;
+        UpdateText(currentValue, maxValue);
     }
 
     protected override float GetCurrentValue()
@@ -181,6 +180,22 @@ public class GameEntityBar : Bar
                     throw new System.Exception("Can't get weapon!");
             }
             maxValue = weapon.fullLoad;
+        }
+    }
+
+    private void UpdateText(float currentValue, float maxValue)
+    {
+        switch(barType)
+        {
+            case BarType.blood:
+                childText.text = $"Blood:{currentValue:F0}/{maxValue:F0}";
+                break;
+            case BarType.shield:
+                childText.text = $"Shield:{currentValue:F0}/{maxValue:F0}";
+                break;
+            case BarType.loadBullet:
+                childText.text = $"loadBullet:{currentValue:F2}/{maxValue:F0}";
+                break;
         }
     }
 }

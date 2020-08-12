@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameStatus
 {
+    private GameStatus() { }
     public enum GameStatusType
     {
         none,
@@ -11,5 +12,10 @@ public class GameStatus
         pause,
     }
 
-    public static GameStatusType CurrentGameStatus  = GameStatusType.none;
+    public static GameStatusType CurrentGameStatus = GameStatusType.none;
+
+    public static bool IsPauseGame()
+    {
+        return (CurrentGameStatus == GameStatusType.pause);
+    }
 }

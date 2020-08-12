@@ -8,6 +8,8 @@ public class Targeting : MonoBehaviour
 
     private void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         transform.rotation = Quaternion.FromToRotation(Vector3.up, target.transform.position - transform.position);
     }
 }

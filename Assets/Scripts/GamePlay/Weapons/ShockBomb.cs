@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Path;
 using UnityEngine;
 
 public class ShockBomb : MonoBehaviour
@@ -22,6 +21,8 @@ public class ShockBomb : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         timeElapsed += Time.deltaTime;
         if (timeElapsed >= duration)
         {
