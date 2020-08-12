@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Level : MonoBehaviour
 {
     public float StartTime;
+    public float Duration;
     public abstract void StartLevel();
     public abstract void EndLevel();
 }

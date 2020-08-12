@@ -40,13 +40,16 @@ public class MoveCircleBySpeed : EntityAction
         while (Vector2.Distance(entity.transform.position, targetPoint) >= 0.001f)
         {
             if (GameStatus.IsPauseGame())
-                continue;
-            Vector2 centerToCur = (Vector2)entity.transform.position - centerOfCircle;
-            float sin = Vector2.Dot(centerToCur, Vector2.up) / radius;
-            float cos = Vector2.Dot(centerToCur, Vector2.right) / radius;
-            Vector2 velocity = new Vector2(speed * sin, speed * cos);
-            entity.transform.position += (Vector3)velocity * Time.deltaTime;
-            yield return 0;
+                yield return 0;
+            else
+            {
+                Vector2 centerToCur = (Vector2)entity.transform.position - centerOfCircle;
+                float sin = Vector2.Dot(centerToCur, Vector2.up) / radius;
+                float cos = Vector2.Dot(centerToCur, Vector2.right) / radius;
+                Vector2 velocity = new Vector2(speed * sin, speed * cos);
+                entity.transform.position += (Vector3)velocity * Time.deltaTime;
+                yield return 0;
+            }
         }
         list.SwitchToNext();
     }

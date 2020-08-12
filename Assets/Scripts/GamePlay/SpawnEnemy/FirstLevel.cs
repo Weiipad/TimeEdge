@@ -4,26 +4,33 @@ using UnityEngine;
 
 public class FirstLevel : Level
 {
+    public AudioClip Music;
+
     private bool isStartThisLevel;
-    private GameObject player;
     private Coroutine preCoroutine;
+
+    private AudioSource musicPlayer;
+
     public override void StartLevel()
     {
         isStartThisLevel = true;
-
+        musicPlayer = GameObject.Find("AudioGroup").transform.GetChild(0).GetComponent<AudioSource>();
+        musicPlayer.clip = Music;
+        musicPlayer.Play();
+        //preCoroutine = StartCoroutine(DoFirstLevel());
     }
 
     public override void EndLevel()
     {
         isStartThisLevel = false;
+        if(preCoroutine != null)
+            StopCoroutine(preCoroutine);
     }
 
-    //private IEnumerator DoFirstLevel()
-    //{
-    //    player = new GameObject("Player");
-    //    player.tag = "player";
-
-    //}
+    private IEnumerator DoFirstLevel()
+    {
+        yield return 0;
+    }
 
     // Start is called before the first frame update
     void Start()

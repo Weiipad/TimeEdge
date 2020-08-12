@@ -24,7 +24,7 @@ public class MoveVectorByTime : EntityAction
             offset.x = -offset.x;
         if (MirrorY)
             offset.y = -offset.y;
-        WaitForSecondsRealtime wait = new WaitForSecondsRealtime(0.02f * secondScale);
+        WaitForSeconds wait = new WaitForSeconds(0.02f * secondScale);
         while (curSeconds < seconds)
         {
             if (GameStatus.IsPauseGame())

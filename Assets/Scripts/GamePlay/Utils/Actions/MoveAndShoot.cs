@@ -12,10 +12,13 @@ public class MoveAndShoot : EntityAction
         var target = new Vector3(targetPosition.x, targetPosition.y, entity.transform.position.z);
         while (Vector3.Distance(entity.transform.position, target) >= 0.001f)
         {
-            if (GameStatus.IsPauseGame())
-                continue;
-            entity.transform.position = Vector3.Lerp(entity.transform.position, target, speed);
-            yield return 0;
+            if (!GameStatus.IsPauseGame())
+            {
+                entity.transform.position = Vector3.Lerp(entity.transform.position, target, speed);
+                yield return 0;
+            }
+            else
+                yield return 0;
         }
         list.SwitchToNext();
         yield return 0;

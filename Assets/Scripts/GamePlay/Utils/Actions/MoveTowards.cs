@@ -19,17 +19,20 @@ public class MoveTowards : EntityAction
         while (true)
         {
             if (GameStatus.IsPauseGame())
-                continue;
-            var curDistance = Vector3.Distance(target.position, entity.transform.position);
-            if (curDistance > distance)
-            {
-                entity.transform.position += (curDistance/distance) * speed * Time.deltaTime * entity.transform.up;
-            }
+                yield return 0;
             else
             {
-                entity.transform.position += speed * Time.deltaTime * entity.transform.right;
+                var curDistance = Vector3.Distance(target.position, entity.transform.position);
+                if (curDistance > distance)
+                {
+                    entity.transform.position += (curDistance / distance) * speed * Time.deltaTime * entity.transform.up;
+                }
+                else
+                {
+                    entity.transform.position += speed * Time.deltaTime * entity.transform.right;
+                }
+                yield return 0;
             }
-            yield return 0;
         }
     }
 }
