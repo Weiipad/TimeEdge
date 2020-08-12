@@ -2317,13 +2317,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartTime: 0
-  Duration: 10
+  Duration: 174
   Musics:
   - {fileID: 8300000, guid: 7811464d0636a564e91c95a1495428be, type: 3}
   - {fileID: 8300000, guid: 8f77ae419dd7585438ab15908f060248, type: 3}
   EntityActions:
   - {fileID: 11400000, guid: 9241363fbdb1d9a4493f1935ba980cbb, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: fe278183df38af2498018f4584499bf3, type: 2}
+  - {fileID: 11400000, guid: 5b9d58ae4269bc54080bd3a4eae6effd, type: 2}
+  - {fileID: 11400000, guid: ecbb0856c540e3c4cbe5ab35b6ca1191, type: 2}
+  - {fileID: 11400000, guid: 6f8d54f90c3b15547aa987f59a141f30, type: 2}
+  - {fileID: 11400000, guid: 0167e364d5e04534da201b54577ce9e9, type: 2}
+  - {fileID: 11400000, guid: caff243f2db5b934caa1e805e53b9df1, type: 2}
+  - {fileID: 11400000, guid: bf404c122de7d24439d96a0b74504ebb, type: 2}
+  - {fileID: 11400000, guid: 2fd15817cd1ad2649bc6ed73d8e16366, type: 2}
   EnemyPrefabs:
   - {fileID: 1036110244193432138, guid: bb3fa23cb5e4e8444b2b506dae0b90df, type: 3}
   - {fileID: 4015917710857340977, guid: 1e4eb3202a3c791419d9dea24354067c, type: 3}

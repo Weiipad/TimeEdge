@@ -7,6 +7,7 @@ public class CircleGun : Weapon
 {
     private float startAngle = 0f;
     public float angleRate = 10f;
+    public float angleOffset = 3f;
     protected override void TryShoot(WeaponInterface wi)
     {
         if (wi.load >= wi.fullLoad)
@@ -29,6 +30,6 @@ public class CircleGun : Weapon
             bullet.duration = bulletDuration;
             angle += angleRate;
         }
-        startAngle += 3f;
+        startAngle += angleOffset;
     }
 }
