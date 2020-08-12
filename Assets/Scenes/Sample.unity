@@ -353,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda91bfb70ae8bd4ebf22168d10707f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseGameGO: {fileID: 0}
 --- !u!1 &254554870
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1189,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1356707778}
     m_Modifications:
+    - target: {fileID: 927460861268201242, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5991515352703136456, guid: 2dfc1dfcf4b07ce4b98d3128a9167545,
         type: 3}
       propertyPath: m_Name
@@ -1418,6 +1424,8 @@ MonoBehaviour:
   weapon: {fileID: 11400000, guid: 61bea2b05b707a4469d813cb00e41819, type: 2}
   actions:
   - {fileID: 11400000, guid: 952f4ca91a4845a4b8c4f72ecde985aa, type: 2}
+  - {fileID: 11400000, guid: 8d0fbf3ec2749cd4eb62d958b3ccf3c3, type: 2}
+  - {fileID: 11400000, guid: 37f627e7198b31d4a8f8aa482655b949, type: 2}
 --- !u!114 &842262144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1543,7 +1551,7 @@ GameObject:
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &992400264
 Transform:
   m_ObjectHideFlags: 0
