@@ -5,7 +5,7 @@ using UnityEngine;
 public class CursorControl : MonoBehaviour
 {
     public PauseGame pauseGameGO;
-    private void Start()
+    private void Awake()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;

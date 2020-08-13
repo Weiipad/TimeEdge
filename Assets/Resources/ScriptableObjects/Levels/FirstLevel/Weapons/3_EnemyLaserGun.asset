@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2129de220268158498bb5d02b9c7f051, type: 3}
-  m_Name: SimpleMachineGun
+  m_Script: {fileID: 11500000, guid: 59977576461acf847881afc350a35c69, type: 3}
+  m_Name: 3_EnemyLaserGun
   m_EditorClassIdentifier: 
-  ammunition: {fileID: 5932569958338663460, guid: 15f1de08965c9be448f103b4c790f455,
+  ammunition: {fileID: 7212087283900276921, guid: d3f19d3250847f546aef0df720d34205,
     type: 3}
   fullLoad: 1
-  baseLoadSpeed: 10
-  bulletVelocity: 10
-  bulletDamage: 100
-  bulletDuration: 1
+  baseLoadSpeed: 2
+  bulletVelocity: 100
+  bulletDamage: 3
+  bulletDuration: 100
+  powerLoadSpeed: 1

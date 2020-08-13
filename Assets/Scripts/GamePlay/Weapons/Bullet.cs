@@ -24,11 +24,16 @@ public class Bullet : MonoBehaviour
         layerMask.value = LayerMask.NameToLayer("Default");
     }
 
+    private void Start()
+    {
+        rigidbody.velocity = velocity * transform.up;
+    }
+
     void FixedUpdate()
     {
         if (GameStatus.IsPauseGame())
             return;
-        rigidbody.velocity = velocity * transform.up;
+        //rigidbody.velocity = velocity * transform.up;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

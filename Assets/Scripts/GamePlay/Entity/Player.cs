@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (GameStatus.IsPauseGame()) return;
+        if (GameStatus.CurrentGameStatus != GameStatus.GameStatusType.playing) return;
         wi.Update();
         if (Input.GetKey(KeyCode.Mouse0)) wi.Shoot();
         if (Input.GetKeyDown(KeyCode.Mouse1) && avaliableShock > 0) GenShockBomb();

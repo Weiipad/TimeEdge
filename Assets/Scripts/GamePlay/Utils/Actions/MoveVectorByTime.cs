@@ -39,6 +39,7 @@ public class MoveVectorByTime : EntityAction
 
         if(seconds == 0f || curSeconds == 0f)
             entity.transform.position = (Vector2)entity.transform.position + vector;
-        list.SwitchToNext();
+        if(list != null)
+            list.SwitchToNext();
     }
 }

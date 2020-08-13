@@ -25,14 +25,9 @@ public class SpawnTime : MonoBehaviour
             StopCoroutine(preCountTime);
     }
 
-    private void Start()
-    {
-        StartCountTIme(true);
-    }
-
     private void Update()
     {
-        if (GameStatus.IsPauseGame())
+        if (GameStatus.CurrentGameStatus != GameStatus.GameStatusType.playing)
             return;
         for (int i = 0;i < levels.Length;i ++)
         {

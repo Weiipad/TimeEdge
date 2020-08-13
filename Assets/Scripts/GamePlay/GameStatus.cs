@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class GameStatus
@@ -17,5 +18,10 @@ public class GameStatus
     public static bool IsPauseGame()
     {
         return (CurrentGameStatus == GameStatusType.pause);
+    }
+
+    public static bool IsPlayGame()
+    {
+        return (CurrentGameStatus == GameStatusType.playing);
     }
 }

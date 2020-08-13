@@ -31,7 +31,7 @@ public class PauseGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseWindow == null)
+        if (PauseWindow == null || GameStatus.CurrentGameStatus == GameStatus.GameStatusType.none)
             return;
         if(Input.GetKeyDown(KeyCode.Escape) && !isPressButton)
         {
@@ -105,7 +105,6 @@ public class PauseGame : MonoBehaviour
     private void PressButton()
     {
         isPressButton = true;
-
         if (PauseWindowAnimation["PauseWindowShowUp"].time == PauseWindowAnimation["PauseWindowShowUp"].clip.length || PauseWindowAnimation["PauseWindowShowUp"].time == 0)
             PauseWindowAnimation["PauseWindowShowUp"].time = PauseWindowAnimation["PauseWindowShowUp"].clip.length;
         else

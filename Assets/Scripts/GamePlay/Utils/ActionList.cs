@@ -27,7 +27,7 @@ public class ActionList
 
     public void SwitchToNext()
     {
-        if (++pointer >= actions.Count)
+        if (++pointer >= actions.Count || host == null)
         {
             return;
         }

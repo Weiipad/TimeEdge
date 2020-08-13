@@ -31,7 +31,7 @@ public class AudioPlayAndPause : MonoBehaviour
 
     private void ContinuePlayMusic()
     {
-        player.time = recordTime;
+        player.time = recordTime - 0.1f;
         player.Play();
     }
 }

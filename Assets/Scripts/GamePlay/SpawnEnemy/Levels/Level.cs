@@ -7,7 +7,6 @@ public abstract class Level : MonoBehaviour
     public float StartTime;
     public float Duration;
     public AudioClip[] Musics;
-    public EntityAction[] EntityActions;
     public GameObject[] EnemyPrefabs;
     public Weapon[] Weapons;
     public abstract void StartLevel();
