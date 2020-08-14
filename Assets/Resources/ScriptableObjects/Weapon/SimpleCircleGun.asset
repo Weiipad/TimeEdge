@@ -19,3 +19,5 @@ MonoBehaviour:
   bulletVelocity: 3
   bulletDamage: 1
   bulletDuration: 5
+  angleRate: 90
+  angleOffset: 6

@@ -13,7 +13,7 @@ public class GameEntityBar : Bar
 
     public enum BarType
     {
-        blood,
+        hp,
         shield,
         loadBullet,
     }
@@ -21,7 +21,7 @@ public class GameEntityBar : Bar
     /// <summary>
     /// 显示的类别
     /// </summary>
-    public BarType barType = BarType.blood;
+    public BarType barType = BarType.hp;
 
     /// <summary>
     /// 实体数据来自标签或游戏物体
@@ -45,6 +45,7 @@ public class GameEntityBar : Bar
     private GameEntity targetEntity;
     private Weapon.WeaponInterface weapon;
     private bool isGetEntity;
+    private bool isTargetFade;
 
     private void OnEnable()
     {
@@ -53,6 +54,8 @@ public class GameEntityBar : Bar
 
     private void FixedUpdate()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         if(isGetEntity == false)
         {
             BarInit();
@@ -98,7 +101,7 @@ public class GameEntityBar : Bar
 
         switch (barType)
         {
-            case BarType.blood: childImage.color = BloodBarColor; break;
+            case BarType.hp: childImage.color = BloodBarColor; break;
             case BarType.shield: childImage.color = ShieldBarColor; break;
             case BarType.loadBullet: childImage.color = LoadBulletColor; break;
             default: break;
@@ -119,7 +122,17 @@ public class GameEntityBar : Bar
             {
                 if (isGetEntity)
                 {
-                    Destroy(gameObject);
+                    if (!isTargetFade)
+                    {
+                        currentValue = 0f;
+                        float per = 0f;
+                        if (!maxValue.Equals(0f))
+                            per = Mathf.Clamp(currentValue / maxValue, 0f, 1f);
+                        childImage.fillAmount = per;
+                        UpdateText(currentValue, maxValue);
+                        isTargetFade = true;
+                    }
+                    return;
                 }
             }
             throw new System.Exception("Can't get target!");
@@ -143,7 +156,7 @@ public class GameEntityBar : Bar
     protected override float GetCurrentValue()
     {
         float current = 0f;
-        if (barType == BarType.blood)
+        if (barType == BarType.hp)
             current = targetEntity.currentHP;
         else if (barType == BarType.shield)
             current = targetEntity.currentShield;
@@ -167,7 +180,7 @@ public class GameEntityBar : Bar
             BarInit();
         }
 
-        if (barType == BarType.blood)
+        if (barType == BarType.hp)
             maxValue = targetEntity.maxHP;
         else if (barType == BarType.shield)
             maxValue = targetEntity.maxShield;
@@ -187,14 +200,14 @@ public class GameEntityBar : Bar
     {
         switch(barType)
         {
-            case BarType.blood:
-                childText.text = $"Blood:{currentValue:F0}/{maxValue:F0}";
+            case BarType.hp:
+                childText.text = $"HP:{currentValue:F0}/{maxValue:F0}";
                 break;
             case BarType.shield:
                 childText.text = $"Shield:{currentValue:F0}/{maxValue:F0}";
                 break;
             case BarType.loadBullet:
-                childText.text = $"loadBullet:{currentValue:F2}/{maxValue:F0}";
+                childText.text = $"Load:{currentValue:F2}/{maxValue:F0}";
                 break;
         }
     }

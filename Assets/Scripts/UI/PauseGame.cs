@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PauseGame : MonoBehaviour
 {
     public delegate void OnPressButtonDelegate();
+    public event OnPressButtonDelegate OnPressPauseGameButton;
     public event OnPressButtonDelegate OnPressReturnGameButton;
     public event OnPressButtonDelegate OnPressReturnStartPageButton;
     public event OnPressButtonDelegate OnPressExitButton;
@@ -30,7 +31,7 @@ public class PauseGame : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PauseWindow == null)
+        if (PauseWindow == null || GameStatus.CurrentGameStatus == GameStatus.GameStatusType.none)
             return;
         if(Input.GetKeyDown(KeyCode.Escape) && !isPressButton)
         {
@@ -44,6 +45,8 @@ public class PauseGame : MonoBehaviour
                     PauseWindowAnimation["PauseWindowShowUp"].speed = 1f;
                     PauseWindowAnimation.Play("PauseWindowShowUp");
                 }
+                if(OnPressPauseGameButton != null)
+                    OnPressPauseGameButton();
             }
             else
             {
@@ -103,7 +106,6 @@ public class PauseGame : MonoBehaviour
     private void PressButton()
     {
         isPressButton = true;
-
         if (PauseWindowAnimation["PauseWindowShowUp"].time == PauseWindowAnimation["PauseWindowShowUp"].clip.length || PauseWindowAnimation["PauseWindowShowUp"].time == 0)
             PauseWindowAnimation["PauseWindowShowUp"].time = PauseWindowAnimation["PauseWindowShowUp"].clip.length;
         else

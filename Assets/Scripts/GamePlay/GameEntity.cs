@@ -40,10 +40,6 @@ public class GameEntity : MonoBehaviour
     {
         if (GameStatus.IsPauseGame())
             return;
-        if (currentHP <= 0)
-        {
-            Destroy(gameObject);
-        }
         foreach (var effect in effects)
         {
             effect.Update();
@@ -98,7 +94,12 @@ public class GameEntity : MonoBehaviour
         {
             currentHP -= damage;
         }
-        
+
+        if (currentHP <= 0)
+        {
+            Destroy(gameObject);
+        }
+
         anim.Play();
     }
 }

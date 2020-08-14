@@ -17,6 +17,12 @@ public class EnemyLaserBullet : Bullet
 
     private new void OnTriggerEnter2D(Collider2D collision)
     {
+        if (GameStatus.IsPauseGame())
+            return;
+        if ((collision.CompareTag("Enemy") && gameObject.CompareTag("Bullet0")) || (collision.CompareTag("Player") && gameObject.CompareTag("Bullet1")))
+        {
+            OnCollide(collision.GetComponent<GameEntity>());
+        }
     }
 
     protected override void OnCollide(GameEntity e)

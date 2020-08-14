@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b1de3a65a305f43a5ffb209111724d, type: 3}
+  m_Name: 1_CircleGun
+  m_EditorClassIdentifier: 
+  ammunition: {fileID: -4629710830114083070, guid: 657aa14d97ae4a14abdd8a37c1967c69,
+    type: 3}
+  fullLoad: 1
+  baseLoadSpeed: 2
+  bulletVelocity: 5
+  bulletDamage: 5
+  bulletDuration: 3
+  angleRate: 20
+  angleOffset: 2

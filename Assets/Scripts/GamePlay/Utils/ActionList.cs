@@ -8,6 +8,7 @@ public class ActionList
     private Weapon.WeaponInterface wi = null;
 
     public List<EntityAction> actions;
+    public bool Loop = false;
 
     private int pointer = 0;
 
@@ -27,9 +28,12 @@ public class ActionList
 
     public void SwitchToNext()
     {
-        if (++pointer >= actions.Count)
+        if (++pointer >= actions.Count || host == null)
         {
-            return;
+            if (Loop)
+                pointer = 0;
+            else
+                return;
         }
         host.StartCoroutine(actions[pointer].Act(this, host, wi));
     }

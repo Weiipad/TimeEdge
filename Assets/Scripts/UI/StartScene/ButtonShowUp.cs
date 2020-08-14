@@ -6,25 +6,25 @@ using UnityEngine.UI;
 
 public class ButtonShowUp : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    new Animation animation;
+    Animation anim;
     void Start()
     {
-        animation = GetComponent<Animation>();
+        anim = GetComponent<Animation>();
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        animation["StartSceneButton"].speed = 1f;
-        animation.Play();
+        anim["StartSceneButton"].speed = 1f;
+        anim.Play();
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (animation.isPlaying)
-            animation["StartSceneButton"].time = animation["StartSceneButton"].time;
+        if (anim.isPlaying)
+            anim["StartSceneButton"].time = anim["StartSceneButton"].time;
         else
-            animation["StartSceneButton"].time = animation["StartSceneButton"].length;
-        animation["StartSceneButton"].speed = -1f;
-        animation.Play();
+            anim["StartSceneButton"].time = anim["StartSceneButton"].length;
+        anim["StartSceneButton"].speed = -1f;
+        anim.Play();
     }
 }

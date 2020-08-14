@@ -8,12 +8,7 @@ public class EnemyLaserGun : Weapon
     private float powerLoad = 0f;
     public float powerLoadSpeed = 1f;
 
-    private float offSet;
     private float curDuration = 0f;
-
-    private Bullet bullet = null;
-    private Bullet laser = null;
-
     private bool isShoot = false;
     private bool isPowerLoad = false;
 
@@ -21,7 +16,17 @@ public class EnemyLaserGun : Weapon
     {
         if (wi.load < fullLoad && !isShoot)
             wi.load += baseLoadSpeed * wi.owner.loadSpeedScale * Time.deltaTime;
-
+        Bullet bullet = null;
+        Bullet laser = null;
+        if(wi.owner.transform.childCount > 0)
+        {
+            bullet = wi.owner.transform.GetChild(0).GetComponent<Bullet>();
+            if(wi.owner.transform.GetChild(0).transform.childCount > 0)
+            {
+                laser = wi.owner.transform.GetChild(0).transform.GetChild(0).GetComponent<Bullet>();
+            }
+        }
+        float offSet;
         if (isShoot)
         {
             curDuration += Time.deltaTime;

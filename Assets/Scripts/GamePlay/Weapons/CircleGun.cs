@@ -6,6 +6,8 @@ using UnityEngine;
 public class CircleGun : Weapon
 {
     private float startAngle = 0f;
+    public float angleRate = 10f;
+    public float angleOffset = 3f;
     protected override void TryShoot(WeaponInterface wi)
     {
         if (wi.load >= wi.fullLoad)
@@ -17,7 +19,7 @@ public class CircleGun : Weapon
 
     private void GenBullet(WeaponInterface wi)
     {
-        float angleRate = 10f;
+        
         float angle = 0f + startAngle;
         for (int i = 0; i < 360f / angleRate; i++)
         {
@@ -28,6 +30,6 @@ public class CircleGun : Weapon
             bullet.duration = bulletDuration;
             angle += angleRate;
         }
-        startAngle += 3f;
+        startAngle += angleOffset;
     }
 }

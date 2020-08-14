@@ -25,14 +25,31 @@ public class SpawnTime : MonoBehaviour
             StopCoroutine(preCountTime);
     }
 
+    private void Update()
+    {
+        if (GameStatus.CurrentGameStatus != GameStatus.GameStatusType.playing)
+            return;
+        for (int i = 0;i < levels.Length;i ++)
+        {
+            if (Mathf.Abs(levels[i].StartTime - time) <= 0.01f)
+                levels[i].StartLevel();
+            if (levels[i].StartTime + levels[i].Duration <= time)
+                levels[i].EndLevel();
+        }
+    }
+
     private IEnumerator CountTime()
     {
         while (!isEndCountTIme)
         {
-            if (GameStatus.CurrentGameStatus == GameStatus.GameStatusType.pause)
-                continue;
-            time += 0.02f;
-            yield return new WaitForSeconds(0.02f);
+            if (!GameStatus.IsPauseGame())
+            {
+                yield return new WaitForSeconds(0.02f);
+                time += 0.02f;
+            }
+            else
+                yield return 0;
         }
     }
+
 }

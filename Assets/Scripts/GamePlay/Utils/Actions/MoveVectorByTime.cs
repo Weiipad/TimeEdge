@@ -19,23 +19,27 @@ public class MoveVectorByTime : EntityAction
         if (secondScale <= 0f)
             yield break;
         float curSeconds = 0f;
-        Vector2 offset = vector * vectorScale / (0.02f * secondScale / seconds);
+        Vector2 offset = vector * vectorScale * (0.02f * secondScale / seconds);
         if (MirrorX)
             offset.x = -offset.x;
         if (MirrorY)
             offset.y = -offset.y;
-        WaitForSecondsRealtime wait = new WaitForSecondsRealtime(0.02f * secondScale);
+        WaitForSeconds wait = new WaitForSeconds(0.02f * secondScale);
         while (curSeconds < seconds)
         {
             if (GameStatus.IsPauseGame())
-                continue;
-            entity.transform.position = (Vector2)entity.transform.position + offset;
-            yield return wait;
-            curSeconds += 0.02f * secondScale;
+                yield return 0;
+            else
+            {
+                entity.transform.position = (Vector2)entity.transform.position + offset;
+                yield return wait;
+                curSeconds += 0.02f * secondScale;
+            }
         }
 
         if(seconds == 0f || curSeconds == 0f)
             entity.transform.position = (Vector2)entity.transform.position + vector;
-        list.SwitchToNext();
+        if(list != null)
+            list.SwitchToNext();
     }
 }
