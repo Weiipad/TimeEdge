@@ -44,7 +44,7 @@ public class SpawnTime : MonoBehaviour
         {
             if (!GameStatus.IsPauseGame())
             {
-                yield return new WaitForSeconds(0.02f);
+                yield return new WaitForSecondsRealtime(0.02f);
                 time += 0.02f;
             }
             else

@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeView : MonoBehaviour
+public class TimeView : View
 {
     public float time;
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         time = SpawnTime.Time;
+        base.Update();
+    }
+
+    public override string GetContain()
+    {
+        return "Spawn:" + time.ToString();
     }
 }
