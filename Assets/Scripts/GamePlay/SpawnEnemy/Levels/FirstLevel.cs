@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.WSA;
 
 public class FirstLevel : Level
 {
-    public Transform PlayerTransform;
+    public GameObject[] BulletPrefabs;
 
     private bool isStartThisLevel;
     private Coroutine preCoroutine;
@@ -28,14 +27,15 @@ public class FirstLevel : Level
         if (isStartThisLevel)
         {
             isStartThisLevel = false;
-            musicPlayer.Pause();
             if (preCoroutine != null)
                 StopCoroutine(preCoroutine);
+            StartCoroutine(EndFirstLevel(musicPlayer));
         }
     }
 
     private IEnumerator DoFirstLevel()
     {
+        List<Object> needDestroy = new List<Object>();
         //0:00-0:02
         for (int i = 0; i < 2; i++)
         {
@@ -113,23 +113,23 @@ public class FirstLevel : Level
                         spawnLocalPos = new Vector2(3f, 0f);
 
                     List<EntityAction> actions = new List<EntityAction>();
-                    actions.Add(ScriptableObject.Instantiate(entityActionPre[0]));
+                    actions.Add(entityActionPre[0]);
                     suicideTime += 0.25f;
                     if (i != 14)
                     {
                         if (i % 2 == 0)
-                            actions.Add(ScriptableObject.Instantiate(entityActionPre[2]));
+                            actions.Add(entityActionPre[2]);
                         else
-                            actions.Add(ScriptableObject.Instantiate(entityActionPre[1]));
+                            actions.Add(entityActionPre[1]);
                         suicideTime += 0.25f;
                     }
                     else
                     {
-                        actions.Add(ScriptableObject.Instantiate(entityActionPre[7]));
+                        actions.Add(entityActionPre[7]);
                         if (i % 2 == 0)
-                            actions.Add(ScriptableObject.Instantiate(entityActionPre[2]));
+                            actions.Add(entityActionPre[2]);
                         else
-                            actions.Add(ScriptableObject.Instantiate(entityActionPre[1]));
+                            actions.Add(entityActionPre[1]);
                         suicideTime += 0.5f;
                     }
 
@@ -137,12 +137,12 @@ public class FirstLevel : Level
                     if (i == 14)
                     {
                         var goCir = GameObject.Instantiate(EnemyPrefabs[1], transform);
-                        EntityAction[] entityActions = new EntityAction[] { ScriptableObject.Instantiate(entityActionPre[3]), ScriptableObject.Instantiate(entityActionPre[6]) };
+                        EntityAction[] entityActions = new EntityAction[] { entityActionPre[3], entityActionPre[6] };
                         EnemyInit(goCir, new Vector2(-3f, 0f), Weapons[1], entityActions, 0.75f);
 
                         goCir = GameObject.Instantiate(EnemyPrefabs[1], transform);
-                        entityActions[0] = ScriptableObject.Instantiate(entityActionPre[4]);
-                        entityActions[1] = ScriptableObject.Instantiate(entityActionPre[5]);
+                        entityActions[0] = entityActionPre[4];
+                        entityActions[1] = entityActionPre[5];
                         EnemyInit(goCir, new Vector2(3f, 0f), Weapons[1], entityActions, 0.75f);
                     }
                     yield return new WaitForSeconds(0.5f);
@@ -276,9 +276,10 @@ public class FirstLevel : Level
             }
         }
 
-        //0:22
+        //0:22-1:36
         {
             GameObject goParentPrefabs = new GameObject("GoParentPrefabs");
+            needDestroy.Add(goParentPrefabs);
             var entity = goParentPrefabs.AddComponent<GameEntity>();
             entity.maxHP = 1;
             entity.currentHP = 1;
@@ -304,7 +305,7 @@ public class FirstLevel : Level
                 weapons[1].baseLoadSpeed = 1f;
             if (GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
                 weapons[1].baseLoadSpeed = 2f;
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 91; i++)
             {
                 if (GameStatus.IsPauseGame())
                 {
@@ -339,12 +340,64 @@ public class FirstLevel : Level
                         }
                         for (int j = 0; j < shipCount; j++)
                         {
-                            GameObject go = GameObject.Instantiate(EnemyPrefabs[1], parent.transform);
-                            EnemyInit(go, circleEnemySpawnPoint[j], weapons[1], null, 0f);
-                            go.transform.parent = parent.transform;
+                            if (GameStatus.IsPauseGame())
+                            {
+                                j--;
+                                yield return 0;
+                            }
+                            else
+                            {
+                                GameObject go = GameObject.Instantiate(EnemyPrefabs[1], parent.transform);
+                                EnemyInit(go, circleEnemySpawnPoint[j], weapons[1], null, 0f);
+                                go.transform.parent = parent.transform;
+                                yield return 0;
+                            }
+                        }
+
+                        if (i >= 16)
+                        {
+                            int randomNumber = Random.Range(1, 22);
+                            if (((randomNumber % 5 == 0 || randomNumber % 7 == 0 || randomNumber % 11 == 0) && randomNumber % 3 != 0) || i == 16)
+                            {
+                                int laserShipCount = Random.Range(1, 4);
+                                if (GameDiffculty.diffculty == GameDiffculty.Diffculty.easy)
+                                {
+                                    if (laserShipCount >= 2)
+                                        laserShipCount = 1;
+                                }
+                                else if (GameDiffculty.diffculty == GameDiffculty.Diffculty.normal)
+                                {
+                                    if (laserShipCount >= 3)
+                                        laserShipCount = 2;
+                                }
+                                for (int k = 0; k < laserShipCount; k++)
+                                {
+                                    if (GameStatus.IsPauseGame())
+                                    {
+                                        k--;
+                                        yield return 0;
+                                    }
+                                    else
+                                    {
+                                        GameObject laserEnemy = GameObject.Instantiate(EnemyPrefabs[1], transform);
+                                        Vector2 spawnLocalPoint = new Vector2(Random.Range(9.3f, 9.6f), Random.Range(-1.5f, -3f));
+                                        int mirror = Random.Range(0, 2);
+                                        if (mirror == 1)
+                                            spawnLocalPoint.x = -spawnLocalPoint.x;
+                                        MoveVectorByTime moveLeft = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-19f, 0f), 2f);
+                                        MoveVectorByTime moveRight = ActionMaker.MakeActionMoveVectorByTime(new Vector2(19f, 0f), 2f);
+                                        EntityAction[] moveActions = new EntityAction[2] { moveLeft, moveRight };
+                                        if (mirror == 1)
+                                            moveActions = new EntityAction[] { moveRight, moveLeft };
+                                        EnemyInit(laserEnemy, spawnLocalPoint, Weapons[5], moveActions, 8f);
+                                        laserEnemy.GetComponent<Enemy>().ActionLoop(true);
+                                    }
+                                }
+                            }
+
                         }
                     }
-                    else if(i % 2 == 0)
+                    else if (i % 2 != 0)
                     {
                         int shipCount = Random.Range(1, 8);
                         Vector2 spawnPoint = Vector2.zero;
@@ -365,16 +418,25 @@ public class FirstLevel : Level
                         }
                         for (int j = 0; j < shipCount; j++)
                         {
-                            GameObject go = GameObject.Instantiate(EnemyPrefabs[0], parent.transform);
-                            Vector2 spawn = spawnPoint;
-                            if (j % 2 != 0)
-                                spawn.x = -spawn.x;
-                            EnemyInit(go, spawn, weapons[0], null, 0f);
-                            go.transform.parent = parent.transform;
-                            if (j % 2 == 0)
+                            if (GameStatus.IsPauseGame())
                             {
-                                spawnPoint.x += spikerXOffset;
-                                spawnPoint.y += spikerYOffset;
+                                j--;
+                                yield return 0;
+                            }
+                            else
+                            {
+                                GameObject go = GameObject.Instantiate(EnemyPrefabs[0], parent.transform);
+                                Vector2 spawn = spawnPoint;
+                                if (j % 2 != 0)
+                                    spawn.x = -spawn.x;
+                                EnemyInit(go, spawn, weapons[0], null, 0f);
+                                go.transform.parent = parent.transform;
+                                if (j % 2 == 0)
+                                {
+                                    spawnPoint.x += spikerXOffset;
+                                    spawnPoint.y += spikerYOffset;
+                                }
+                                yield return 0;
                             }
                         }
                     }
@@ -393,6 +455,48 @@ public class FirstLevel : Level
             }
         }
 
+        //1:37-1:51
+        {
+            CircleGun circleGunEvil = ScriptableObject.CreateInstance<CircleGun>();
+            circleGunEvil.fullLoad = 1f;
+            circleGunEvil.baseLoadSpeed = 5f;
+            circleGunEvil.bulletVelocity = 5f;
+            circleGunEvil.bulletDamage = 10f;
+            circleGunEvil.bulletDuration = 8f;
+            circleGunEvil.angleRate = 90f;
+            circleGunEvil.angleOffset = 6f;
+            GameObject circleBulletEvilPrefabs = GameObject.Instantiate(BulletPrefabs[0], transform);
+            circleBulletEvilPrefabs.transform.localPosition = Vector2.zero;
+            circleBulletEvilPrefabs.GetComponent<SpriteRenderer>().color = Color.red;
+            circleGunEvil.ammunition = circleBulletEvilPrefabs.GetComponent<Bullet>();
+            circleGunEvil.name = "6_CircleGunEvil";
+            needDestroy.Add(circleBulletEvilPrefabs);
+            Weapons.Add(circleGunEvil);
+            for (int i = 0;i < 10;i ++)
+            {
+                if(GameStatus.IsPauseGame())
+                {
+                    i--;
+                    yield return 0;
+                }
+                else
+                {
+                    GameObject evil = GameObject.Instantiate(EnemyPrefabs[1], transform);
+                    var entity = evil.GetComponent<GameEntity>();
+                    entity.maxHP = 1200f;
+                    entity.currentHP = 1200f;
+                    MoveVectorByTime move = ActionMaker.MakeActionMoveVectorByTime(new Vector2(0f, -12f), 6f);
+                    float randomInstantiaPosX = Random.Range(-5f, 5.1f);
+                    EnemyInit(evil, new Vector2(randomInstantiaPosX, 0f), circleGunEvil, new EntityAction[] { move }, 6.5f);
+                    yield return new WaitForSeconds(5f);
+                }
+            }
+        }
+        foreach(var i in needDestroy)
+        {
+            if (i != null)
+                Destroy(i);
+        }
         yield break;
     }
 
@@ -419,5 +523,15 @@ public class FirstLevel : Level
             enemy.StartAction();
         }
         suicide.StartCountTime();
+    }
+
+    private IEnumerator EndFirstLevel(AudioSource musicPlayer)
+    {
+        while(musicPlayer.time <= 113.4f)
+        {
+            yield return 0;
+        }
+        musicPlayer.Pause();
+        yield break;
     }
 }

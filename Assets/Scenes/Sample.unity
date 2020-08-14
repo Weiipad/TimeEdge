@@ -2070,10 +2070,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bdedb242bd3e88428f9b4b5db3cbbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapon: {fileID: 11400000, guid: 61bea2b05b707a4469d813cb00e41819, type: 2}
-  actions:
-  - {fileID: 11400000, guid: 8d0fbf3ec2749cd4eb62d958b3ccf3c3, type: 2}
-  - {fileID: 11400000, guid: 9cb4f621c7cc9774dac2d1eb3ea09fc1, type: 2}
+  weapon: {fileID: 11400000, guid: 227ab047e9657f246813d622ad2a4f77, type: 2}
+  actions: []
   Loop: 1
 --- !u!114 &842262144
 MonoBehaviour:

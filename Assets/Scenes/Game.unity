@@ -1446,6 +1446,7 @@ GameObject:
   - component: {fileID: 837080251}
   - component: {fileID: 837080252}
   - component: {fileID: 837080253}
+  - component: {fileID: 837080254}
   m_Layer: 0
   m_Name: Music
   m_TagString: Untagged
@@ -1576,6 +1577,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseGameGO: {fileID: 1320422906}
+--- !u!114 &837080254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 837080250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e65a44b3214c7ad47a08b7f0c2af204c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Minutes: 0
+  Seconds: 0
+  Time: 0
 --- !u!1 &904065508
 GameObject:
   m_ObjectHideFlags: 0
@@ -2753,7 +2769,7 @@ MonoBehaviour:
   loadSpeedScale: 1
   defenseRate: 1
   damageRate: 1
-  maxShield: 10
+  maxShield: 100
   currentShield: 0
 --- !u!111 &1826115518
 Animation:
@@ -2873,7 +2889,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1826115516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.75404716, y: -2.606584, z: 0}
+  m_LocalPosition: {x: 0, y: -2.606584, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 645962109}
@@ -3090,10 +3106,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartTime: 0
-  Duration: 174
+  Duration: 97
   Musics:
   - {fileID: 8300000, guid: 7811464d0636a564e91c95a1495428be, type: 3}
-  - {fileID: 8300000, guid: 8f77ae419dd7585438ab15908f060248, type: 3}
   EnemyPrefabs:
   - {fileID: 1036110244193432138, guid: bb3fa23cb5e4e8444b2b506dae0b90df, type: 3}
   - {fileID: 4015917710857340977, guid: 1e4eb3202a3c791419d9dea24354067c, type: 3}
@@ -3103,6 +3118,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c22d45d25d5f6d04ea9429c13b841b8f, type: 2}
   - {fileID: 11400000, guid: 39ba0a03c9de23649a49df5ea6de3498, type: 2}
   - {fileID: 11400000, guid: 34adfb53adabc0f419d46ea43ff394da, type: 2}
+  - {fileID: 11400000, guid: fadb6dfc53888dc4b9376a80478c3a2a, type: 2}
+  BulletPrefabs:
+  - {fileID: 9042781574407170883, guid: 657aa14d97ae4a14abdd8a37c1967c69, type: 3}
   PlayerTransform: {fileID: 1826115523}
 --- !u!1 &1958079391
 GameObject:

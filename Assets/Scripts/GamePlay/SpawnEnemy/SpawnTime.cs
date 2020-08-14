@@ -33,7 +33,7 @@ public class SpawnTime : MonoBehaviour
         {
             if (Mathf.Abs(levels[i].StartTime - time) <= 0.01f)
                 levels[i].StartLevel();
-            if (Mathf.Abs(levels[i].StartTime + levels[i].Duration - time) <= 0.01f)
+            if (levels[i].StartTime + levels[i].Duration <= time)
                 levels[i].EndLevel();
         }
     }

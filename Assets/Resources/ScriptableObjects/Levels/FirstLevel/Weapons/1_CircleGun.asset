@@ -9,14 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59977576461acf847881afc350a35c69, type: 3}
-  m_Name: 3_EnemyLaserGun
+  m_Script: {fileID: 11500000, guid: 26b1de3a65a305f43a5ffb209111724d, type: 3}
+  m_Name: 1_CircleGun
   m_EditorClassIdentifier: 
-  ammunition: {fileID: 7212087283900276921, guid: d3f19d3250847f546aef0df720d34205,
+  ammunition: {fileID: -4629710830114083070, guid: 657aa14d97ae4a14abdd8a37c1967c69,
     type: 3}
   fullLoad: 1
   baseLoadSpeed: 2
-  bulletVelocity: 100
-  bulletDamage: 3
-  bulletDuration: 100
-  powerLoadSpeed: 1
+  bulletVelocity: 5
+  bulletDamage: 5
+  bulletDuration: 3
+  angleRate: 20
+  angleOffset: 2

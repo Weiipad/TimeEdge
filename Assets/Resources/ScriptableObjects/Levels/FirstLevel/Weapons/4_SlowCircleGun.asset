@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26b1de3a65a305f43a5ffb209111724d, type: 3}
-  m_Name: SimpleCircleGun
+  m_Name: 4_SlowCircleGun
   m_EditorClassIdentifier: 
-  ammunition: {fileID: 5415349726203385416, guid: 6b1c3eb03ce702540b6bcd2060722e3e,
+  ammunition: {fileID: -4629710830114083070, guid: 657aa14d97ae4a14abdd8a37c1967c69,
     type: 3}
   fullLoad: 1
-  baseLoadSpeed: 3
-  bulletVelocity: 3
-  bulletDamage: 1
-  bulletDuration: 5
-  angleRate: 90
-  angleOffset: 6
+  baseLoadSpeed: 0.8
+  bulletVelocity: 5
+  bulletDamage: 3
+  bulletDuration: 3
+  angleRate: 30
+  angleOffset: 2
