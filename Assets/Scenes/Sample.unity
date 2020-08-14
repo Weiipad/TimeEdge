@@ -2981,8 +2981,14 @@ PrefabInstance:
     - target: {fileID: 1036110244193432138, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1036110244193432141, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
+        type: 3}
+      propertyPath: actions.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 22d68fcfe73bf22439ba2822065a56e7,
+        type: 2}
     - target: {fileID: 1036110244193432143, guid: bb3fa23cb5e4e8444b2b506dae0b90df,
         type: 3}
       propertyPath: m_LocalPosition.x
