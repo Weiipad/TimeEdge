@@ -296,6 +296,14 @@ public class FirstLevel : Level
             float spikerXOffset = 1f;
             float spikerYOffset = 0.2f;
             float calTime = 0f;
+
+            Weapon[] weapons = new Weapon[2];
+            weapons[0] = ScriptableObject.Instantiate(Weapons[3]);
+            weapons[1] = ScriptableObject.Instantiate(Weapons[4]);
+            if (GameDiffculty.diffculty == GameDiffculty.Diffculty.normal)
+                weapons[1].baseLoadSpeed = 1f;
+            if (GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
+                weapons[1].baseLoadSpeed = 2f;
             for (int i = 0; i < 100; i++)
             {
                 if (GameStatus.IsPauseGame())
@@ -324,15 +332,19 @@ public class FirstLevel : Level
                             if (shipCount >= 4)
                                 shipCount = 3;
                         }
-
+                        else
+                        {
+                            if (shipCount < 2)
+                                shipCount = 2;
+                        }
                         for (int j = 0; j < shipCount; j++)
                         {
                             GameObject go = GameObject.Instantiate(EnemyPrefabs[1], parent.transform);
-                            EnemyInit(go, circleEnemySpawnPoint[j], Weapons[4], null, 0f);
+                            EnemyInit(go, circleEnemySpawnPoint[j], weapons[1], null, 0f);
                             go.transform.parent = parent.transform;
                         }
                     }
-                    else
+                    else if(i % 2 == 0)
                     {
                         int shipCount = Random.Range(1, 8);
                         Vector2 spawnPoint = Vector2.zero;
@@ -346,13 +358,18 @@ public class FirstLevel : Level
                             if (shipCount >= 6)
                                 shipCount = 5;
                         }
+                        else
+                        {
+                            if (shipCount < 3)
+                                shipCount = 3;
+                        }
                         for (int j = 0; j < shipCount; j++)
                         {
                             GameObject go = GameObject.Instantiate(EnemyPrefabs[0], parent.transform);
                             Vector2 spawn = spawnPoint;
                             if (j % 2 != 0)
                                 spawn.x = -spawn.x;
-                            EnemyInit(go, spawn, Weapons[3], null, 0f);
+                            EnemyInit(go, spawn, weapons[0], null, 0f);
                             go.transform.parent = parent.transform;
                             if (j % 2 == 0)
                             {

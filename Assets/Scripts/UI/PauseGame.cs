@@ -45,7 +45,8 @@ public class PauseGame : MonoBehaviour
                     PauseWindowAnimation["PauseWindowShowUp"].speed = 1f;
                     PauseWindowAnimation.Play("PauseWindowShowUp");
                 }
-                OnPressPauseGameButton();
+                if(OnPressPauseGameButton != null)
+                    OnPressPauseGameButton();
             }
             else
             {

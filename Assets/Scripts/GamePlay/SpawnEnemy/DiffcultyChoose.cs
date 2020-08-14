@@ -41,7 +41,8 @@ public class DiffcultyChoose : MonoBehaviour
         HideCursor(true);
         GameDiffculty.diffculty = (GameDiffculty.Diffculty)enumIndex;
         GameStatus.CurrentGameStatus = GameStatus.GameStatusType.playing;
-        SpawnTime.StartCountTIme(true);
+        if(SpawnTime != null)
+            SpawnTime.StartCountTIme(true);
         gameObject.SetActive(false);
     }
 }

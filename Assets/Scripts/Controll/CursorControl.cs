@@ -9,8 +9,11 @@ public class CursorControl : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-        pauseGameGO.OnPressReturnGameButton += OnPressReturnGameButton;
-        pauseGameGO.OnPressReturnStartPageButton += OnPressReturnStartPageButton;
+        if (pauseGameGO != null)
+        {
+            pauseGameGO.OnPressReturnGameButton += OnPressReturnGameButton;
+            pauseGameGO.OnPressReturnStartPageButton += OnPressReturnStartPageButton;
+        }
     }
 
     private void Update()

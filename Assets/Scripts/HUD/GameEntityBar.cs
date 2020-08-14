@@ -45,6 +45,7 @@ public class GameEntityBar : Bar
     private GameEntity targetEntity;
     private Weapon.WeaponInterface weapon;
     private bool isGetEntity;
+    private bool isTargetFade;
 
     private void OnEnable()
     {
@@ -121,7 +122,17 @@ public class GameEntityBar : Bar
             {
                 if (isGetEntity)
                 {
-                    Destroy(gameObject);
+                    if (!isTargetFade)
+                    {
+                        currentValue = 0f;
+                        float per = 0f;
+                        if (!maxValue.Equals(0f))
+                            per = Mathf.Clamp(currentValue / maxValue, 0f, 1f);
+                        childImage.fillAmount = per;
+                        UpdateText(currentValue, maxValue);
+                        isTargetFade = true;
+                    }
+                    return;
                 }
             }
             throw new System.Exception("Can't get target!");

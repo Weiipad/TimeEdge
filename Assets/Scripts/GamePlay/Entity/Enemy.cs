@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public Weapon.WeaponInterface wi = null;
 
     public List<EntityAction> actions;
+    public bool Loop;
 
     private ActionList list;
 
@@ -31,6 +32,14 @@ public class Enemy : MonoBehaviour
     {
         var entity = GetComponent<GameEntity>();
         list = new ActionList(entity, actions);
+        list.Loop = Loop;
         list.Start();
+    }
+
+    public void ActionLoop(bool isLoop)
+    {
+        Loop = isLoop;
+        if(list != null)
+            list.Loop = Loop;
     }
 }
