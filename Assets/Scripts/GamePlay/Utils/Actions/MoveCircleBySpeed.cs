@@ -37,15 +37,21 @@ public class MoveCircleBySpeed : EntityAction
         centerOfCircle = new Vector2(prepenVector.x + (targetCopy.x + entity.transform.position.x) / 2f, prepenVector.y + (targetCopy.y + entity.transform.position.y) / 2f);
         //==========End calculate the center of circle===========
 
-        while (Vector2.Distance(entity.transform.position, targetPoint) >= 0.001f)
+        var target = new Vector3(targetPoint.x, targetPoint.y, 0);
+        var center = new Vector3(centerOfCircle.x, centerOfCircle.y, 0);
+        while (Vector3.Distance(entity.transform.position, target) > 0.001f)
         {
+            
             if (GameStatus.IsPauseGame())
                 continue;
-            Vector2 centerToCur = (Vector2)entity.transform.position - centerOfCircle;
-            float sin = Vector2.Dot(centerToCur, Vector2.up) / radius;
-            float cos = Vector2.Dot(centerToCur, Vector2.right) / radius;
-            Vector2 velocity = new Vector2(speed * sin, speed * cos);
-            entity.transform.position += (Vector3)velocity * Time.deltaTime;
+            Vector3 centerToCur = entity.transform.position - center;
+            float sin = Vector3.Dot(centerToCur.normalized, Vector3.up);
+            float cos = Vector3.Dot(centerToCur.normalized, Vector3.right);
+            
+            Vector3 velocity = new Vector3(speed * sin, speed * cos, 0);
+            Debug.Log($"V:{velocity.normalized}");
+
+            entity.transform.position += velocity * Time.deltaTime;
             yield return 0;
         }
         list.SwitchToNext();
