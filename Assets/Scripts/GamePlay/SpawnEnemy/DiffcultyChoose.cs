@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DiffcultyChoose : MonoBehaviour
 {
-    public SpawnTime SpawnTime;
+    public SpawnLevel SpawnLevel;
 
     private void Start()
     {
@@ -41,8 +41,8 @@ public class DiffcultyChoose : MonoBehaviour
         HideCursor(true);
         GameDiffculty.diffculty = (GameDiffculty.Diffculty)enumIndex;
         GameStatus.CurrentGameStatus = GameStatus.GameStatusType.playing;
-        if(SpawnTime != null)
-            SpawnTime.StartCountTIme(true);
+        if(SpawnLevel != null)
+            SpawnLevel.StartSpawnLevel();
         gameObject.SetActive(false);
     }
 }

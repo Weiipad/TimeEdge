@@ -5,16 +5,14 @@ using UnityEngine;
 public class FirstLevel : Level
 {
     public GameObject[] BulletPrefabs;
-
-    private bool isStartThisLevel;
     private Coroutine preCoroutine;
 
     private AudioSource musicPlayer;
     public override void StartLevel()
     {
-        if (!isStartThisLevel)
+        if (!isThisLevelStart && !isThisLevelEnd)
         {
-            isStartThisLevel = true;
+            isThisLevelStart = true;
             musicPlayer = GameObject.Find("AudioGroup").transform.GetChild(0).GetComponent<AudioSource>();
             musicPlayer.clip = Musics[0];
             musicPlayer.Play();
@@ -24,10 +22,8 @@ public class FirstLevel : Level
 
     public override void EndLevel()
     {
-        if (isStartThisLevel)
+        if (isThisLevelEnd && isThisLevelStart)
         {
-            isStartThisLevel = false;
-            
             StartCoroutine(EndFirstLevel(musicPlayer));
         }
     }
@@ -304,7 +300,7 @@ public class FirstLevel : Level
                 weapons[1].baseLoadSpeed = 1f;
             if (GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
                 weapons[1].baseLoadSpeed = 2f;
-            for (int i = 0; i < 91; i++)
+            for (int i = 0; i < 89; i++)
             {
                 if (GameStatus.IsPauseGame())
                 {
@@ -471,7 +467,7 @@ public class FirstLevel : Level
             circleGunEvil.name = "6_CircleGunEvil";
             needDestroy.Add(circleBulletEvilPrefabs);
             Weapons.Add(circleGunEvil);
-            for (int i = 0;i < 10;i ++)
+            for (int i = 0;i < 3;i ++)
             {
                 if(GameStatus.IsPauseGame())
                 {
@@ -496,6 +492,7 @@ public class FirstLevel : Level
             if (i != null)
                 Destroy(i);
         }
+        isThisLevelEnd = true;
         yield break;
     }
 

@@ -11,6 +11,7 @@ public class GameStatus
         none,
         playing,
         pause,
+        end,
     }
 
     public static GameStatusType CurrentGameStatus = GameStatusType.none;

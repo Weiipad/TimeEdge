@@ -1728,7 +1728,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1128083837}
-  - {fileID: 1558481685}
   m_Father: {fileID: 1796970350}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2187,7 +2186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0bcbe35eda8ce246b03fc8b72be881c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpawnTime: {fileID: 1520966476}
+  SpawnLevel: {fileID: 0}
 --- !u!114 &1280466100
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2433,7 +2432,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1520966477}
   - component: {fileID: 1520966476}
-  - component: {fileID: 1520966475}
   m_Layer: 0
   m_Name: EnemySpanwTime
   m_TagString: Untagged
@@ -2441,20 +2439,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1520966475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520966474}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7b980a2e5e430447bc54099207ae046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetText: {fileID: 1558481686}
-  time: 0
 --- !u!114 &1520966476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2467,6 +2451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad4eb6dd5a7edc0459c51e2540b74d55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StartLevel: 0
   levels:
   - {fileID: 1920923454}
 --- !u!4 &1520966477
@@ -2483,84 +2468,6 @@ Transform:
   m_Father: {fileID: 166224790}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1558481684
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1558481685}
-  - component: {fileID: 1558481687}
-  - component: {fileID: 1558481686}
-  m_Layer: 5
-  m_Name: SpawnTimeView
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1558481685
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558481684}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1042482543}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -369, y: 340.9}
-  m_SizeDelta: {x: 160, y: 36.147057}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1558481686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558481684}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 23
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: New Text
---- !u!222 &1558481687
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1558481684}
-  m_CullTransparentMesh: 0
 --- !u!1001 &1704913462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3299,8 +3206,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7487608de174b2459f57322222cab21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartTime: 0
-  Duration: 67
   Musics:
   - {fileID: 8300000, guid: 7811464d0636a564e91c95a1495428be, type: 3}
   EnemyPrefabs:
