@@ -3300,7 +3300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartTime: 0
-  Duration: 73
+  Duration: 67
   Musics:
   - {fileID: 8300000, guid: 7811464d0636a564e91c95a1495428be, type: 3}
   EnemyPrefabs:

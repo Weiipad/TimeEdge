@@ -27,8 +27,7 @@ public class FirstLevel : Level
         if (isStartThisLevel)
         {
             isStartThisLevel = false;
-            if (preCoroutine != null)
-                StopCoroutine(preCoroutine);
+            
             StartCoroutine(EndFirstLevel(musicPlayer));
         }
     }
@@ -531,6 +530,8 @@ public class FirstLevel : Level
         {
             yield return 0;
         }
+        if (preCoroutine != null)
+            StopCoroutine(preCoroutine);
         musicPlayer.Pause();
         yield break;
     }
