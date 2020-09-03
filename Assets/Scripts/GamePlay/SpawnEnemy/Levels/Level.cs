@@ -14,6 +14,6 @@ public abstract class Level : MonoBehaviour
     protected bool isThisLevelEnd;
     public bool IsThisLevelEnd { get { return isThisLevelEnd; } }
 
-    public abstract void StartLevel();
+    public abstract void StartLevel(LevelList levelList);
     public abstract void EndLevel();
 }

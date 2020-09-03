@@ -8,7 +8,9 @@ public class FirstLevel : Level
     private Coroutine preCoroutine;
 
     private AudioSource musicPlayer;
-    public override void StartLevel()
+
+    private LevelList level;
+    public override void StartLevel(LevelList levelList)
     {
         if (!isThisLevelStart && !isThisLevelEnd)
         {
@@ -18,6 +20,7 @@ public class FirstLevel : Level
             musicPlayer.Play();
             preCoroutine = StartCoroutine(DoFirstLevel());
         }
+        level = levelList;
     }
 
     public override void EndLevel()
@@ -30,7 +33,6 @@ public class FirstLevel : Level
 
     private IEnumerator DoFirstLevel()
     {
-        List<Object> needDestroy = new List<Object>();
         //0:00-0:02
         for (int i = 0; i < 2; i++)
         {
@@ -274,7 +276,6 @@ public class FirstLevel : Level
         //0:22-1:36
         {
             GameObject goParentPrefabs = new GameObject("GoParentPrefabs");
-            needDestroy.Add(goParentPrefabs);
             var entity = goParentPrefabs.AddComponent<GameEntity>();
             entity.maxHP = 1;
             entity.currentHP = 1;
@@ -465,7 +466,6 @@ public class FirstLevel : Level
             circleBulletEvilPrefabs.GetComponent<SpriteRenderer>().color = Color.red;
             circleGunEvil.ammunition = circleBulletEvilPrefabs.GetComponent<Bullet>();
             circleGunEvil.name = "6_CircleGunEvil";
-            needDestroy.Add(circleBulletEvilPrefabs);
             Weapons.Add(circleGunEvil);
             for (int i = 0;i < 3;i ++)
             {
@@ -487,12 +487,8 @@ public class FirstLevel : Level
                 }
             }
         }
-        foreach(var i in needDestroy)
-        {
-            if (i != null)
-                Destroy(i);
-        }
         isThisLevelEnd = true;
+        EndLevel();
         yield break;
     }
 
@@ -530,6 +526,8 @@ public class FirstLevel : Level
         if (preCoroutine != null)
             StopCoroutine(preCoroutine);
         musicPlayer.Pause();
+        musicPlayer.clip = null;
+        level.SwitchLevel(1);
         yield break;
     }
 }
