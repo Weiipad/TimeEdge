@@ -45,4 +45,11 @@ public class Enemy : MonoBehaviour
         if(list != null)
             list.Loop = Loop;
     }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        this.weapon = weapon;
+        var entity = GetComponent<GameEntity>();
+        wi = new Weapon.WeaponInterface(entity, weapon);
+    }
 }

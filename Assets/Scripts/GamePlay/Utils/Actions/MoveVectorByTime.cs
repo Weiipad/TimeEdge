@@ -16,6 +16,8 @@ public class MoveVectorByTime : EntityAction
     public bool MirrorY;
     public override IEnumerator Act(ActionList list, GameEntity entity, Weapon.WeaponInterface wi)
     {
+        if (BeforeActionDelegate != null)
+            BeforeActionDelegate();
         if (secondScale <= 0f)
             yield break;
         float curSeconds = 0f;
@@ -37,9 +39,12 @@ public class MoveVectorByTime : EntityAction
             }
         }
 
-        if(seconds == 0f || curSeconds == 0f)
+        if (seconds == 0f || curSeconds == 0f)
             entity.transform.position = (Vector2)entity.transform.position + vector;
-        if(list != null)
+
+        if (AfterActionDelegate != null)
+            AfterActionDelegate();
+        if (list != null && !IsStopSwitch)
             list.SwitchToNext();
     }
 }

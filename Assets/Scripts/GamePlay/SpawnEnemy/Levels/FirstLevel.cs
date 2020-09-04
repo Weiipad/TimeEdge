@@ -240,22 +240,22 @@ public class FirstLevel : Level
                 MoveVectorByTime straightLeft34 = ActionMaker.MakeActionMoveVectorByTime(-vector34, 0.5f);
                 MoveVectorByTime straightRight34 = ActionMaker.MakeActionMoveVectorByTime(vector34, 0.5f);
 
-                GameObject go1 = GameObject.Instantiate(EnemyPrefabs[1], transform);
+                GameObject go1 = GameObject.Instantiate(EnemyPrefabs[2], transform);
                 Vector2 spawnPoint1 = new Vector2(-2.5f, 0f);
                 GameEntity go1Entity = go1.GetComponent<GameEntity>();
 
-                GameObject go2 = GameObject.Instantiate(EnemyPrefabs[1], transform);
+                GameObject go2 = GameObject.Instantiate(EnemyPrefabs[2], transform);
                 Vector2 spawnPoint2 = -spawnPoint1;
                 GameEntity go2Entity = go2.GetComponent<GameEntity>();
 
-                GameObject go3 = GameObject.Instantiate(EnemyPrefabs[1], transform);
-                go3.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -90f));
+                GameObject go3 = GameObject.Instantiate(EnemyPrefabs[2], transform);
+                go3.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
                 Vector2 spawnPoint3 = new Vector2(-10f, -5f);
                 EntityAction[] entityActions3 = new EntityAction[] { straightRight34, stayTwoSeconds, straightLeft34 };
                 GameEntity go3Entity = go3.GetComponent<GameEntity>();
 
-                GameObject go4 = GameObject.Instantiate(EnemyPrefabs[1], transform);
-                go4.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, 90f));
+                GameObject go4 = GameObject.Instantiate(EnemyPrefabs[2], transform);
+                go4.transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, -90f));
                 Vector2 spawnPoint4 = new Vector2(10f, -8f);
                 EntityAction[] entityActions4 = new EntityAction[] { straightLeft34, stayTwoSeconds, straightRight34 };
                 GameEntity go4Entity = go4.GetComponent<GameEntity>();
@@ -375,7 +375,7 @@ public class FirstLevel : Level
                                     }
                                     else
                                     {
-                                        GameObject laserEnemy = GameObject.Instantiate(EnemyPrefabs[1], transform);
+                                        GameObject laserEnemy = GameObject.Instantiate(EnemyPrefabs[2], transform);
                                         Vector2 spawnLocalPoint = new Vector2(Random.Range(9.3f, 9.6f), Random.Range(-1.5f, -3f));
                                         int mirror = Random.Range(0, 2);
                                         if (mirror == 1)

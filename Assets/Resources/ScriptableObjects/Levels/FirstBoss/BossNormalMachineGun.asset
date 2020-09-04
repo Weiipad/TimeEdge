@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2129de220268158498bb5d02b9c7f051, type: 3}
+  m_Name: BossNormalMachineGun
+  m_EditorClassIdentifier: 
+  ammunition: {fileID: 5415349726203385416, guid: 6fb27189750c69140bf9acc4792a3222,
+    type: 3}
+  fullLoad: 1
+  baseLoadSpeed: 3
+  bulletVelocity: 2
+  bulletDamage: 2
+  bulletDuration: 5
