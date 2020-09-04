@@ -36,7 +36,7 @@ public class ShockBomb : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Bullet1"))
+        if (collision.CompareTag("Bullet1") && collision.transform.parent?.GetComponent<Level>() == null)
         {
             Destroy(collision.gameObject);
         }
