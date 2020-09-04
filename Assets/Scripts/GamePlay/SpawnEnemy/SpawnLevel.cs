@@ -16,7 +16,7 @@ public class SpawnLevel : MonoBehaviour
 
     public void StartSpawnLevel()
     {
-        levelList.StartLevel();
+        levelList.StartLevel(StartLevel);
     }
 
     private void Update()

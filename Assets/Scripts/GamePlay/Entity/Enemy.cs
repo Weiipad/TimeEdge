@@ -24,8 +24,11 @@ public class Enemy : MonoBehaviour
     {
         if (GameStatus.IsPauseGame())
             return;
-        wi.Update();
-        wi.Shoot();
+        if (wi != null)
+        {
+            wi.Update();
+            wi.Shoot();
+        }
     }
 
     public void StartAction()

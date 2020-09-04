@@ -17,6 +17,12 @@ public class LevelList
             levels[0].StartLevel(this);
     }
 
+    public void StartLevel(int index)
+    {
+        if (levels.Count > 0 && index < levels.Count)
+            levels[index].StartLevel(this);
+    }
+
     public void SwitchLevel(int index)
     {
         if (index < levels.Count)
