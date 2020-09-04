@@ -452,6 +452,8 @@ public class FirstLevel : Level
         }
 
         //1:37-1:51
+
+        
         {
             CircleGun circleGunEvil = ScriptableObject.CreateInstance<CircleGun>();
             circleGunEvil.fullLoad = 1f;
@@ -519,7 +521,7 @@ public class FirstLevel : Level
 
     private IEnumerator EndFirstLevel(AudioSource musicPlayer)
     {
-        while(musicPlayer.time <= 113.4f)
+        while(musicPlayer.time <= 113.0f)
         {
             yield return 0;
         }
