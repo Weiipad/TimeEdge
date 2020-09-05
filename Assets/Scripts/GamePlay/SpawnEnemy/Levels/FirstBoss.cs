@@ -62,6 +62,10 @@ public class FirstBoss : Level
             actions.Add(moveCircleRightUp);
             actions.Add(moveCircleLeftUp);
         }
+        MoveVectorByTime moveLeft = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-4.0f, 0.0f), 1.0f);
+        MoveVectorByTime moveRight = ActionMaker.MakeActionMoveVectorByTime(new Vector2(8.0f, 0.0f), 2.0f);
+        MoveVectorByTime moveLeftBack = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-4.0f, 0.0f), 1.0f);
+        moveLeftBack.AfterActionDelegate += () => { boss.transform.position = new Vector3(0.0f, 4.1f, 0.0f); };
         MoveVectorByTime stay = ActionMaker.MakeActionMoveVectorByTime(Vector2.zero, 1.0f);
         stay.BeforeActionDelegate += () =>
         {
@@ -89,6 +93,9 @@ public class FirstBoss : Level
             bossLeftGun.EquipWeapon(Weapons[0]);
             bossRightGun.EquipWeapon(Weapons[0]);
         };
+        actions.Add(moveLeft);
+        actions.Add(moveRight);
+        actions.Add(moveLeftBack);
         actions.Add(stay);
         actions.Add(strightDownOutOfScreen);
         actions.Add(backSpawnPos);

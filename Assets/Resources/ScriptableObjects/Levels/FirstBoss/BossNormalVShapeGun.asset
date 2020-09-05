@@ -18,7 +18,7 @@ MonoBehaviour:
   baseLoadSpeed: 2
   bulletVelocity: 5
   bulletDamage: 5
-  bulletDuration: 10
+  bulletDuration: 5
   bulletLevel: 15
   levelSpacingBase: 0.3
   levelSpacingOffset: 0
