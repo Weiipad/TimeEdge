@@ -21,6 +21,8 @@ public class MoveCircleBySpeed : EntityAction
 
     public override IEnumerator Act(ActionList list, GameEntity entity, Weapon.WeaponInterface wi)
     {
+        if (BeforeActionDelegate != null)
+            BeforeActionDelegate();
         //=========Start calculate the center of circle=========
         Vector2 centerOfCircle;
         Vector2 prepenVector;
@@ -51,6 +53,9 @@ public class MoveCircleBySpeed : EntityAction
                 yield return 0;
             }
         }
-        list.SwitchToNext();
+        if (AfterActionDelegate != null)
+            AfterActionDelegate();
+        if (list != null && !IsStopSwitch)
+            list?.SwitchToNext();
     }
 }

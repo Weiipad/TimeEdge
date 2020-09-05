@@ -23,6 +23,7 @@ public class ActionList
 
     public void Start()
     {
+        pointer = 0;
         if (actions.Count != 0) host.StartCoroutine(actions[0].Act(this, host, wi));
     }
 
@@ -35,6 +36,7 @@ public class ActionList
             else
                 return;
         }
+        if (pointer >= actions.Count) pointer = 0;
         host.StartCoroutine(actions[pointer].Act(this, host, wi));
     }
 }

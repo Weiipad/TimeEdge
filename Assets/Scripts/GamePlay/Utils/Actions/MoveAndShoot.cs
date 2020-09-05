@@ -9,6 +9,8 @@ public class MoveAndShoot : EntityAction
     public float speed;
     public override IEnumerator Act(ActionList list, GameEntity entity, Weapon.WeaponInterface wi)
     {
+        if (BeforeActionDelegate != null)
+            BeforeActionDelegate();
         var target = new Vector3(targetPosition.x, targetPosition.y, entity.transform.position.z);
         while (Vector3.Distance(entity.transform.position, target) >= 0.001f)
         {
@@ -20,7 +22,10 @@ public class MoveAndShoot : EntityAction
             else
                 yield return 0;
         }
-        list.SwitchToNext();
+        if (AfterActionDelegate != null)
+            AfterActionDelegate();
+        if (list != null && !IsStopSwitch)
+            list?.SwitchToNext();
         yield return 0;
     }
 }

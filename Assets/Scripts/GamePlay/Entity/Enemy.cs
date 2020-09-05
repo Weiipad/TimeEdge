@@ -24,8 +24,11 @@ public class Enemy : MonoBehaviour
     {
         if (GameStatus.IsPauseGame())
             return;
-        wi.Update();
-        wi.Shoot();
+        if (wi != null)
+        {
+            wi.Update();
+            wi.Shoot();
+        }
     }
 
     public void StartAction()
@@ -41,5 +44,12 @@ public class Enemy : MonoBehaviour
         Loop = isLoop;
         if(list != null)
             list.Loop = Loop;
+    }
+
+    public void EquipWeapon(Weapon weapon)
+    {
+        this.weapon = weapon;
+        var entity = GetComponent<GameEntity>();
+        wi = new Weapon.WeaponInterface(entity, weapon);
     }
 }

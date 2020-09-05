@@ -9,10 +9,15 @@ public class MoveTowards : EntityAction
     public float speed;
     public override IEnumerator Act(ActionList list, GameEntity entity, Weapon.WeaponInterface wi)
     {
+        if (BeforeActionDelegate != null)
+            BeforeActionDelegate();
         var target = entity.GetComponent<Targeting>().target;
         if (target == null)
         {
-            list.SwitchToNext();
+            if (AfterActionDelegate != null)
+                AfterActionDelegate();
+            if (list != null && !IsStopSwitch)
+                list?.SwitchToNext();
             yield return 0;
         }
 

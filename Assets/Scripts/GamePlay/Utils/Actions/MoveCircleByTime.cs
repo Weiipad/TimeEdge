@@ -22,6 +22,8 @@ public class MoveCircleByTime : EntityAction
 
     public override IEnumerator Act(ActionList list, GameEntity entity, Weapon.WeaponInterface wi)
     {
+        if (BeforeActionDelegate != null)
+            BeforeActionDelegate();
         float curSeconds = 0f;
         float curAngle;
         //=========Start calculate the center of circle=========
@@ -80,7 +82,12 @@ public class MoveCircleByTime : EntityAction
                 curSeconds += 0.02f * secondScale;
             }
         }
-        list.SwitchToNext();
+        if (AfterActionDelegate != null)
+            AfterActionDelegate();
+        if (list != null && !IsStopSwitch)
+        {
+            list.SwitchToNext();
+        }
     }
 
     private Vector2 CalculatePos(float angle, Vector2 centerOfCircle)
