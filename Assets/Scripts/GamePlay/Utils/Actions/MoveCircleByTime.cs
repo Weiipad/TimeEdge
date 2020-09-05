@@ -74,14 +74,16 @@ public class MoveCircleByTime : EntityAction
                 curAngle += angleOffset;
                 Vector2 newPos = CalculatePos(curAngle, centerOfCircle);
                 entity.transform.position = newPos;
-                if (entity.transform.position.Equals(targetPoint))
-                    yield break;
-                if (curAngle.Equals(endAngle))
-                    yield break;
+                if (entity.transform.position.Equals(targetPoint) || curAngle.Equals(endAngle))
+                {
+                    entity.transform.position = targetPoint;
+                    break;
+                }
                 yield return new WaitForSeconds(0.02f * secondScale);
                 curSeconds += 0.02f * secondScale;
             }
         }
+        entity.transform.position = targetPoint;
         if (AfterActionDelegate != null)
             AfterActionDelegate();
         if (list != null && !IsStopSwitch)
