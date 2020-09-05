@@ -52,4 +52,10 @@ public class Enemy : MonoBehaviour
         var entity = GetComponent<GameEntity>();
         wi = new Weapon.WeaponInterface(entity, weapon);
     }
+
+    public void RemoveWeapon()
+    {
+        this.weapon = null;
+        wi = null;
+    }
 }

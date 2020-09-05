@@ -2474,7 +2474,7 @@ MonoBehaviour:
   - {fileID: 1701981672}
   Weapons:
   - {fileID: 11400000, guid: 3f9c76b8df2d1994fa5ecd32adf6f360, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: de676a13e746e074d931b693bbc78c6e, type: 2}
   - {fileID: 0}
 --- !u!4 &1314912714
 Transform:
@@ -2668,7 +2668,7 @@ GameObject:
   - component: {fileID: 1701981677}
   m_Layer: 0
   m_Name: Boss
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2685,7 +2685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407933e185fc83a47a66295b8c7f1a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10000
+  maxHP: 1000000
   currentHP: 0
   loadSpeedScale: 1
   defenseRate: 1
