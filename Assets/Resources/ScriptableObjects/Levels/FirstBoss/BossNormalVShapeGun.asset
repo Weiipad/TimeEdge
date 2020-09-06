@@ -24,4 +24,4 @@ MonoBehaviour:
   levelSpacingOffset: 0
   endSpacingBase: 2
   endSpacingOffset: 1
-  direct: 1
+  direct: 0

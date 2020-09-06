@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityScript.Macros;
 
 [CreateAssetMenu(fileName = "NewVShapeGun", menuName = "Time Edge/Weapon/VShapeGun")]
 public class VShapeGun : Weapon
@@ -78,6 +79,21 @@ public class VShapeGun : Weapon
                 }
                 
                 GenBullet(wi, genPos);
+                switch (direct)
+                {
+                    case VShapeDirect.down:
+                        genPos.x = genPosBase.x + tEndSpacingBase / 2.0f;
+                        genPos.y = genPosBase.y + tLevelSpacingBase;
+                        break;
+                    case VShapeDirect.left:
+                        genPos.y = genPosBase.y + tEndSpacingBase / 2.0f;
+                        genPos.x = genPosBase.x + tLevelSpacingBase;
+                        break;
+                    case VShapeDirect.right:
+                        genPos.y = genPosBase.y + tEndSpacingBase / 2.0f;
+                        genPos.x = genPosBase.x - tLevelSpacingBase;
+                        break;
+                }
 
                 //second bullet
                 switch (direct)
@@ -125,11 +141,33 @@ public class VShapeGun : Weapon
         }
     }
 
-    private void GenBullet(WeaponInterface wi, Vector2 genPos)
+    private Bullet GenBullet(WeaponInterface wi, Vector2 genPos)
     {
         Bullet bullet = GameObject.Instantiate(ammunition, genPos, wi.owner.transform.rotation);
+        ModifyRotation(bullet, wi);
         bullet.damage = bulletDamage * wi.owner.damageRate;
         bullet.velocity = bulletVelocity;
         bullet.duration = bulletDuration;
+        return bullet;
+    }
+
+    private void ModifyRotation(Bullet bullet, WeaponInterface wi)
+    {
+        Vector3 parentEuler = wi.owner.transform.rotation.eulerAngles;
+        switch(direct)
+        {
+            case VShapeDirect.up:
+                bullet.transform.rotation = Quaternion.Euler(new Vector3(parentEuler.x, parentEuler.y, 0.0f));
+                break;
+            case VShapeDirect.down:
+                bullet.transform.rotation = Quaternion.Euler(new Vector3(parentEuler.x, parentEuler.y, 180.0f));
+                break;
+            case VShapeDirect.left:
+                bullet.transform.rotation = Quaternion.Euler(new Vector3(parentEuler.x, parentEuler.y, 90.0f));
+                break;
+            case VShapeDirect.right:
+                bullet.transform.rotation = Quaternion.Euler(new Vector3(parentEuler.x, parentEuler.y, -90.0f));
+                break;
+        }
     }
 }
