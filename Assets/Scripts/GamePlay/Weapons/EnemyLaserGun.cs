@@ -51,8 +51,11 @@ public class EnemyLaserGun : Weapon
                     Destroy(bullet.gameObject);
                     bullet = null;
                 }
-                bullet = Instantiate(ammunition, wi.owner.transform.position, wi.owner.transform.rotation);
+                bullet = Instantiate(ammunition);
                 bullet.transform.parent = wi.owner.transform;
+                bullet.transform.localPosition = Vector3.zero;
+                Vector3 parentRotation = wi.owner.transform.rotation.eulerAngles;
+                bullet.transform.rotation = Quaternion.Euler(new Vector3(parentRotation.x, parentRotation.y, parentRotation.z + 180.0f));
                 bullet.damage = bulletDamage;
                 bullet.duration = Mathf.Infinity;
 

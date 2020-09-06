@@ -15,6 +15,22 @@ public class FirstBoss : Level
 
     public override void StartLevel(LevelList levelList)
     {
+        StartCoroutine(WaitTimeToStartFightBoss());
+    }
+
+    IEnumerator WaitTimeToStartFightBoss()
+    {
+        float current = 0.0f;
+        while(current <= 3.0f)
+        {
+            if (!GameStatus.IsPauseGame())
+            {
+                current += 0.02f;
+                yield return new WaitForSeconds(0.02f);
+            }
+            else
+                yield return 0;
+        }
         boss = EnemyPrefabs[0];
         boss.SetActive(true);
         bossLeftGun = boss.transform.GetChild(0)?.GetComponent<Enemy>();
@@ -26,6 +42,7 @@ public class FirstBoss : Level
         bossEnemy.actions.Add(strightDown);
         bossEnemy.StartAction();
         musicPlayer = GameObject.Find("AudioGroup").transform.GetChild(0).GetComponent<AudioSource>();
+        musicPlayer.time = 0.0f;
         musicPlayer.clip = Musics[0];
         musicPlayer.Play();
     }

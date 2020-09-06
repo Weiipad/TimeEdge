@@ -17,6 +17,7 @@ public class Bullet : MonoBehaviour
     public float velocity;
 
     private LayerMask layerMask;
+    private Vector2 preVelocity;
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -32,8 +33,19 @@ public class Bullet : MonoBehaviour
     void FixedUpdate()
     {
         if (GameStatus.IsPauseGame())
+        {
+            if(!(Mathf.Abs((rigidbody.velocity - Vector2.zero).magnitude) <= 0.001f))
+            {
+                preVelocity = rigidbody.velocity;
+                rigidbody.velocity = Vector2.zero;
+            }
             return;
-        //rigidbody.velocity = velocity * transform.up;
+        }
+        else if (Mathf.Abs((rigidbody.velocity - Vector2.zero).magnitude) <= 0.001f)
+        {
+            rigidbody.velocity = preVelocity;
+        }
+        rigidbody.velocity = velocity * transform.up;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

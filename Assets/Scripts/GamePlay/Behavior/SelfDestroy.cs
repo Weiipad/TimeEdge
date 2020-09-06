@@ -17,7 +17,7 @@ public class SelfDestroy : MonoBehaviour
     {
         timeElapsed += Time.deltaTime;
         if (timeElapsed > lifeDuration) {
-            Destory(gameObject);
+            Destroy(gameObject);
         }
     }
 }
