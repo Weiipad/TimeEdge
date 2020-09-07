@@ -5,19 +5,18 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     private float timeAccumulator;
-    [HideInInspector]
+
     public float damage;
+    public float velocity;
 
     [HideInInspector]
     public new Rigidbody2D rigidbody;
 
     [HideInInspector]
     public float duration;
-    [HideInInspector]
-    public float velocity;
 
     private LayerMask layerMask;
-    private Vector2 preVelocity;
+    private Vector2? postVelocity;
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -34,18 +33,19 @@ public class Bullet : MonoBehaviour
     {
         if (GameStatus.IsPauseGame())
         {
-            if(!(Mathf.Abs((rigidbody.velocity - Vector2.zero).magnitude) <= 0.001f))
+            if (!postVelocity.HasValue)
             {
-                preVelocity = rigidbody.velocity;
+                postVelocity = rigidbody.velocity;
                 rigidbody.velocity = Vector2.zero;
             }
             return;
         }
-        else if (Mathf.Abs((rigidbody.velocity - Vector2.zero).magnitude) <= 0.001f)
+
+        if (postVelocity.HasValue)
         {
-            rigidbody.velocity = preVelocity;
+            rigidbody.velocity = postVelocity.Value;
+            postVelocity = null;
         }
-        rigidbody.velocity = velocity * transform.up;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

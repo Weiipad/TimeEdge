@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BulletGenerate : MonoBehaviour
 {
-    public BulletSpawnMode mode;
+    public IBulletSpawnMode mode;
     public Bullet bullet;
 
     public void OnDestory() {
-        mode.Ganerate(gameObject, bullet.gameObject);
+        mode.Generate(gameObject, bullet);
     }
 }
