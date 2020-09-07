@@ -2475,7 +2475,11 @@ MonoBehaviour:
   Weapons:
   - {fileID: 11400000, guid: 3f9c76b8df2d1994fa5ecd32adf6f360, type: 2}
   - {fileID: 11400000, guid: de676a13e746e074d931b693bbc78c6e, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 9d77854a9461e8a4bb301a43eaad9026, type: 2}
+  - {fileID: 11400000, guid: 43370a559ca10f44a9727e347c67fd21, type: 2}
+  - {fileID: 11400000, guid: 9c129b609616dd8478634cd697209c2d, type: 2}
+  - {fileID: 11400000, guid: 2084e0cdad7817d4d9d2a9a36d0de156, type: 2}
+  - {fileID: 11400000, guid: 0b5f2a1cca9fa234c9a59e0a82c950f3, type: 2}
 --- !u!4 &1314912714
 Transform:
   m_ObjectHideFlags: 0
@@ -2685,7 +2689,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407933e185fc83a47a66295b8c7f1a4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1000000
+  maxHP: 60000
   currentHP: 0
   loadSpeedScale: 1
   defenseRate: 1

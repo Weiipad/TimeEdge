@@ -21,6 +21,7 @@ public class MoveVectorByTime : EntityAction
         if (secondScale <= 0f)
             yield break;
         float curSeconds = 0f;
+        Vector2 prePosition = entity.transform.position;
         Vector2 offset = vector * vectorScale * (0.02f * secondScale / seconds);
         if (MirrorX)
             offset.x = -offset.x;
@@ -40,7 +41,7 @@ public class MoveVectorByTime : EntityAction
         }
 
         if (seconds == 0f || curSeconds == 0f)
-            entity.transform.position = (Vector2)entity.transform.position + vector;
+            entity.transform.position = (Vector2)prePosition + vector;
 
         if (AfterActionDelegate != null)
             AfterActionDelegate();

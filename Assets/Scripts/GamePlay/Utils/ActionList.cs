@@ -12,6 +12,7 @@ public class ActionList
 
     private int pointer = 0;
 
+    private List<Coroutine> preCoroutine = new List<Coroutine>();
     public ActionList(GameEntity host, List<EntityAction> actions)
     {
         this.host = host;
@@ -24,7 +25,16 @@ public class ActionList
     public void Start()
     {
         pointer = 0;
-        if (actions.Count != 0) host.StartCoroutine(actions[0].Act(this, host, wi));
+        if (actions.Count != 0) preCoroutine.Add(host.StartCoroutine(actions[0].Act(this, host, wi)));
+    }
+
+    public void Stop()
+    {
+        foreach(var i in preCoroutine)
+        {
+            host.StopCoroutine(i);
+        }
+        preCoroutine = new List<Coroutine>();
     }
 
     public void SwitchToNext()
@@ -37,6 +47,6 @@ public class ActionList
                 return;
         }
         if (pointer >= actions.Count) pointer = 0;
-        host.StartCoroutine(actions[pointer].Act(this, host, wi));
+        preCoroutine.Add(host.StartCoroutine(actions[pointer].Act(this, host, wi)));
     }
 }
