@@ -5,8 +5,18 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewEnemyLaserGun", menuName = "Time Edge/Weapon/EnemyLaserGun")]
 public class EnemyLaserGun : Weapon
 {
+    public enum LaserDirect
+    {
+        up,
+        down,
+        right,
+        left
+    }
+
     private float powerLoad = 0f;
     public float powerLoadSpeed = 1f;
+
+    public LaserDirect direct = LaserDirect.down;
 
     private float curDuration = 0f;
     private bool isShoot = false;
@@ -54,8 +64,23 @@ public class EnemyLaserGun : Weapon
                 bullet = Instantiate(ammunition);
                 bullet.transform.parent = wi.owner.transform;
                 bullet.transform.localPosition = Vector3.zero;
-                Vector3 parentRotation = wi.owner.transform.rotation.eulerAngles;
-                bullet.transform.rotation = Quaternion.Euler(new Vector3(parentRotation.x, parentRotation.y, parentRotation.z + 180.0f));
+                Vector3 parentRotation = new Vector3(wi.owner.transform.rotation.eulerAngles.x, wi.owner.transform.rotation.eulerAngles.y, wi.owner.transform.rotation.eulerAngles.z);
+                switch(direct)
+                {
+                    case LaserDirect.down:
+                        parentRotation.z += 180f;
+                        break;
+                    case LaserDirect.up:
+                        parentRotation.z += 0.0f;
+                        break;
+                    case LaserDirect.right:
+                        parentRotation.z += 90.0f;
+                        break;
+                    case LaserDirect.left:
+                        parentRotation.z += -90.0f;
+                        break;
+                }
+                bullet.transform.rotation = Quaternion.Euler(new Vector3(parentRotation.x, parentRotation.y, parentRotation.z));
                 bullet.damage = bulletDamage;
                 bullet.duration = Mathf.Infinity;
 

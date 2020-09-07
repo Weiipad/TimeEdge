@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 35a4630a87f277c4f8da5a8a1afeb7f6, type: 3}
-  m_Name: BossNormalVShapeGun
+  m_Script: {fileID: 11500000, guid: 26b1de3a65a305f43a5ffb209111724d, type: 3}
+  m_Name: 2_BossNormalMidumCircleGun
   m_EditorClassIdentifier: 
   ammunition: {fileID: -4629710830114083070, guid: d509bc58d7569e44abcde5cc9d44200a,
     type: 3}
@@ -18,10 +18,6 @@ MonoBehaviour:
   baseLoadSpeed: 2
   bulletVelocity: 5
   bulletDamage: 5
-  bulletDuration: 5
-  bulletLevel: 15
-  levelSpacingBase: 0.3
-  levelSpacingOffset: 0
-  endSpacingBase: 2
-  endSpacingOffset: 1
-  direct: 1
+  bulletDuration: 10
+  angleRate: 12
+  angleOffset: 5

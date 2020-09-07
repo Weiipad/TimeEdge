@@ -33,6 +33,7 @@ public class Enemy : MonoBehaviour
 
     public void StartAction()
     {
+        list?.Stop();
         var entity = GetComponent<GameEntity>();
         list = new ActionList(entity, actions);
         list.Loop = Loop;
