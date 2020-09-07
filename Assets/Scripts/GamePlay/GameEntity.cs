@@ -73,7 +73,7 @@ public class GameEntity : MonoBehaviour
         effect.OnAdd();
     }
 
-    public void Hurt(Bullet bullet)
+    public void Hurt(BaseBullet bullet)
     {
         var damage = bullet.damage * defenseRate;
         if (currentShield > 0)

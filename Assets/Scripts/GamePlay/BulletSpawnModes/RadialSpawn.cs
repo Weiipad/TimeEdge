@@ -1,23 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class RadialSpawn : IBulletSpawnMode
+public class RadialSpawn : BulletGenerate
 {
-    private readonly int bulletCount;
+    public int bulletCount;
 
-    public RadialSpawn(int bulletCount)
-    {
-        this.bulletCount = bulletCount;
-    }
-
-    public void Generate(GameObject parent, Bullet bullet)
+    private void OnDestroy()
     {
         float deltaAngle = 360.0f / bulletCount;
         float currentAngle = 0;
         for (int i = 0; i < bulletCount; i++)
         {
-            Object.Instantiate(bullet, parent.transform.position, Quaternion.Euler(0, 0, currentAngle));
+            Instantiate(bullet, transform.position, Quaternion.Euler(0, 0, currentAngle));
             currentAngle += deltaAngle;
         }
     }
