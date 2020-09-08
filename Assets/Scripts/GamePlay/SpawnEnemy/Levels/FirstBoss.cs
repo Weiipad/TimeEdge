@@ -54,7 +54,7 @@ public class FirstBoss : Level
                 yield return 0;
         }
         LevelInit();
-        MoveVectorByTime strightDown = ActionMaker.MakeActionMoveVectorByTime(new Vector2(0.0f, -2.0f), 6f);
+        MoveVectorByTime strightDown = ActionMaker.MakeActionMoveVectorByTime(new Vector2(0.0f, -2.0f), 4f);
         strightDown.AfterActionDelegate += TheBossShowUp;
         strightDown.IsStopSwitch = true;
         bossEnemy.actions.Add(strightDown);
@@ -152,7 +152,7 @@ public class FirstBoss : Level
         if (bossRightGun.transform.childCount > 0)
             Destroy(bossRightGun.transform.GetChild(0));
         Vector2 newPos = new Vector2(0.0f, 3.5f);
-        MoveVectorByTime moveToNewPoint = ActionMaker.MakeActionMoveVectorByTime(newPos - (Vector2)boss.transform.position, 2.0f);
+        MoveVectorByTime moveToNewPoint = ActionMaker.MakeActionMoveVectorByTime(newPos - (Vector2)boss.transform.position, 1.0f);
         moveToNewPoint.BeforeActionDelegate += () =>
         {
             bossEnemy.RemoveWeapon();
@@ -189,16 +189,16 @@ public class FirstBoss : Level
         //end
 
         //line move
-        MoveVectorByTime moveLeftStart = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-4.0f, 0.0f), 2.0f);
-        MoveVectorByTime moveRightLoop = ActionMaker.MakeActionMoveVectorByTime(new Vector2(8.0f, 0.0f), 4.0f);
-        MoveVectorByTime moveLeftLoop = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-8.0f, 0.0f), 4.0f);
-        MoveVectorByTime moveRightAndEquipLaser = ActionMaker.MakeActionMoveVectorByTime(new Vector2(8.0f, 0.0f), 4.0f);
+        MoveVectorByTime moveLeftStart = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-4.0f, 0.0f), 1.0f);
+        MoveVectorByTime moveRightLoop = ActionMaker.MakeActionMoveVectorByTime(new Vector2(8.0f, 0.0f), 2.0f);
+        MoveVectorByTime moveLeftLoop = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-8.0f, 0.0f), 2.0f);
+        MoveVectorByTime moveRightAndEquipLaser = ActionMaker.MakeActionMoveVectorByTime(new Vector2(8.0f, 0.0f), 2.0f);
         moveRightAndEquipLaser.BeforeActionDelegate += () =>
         {
             bossLeftGun.EquipWeapon(Weapons[3]);
             bossRightGun.EquipWeapon(Weapons[3]);
         };
-        MoveVectorByTime moveLeftAndRemoveLaser = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-8.0f, 0.0f), 4.0f);
+        MoveVectorByTime moveLeftAndRemoveLaser = ActionMaker.MakeActionMoveVectorByTime(new Vector2(-8.0f, 0.0f), 2.0f);
         moveLeftAndRemoveLaser.AfterActionDelegate += () =>
         {
             bossLeftGun.RemoveWeapon();
@@ -206,7 +206,7 @@ public class FirstBoss : Level
             Destroy(bossLeftGun.transform.GetChild(0).gameObject);
             Destroy(bossRightGun.transform.GetChild(0).gameObject);
         };
-        MoveVectorByTime moveBackToPoint = ActionMaker.MakeActionMoveVectorByTime(new Vector2(4.0f, 0.0f), 2.0f);
+        MoveVectorByTime moveBackToPoint = ActionMaker.MakeActionMoveVectorByTime(new Vector2(4.0f, 0.0f), 1.0f);
         //end
 
         //stright down and shot and 'S' shape back
@@ -218,7 +218,7 @@ public class FirstBoss : Level
             bossRightGun.EquipWeapon(Weapons[5]);
         };
 
-        MoveCircleByTime moveUpRight = ActionMaker.MakeActionMoveCircleByTime(new Vector2(0.0f, 0.0f), 3.5f/2.0f, 2.0f);
+        MoveCircleByTime moveUpRight = ActionMaker.MakeActionMoveCircleByTime(new Vector2(0.0f, 0.0f), 3.5f/2.0f, 1.0f);
         moveUpRight.BeforeActionDelegate += () =>
         {
             boss.transform.position = new Vector3(0.0f, -3.5f, 0.0f);
@@ -226,7 +226,7 @@ public class FirstBoss : Level
             bossLeftGun.EquipWeapon(Weapons[4]);
             bossRightGun.EquipWeapon(Weapons[5]);
         };
-        MoveCircleByTime moveUpLeft = ActionMaker.MakeActionMoveCircleByTime(new Vector2(0.0f, 3.5f), 3.5f/2.0f, 2.0f);
+        MoveCircleByTime moveUpLeft = ActionMaker.MakeActionMoveCircleByTime(new Vector2(0.0f, 3.5f), 3.5f/2.0f, 1.0f);
         moveUpLeft.AfterActionDelegate += () =>
         {
             bossLeftGun.RemoveWeapon();
@@ -279,11 +279,8 @@ public class FirstBoss : Level
 
         //and line move
         actions.Add(moveLeftStart);
-        for(int i = 0;i < 2;i ++)
-        {
-            actions.Add(moveRightLoop);
-            actions.Add(moveLeftLoop);
-        }
+        actions.Add(moveRightLoop);
+        actions.Add(moveLeftLoop);
         actions.Add(moveRightAndEquipLaser);
         actions.Add(moveLeftLoop);
         actions.Add(moveRightLoop);
