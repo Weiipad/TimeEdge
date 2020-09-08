@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityScript.Macros;
 
 [CreateAssetMenu(fileName = "NewVShapeGun", menuName = "Time Edge/Weapon/VShapeGun")]
 public class VShapeGun : Weapon
