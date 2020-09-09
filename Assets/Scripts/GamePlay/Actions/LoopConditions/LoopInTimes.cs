@@ -9,7 +9,7 @@ namespace GamePlay.Actions
 {
     public class LoopInTimes : LoopAction.LoopCondition
     {
-        private uint cur;
+        private int cur;
         private readonly int total;
 
         public LoopInTimes(int n)

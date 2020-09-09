@@ -55,7 +55,11 @@ public class TestActions : MonoBehaviour
 
         var p = new Parallel();
 
-        var waving = new SinWavingMoveTo(transform, Vector2.up, 2, 2, new Vector2(8.5f, 3), 1);
+        var waving = new LoopAction(new LoopInTimes(-1));
+        waving.PushAction(new MoveTo(transform, new Vector2(8.5f, 3), 10));
+        waving.PushAction(new MoveTo(transform, new Vector2(8.5f, -3), 10));
+        waving.PushAction(new MoveTo(transform, new Vector2(-8.5f, -3), 10));
+        waving.PushAction(moveToTarget.Duplicate());
 
         var looper = new LoopAction(new LoopWhileActing(waving));
         looper.PushAction(new Shoot(transform, bullet, 0.1f));

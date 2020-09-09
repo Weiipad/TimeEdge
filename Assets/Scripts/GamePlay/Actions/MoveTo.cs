@@ -26,6 +26,8 @@ namespace GamePlay.Actions
             var aDir = target - trans.position;
 
             isFinish = Vector3.Dot(dir, aDir) <= 0;
+
+            if (isFinish) Debug.Log($"Moved to {target}");
         }
 
         public override IAction Duplicate()
