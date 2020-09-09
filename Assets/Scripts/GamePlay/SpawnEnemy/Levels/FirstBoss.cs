@@ -332,21 +332,21 @@ public class FirstBoss : Level
 
         //徘徊时，后两门副炮装备圆形弹，前两门装备V型弹
         var equipWaveUpWeapon = new Parallel();
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[2]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[7]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[7]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossEnemy, true));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[2]));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[2]));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[7]));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[7]));
+        equipWaveUpWeapon.AddSubAction(new RemoveWeapon(bossEnemy));
 
         wavaUp.AddSubAction(equipWaveUpWeapon);
         wavaUp.AddSubAction(wave);
 
         //从右边下去时，左边的两门副炮装备V型弹，右边两门圆形弹
         var equipRightDownWeapon = new Parallel();
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[4]));
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[4]));
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[2]));
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[4]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[4]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[2]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[2]));
 
         //先到达指定位置再向下走
         rightDown.AddSubAction(equipRightDownWeapon);
@@ -355,25 +355,25 @@ public class FirstBoss : Level
 
         //在下部向左边走，上面两门副炮装备V型弹，下面的装备圆形弹
         var equipLeftButtomWeapon = new Parallel();
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[8]));
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[8]));
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[2]));
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[2]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[8]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[8]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[2]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[2]));
 
         //从左边上去时，左边两门圆形弹，右边两门V型弹
         var equipLeftUpWeapon = new Parallel();
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[2]));
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[5]));
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[5]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[2]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[2]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[5]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[5]));
 
         //回到原点前停止攻击
         var removeWeapon = new Parallel();
-        removeWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossLeftGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossRightGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossEnemy, Weapons[2]));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossLeftBehindGun));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossRightBehindGun));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossLeftGun));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossRightGun));
+        removeWeapon.AddSubAction(new EquipWeapon(bossEnemy, Weapons[2]));
 
         //先左走再向上走
         leftBottomAndUp.AddSubAction(equipLeftButtomWeapon);
@@ -393,41 +393,53 @@ public class FirstBoss : Level
         root.AddSubAction(loop);
     }
 
-    class WeaponControl : IAction
+    class EquipWeapon:IAction
     {
         private bool isFinish = false;
         public override bool Finished => isFinish;
 
         private Weapon weapon;
         private Enemy enemy;
-        private bool isRemoveWeapon = false;
-        public WeaponControl(Enemy enemy, Weapon weapon)
+
+        public EquipWeapon(Enemy enemy, Weapon weapon)
         {
             this.enemy = enemy;
             this.weapon = weapon;
         }
 
-        public WeaponControl(Enemy enemy, bool isRemoveWeapon)
-        {
-            this.enemy = enemy;
-            this.isRemoveWeapon = isRemoveWeapon;
-        }
-
         public override void Act()
         {
-            if (!isRemoveWeapon)
-                enemy.EquipWeapon(weapon);
-            if (isRemoveWeapon)
-                enemy.RemoveWeapon();
+            enemy.EquipWeapon(weapon);
             isFinish = true;
         }
 
         public override IAction Duplicate()
         {
-            if (weapon == null)
-                return new WeaponControl(enemy, isRemoveWeapon);
-            else
-                return new WeaponControl(enemy, weapon);
+            return new EquipWeapon(enemy, weapon);
+        }
+    }
+
+    class RemoveWeapon : IAction
+    {
+        private bool isFinish = false;
+        public override bool Finished => isFinish;
+
+        private Enemy enemy;
+
+        public RemoveWeapon(Enemy enemy)
+        {
+            this.enemy = enemy;
+        }
+
+        public override void Act()
+        {
+            enemy.RemoveWeapon();
+            isFinish = true;
+        }
+
+        public override IAction Duplicate()
+        {
+            return new RemoveWeapon(enemy);
         }
     }
 }
