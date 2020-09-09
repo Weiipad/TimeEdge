@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using GamePlay.Actions;
+using System.Xml.Schema;
 
 public class TestActions : MonoBehaviour
 {
@@ -53,11 +54,12 @@ public class TestActions : MonoBehaviour
 
         stageOne = new Branch();
 
+        var moveToTarget = new MoveTo(transform, new Vector2(0, 3), 10);
+
         var p = new Parallel();
 
-        var waving = new LoopAction(new LoopInTimes(4));
-        waving.PushAction(new MoveTo(transform, new Vector2(-8.42f, 3), 10));
-        waving.PushAction(new MoveTo(transform, new Vector2(8.42f, 3), 10));
+        var waving = new LoopAction(new LoopInTimes(3));
+        waving.PushAction(new SinWave(transform, Vector2.right, 2f, 1f));
 
         var looper = new LoopAction(new LoopWhileActing(waving));
         looper.PushAction(new Shoot(transform, bullet, 0.5f, 0));
@@ -65,6 +67,7 @@ public class TestActions : MonoBehaviour
         p.AddSubAction(looper);
         p.AddSubAction(waving);
 
+        stageOne.AddSubAction(moveToTarget);
         stageOne.AddSubAction(p);
         root.AddSubAction(stageOne);
         root.AddSubAction(new MoveTo(transform, new Vector2(0, 0), 10));
