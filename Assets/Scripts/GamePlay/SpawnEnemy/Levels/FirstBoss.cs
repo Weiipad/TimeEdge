@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GamePlay.Actions;
+using System.Net.Http.Headers;
 
 public class FirstBoss : Level
 {
@@ -15,15 +17,21 @@ public class FirstBoss : Level
     private Enemy bossEnemy;
     private Enemy bossLeftGun;
     private Enemy bossRightGun;
+    private Enemy bossLeftBehindGun;
+    private Enemy bossRightBehindGun;
 
     private Collider2D bossCollider;
 
     private AudioSource musicPlayer;
 
     private BossLevel bossLevel = BossLevel.none;
+
+    private Branch root;
     public override void StartLevel(LevelList levelList)
     {
-        StartCoroutine(WaitTimeToStartFightBoss());
+        //StartCoroutine(WaitTimeToStartFightBoss());
+        LevelInit();
+        ThirdLevelOfBoss();
     }
 
     private void LevelInit()
@@ -34,6 +42,8 @@ public class FirstBoss : Level
         bossEntity = boss.GetComponent<GameEntity>();
         bossLeftGun = boss.transform.GetChild(0)?.GetComponent<Enemy>();
         bossRightGun = boss.transform.GetChild(1)?.GetComponent<Enemy>();
+        bossLeftBehindGun = boss.transform.GetChild(2)?.GetComponent<Enemy>();
+        bossRightBehindGun = boss.transform.GetChild(3)?.GetComponent<Enemy>();
         musicPlayer = GameObject.Find("AudioGroup").transform.GetChild(0).GetComponent<AudioSource>();
         musicPlayer.time = 0.0f;
         musicPlayer.clip = Musics[0];
@@ -69,6 +79,7 @@ public class FirstBoss : Level
 
     private void Update()
     {
+        if (root != null && !root.Finished && !GameStatus.IsPauseGame()) root.Act();
         if(bossLevel == BossLevel.first && bossEntity.currentHP/bossEntity.maxHP <= 2.0f/3.0f)
         {
             BeforeTurnToLevel(SecondLevelOfBoss);
@@ -310,6 +321,104 @@ public class FirstBoss : Level
 
     private void ThirdLevelOfBoss()
     {
+        root = new Branch();
+        Branch wavaUp = new Branch();
+        Branch rightDown = new Branch();
+        Branch leftBottomAndUp = new Branch();
 
+        //在上部徘徊
+        var wave = new LoopAction(new LoopInTimes(3));
+        wave.PushAction(new SinWave(boss.transform, Vector2.right, 2f, 2f));
+
+        //徘徊时，后两门副炮装备圆形弹，前两门装备V型弹
+        var equipWaveUpWeapon = new Parallel();
+        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[2]));
+        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
+        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[7]));
+        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[7]));
+        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossEnemy, true));
+
+        wavaUp.AddSubAction(equipWaveUpWeapon);
+        wavaUp.AddSubAction(wave);
+
+        //从右边下去时，左边的两门副炮装备V型弹，右边两门圆形弹
+        var equipRightDownWeapon = new Parallel();
+        equipRightDownWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[4]));
+        equipRightDownWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[4]));
+        equipRightDownWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[2]));
+        equipRightDownWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
+
+        //先到达指定位置再向下走
+        rightDown.AddSubAction(equipRightDownWeapon);
+        rightDown.AddSubAction(new MoveTo(boss.transform, new Vector2(5.5f, 3.5f), 20f));
+        rightDown.AddSubAction(new MoveTo(boss.transform, new Vector2(5.5f, -3.5f), 10f));
+
+        //在下部向左边走，上面两门副炮装备V型弹，下面的装备圆形弹
+        var equipLeftButtomWeapon = new Parallel();
+        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[8]));
+        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[8]));
+        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[2]));
+        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[2]));
+
+        //从左边上去时，左边两门圆形弹，右边两门V型弹
+        var equipLeftUpWeapon = new Parallel();
+        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[2]));
+        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
+        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[5]));
+        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[5]));
+
+        //回到原点前停止攻击
+        var removeWeapon = new Parallel();
+        removeWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, true));
+        removeWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, true));
+        removeWeapon.AddSubAction(new WeaponControl(bossLeftGun, true));
+        removeWeapon.AddSubAction(new WeaponControl(bossRightGun, true));
+        removeWeapon.AddSubAction(new WeaponControl(bossEnemy, Weapons[2]));
+
+        //先左走再向上走
+        leftBottomAndUp.AddSubAction(equipLeftButtomWeapon);
+        leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(-5.5f, -3.5f), 10f));
+        leftBottomAndUp.AddSubAction(equipLeftUpWeapon);
+        leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(-5.5f, 3.5f), 10f));
+
+        //回到原点
+        leftBottomAndUp.AddSubAction(removeWeapon);
+        leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(0.0f, 3.5f), 20f));
+
+        var loop = new LoopAction(new LoopInTimes(-1));
+        loop.PushAction(wavaUp);
+        loop.PushAction(rightDown);
+        loop.PushAction(leftBottomAndUp);
+
+        root.AddSubAction(loop);
+    }
+
+    class WeaponControl : IAction
+    {
+        private bool isFinish;
+        public override bool Finished => isFinish;
+
+        public WeaponControl(Enemy enemy, Weapon weapon)
+        {
+            enemy.EquipWeapon(weapon);
+            isFinish = true;
+        }
+
+        public WeaponControl(Enemy enemy, bool isRemoveWeapon)
+        {
+            if (isRemoveWeapon)
+                enemy.RemoveWeapon();
+            isFinish = true;
+        }
+
+        public override void Act()
+        {
+            
+        }
+
+        public override IAction Duplicate()
+        {
+            return null;
+        }
     }
 }
