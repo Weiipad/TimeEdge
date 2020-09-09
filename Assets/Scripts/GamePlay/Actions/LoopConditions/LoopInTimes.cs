@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace GamePlay.Actions
@@ -28,6 +29,11 @@ namespace GamePlay.Actions
         public void Update()
         {
             cur++;
+        }
+
+        public LoopAction.LoopCondition Duplicate()
+        {
+            return new LoopInTimes(total);
         }
     }
 }

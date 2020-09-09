@@ -386,34 +386,11 @@ public class FirstBoss : Level
         leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(0.0f, 3.5f), 20f));
 
         var loop = new LoopAction(new LoopInTimes(-1));
-        loop.PushAction(new DebugAction("StartLoop"));
         loop.PushAction(wavaUp);
         loop.PushAction(rightDown);
         loop.PushAction(leftBottomAndUp);
 
         root.AddSubAction(loop);
-    }
-
-
-    class DebugAction : IAction
-    {
-        public override bool Finished => true;
-
-        string msg = null;
-        public DebugAction(string msg)
-        {
-            this.msg = msg;
-        }
-
-        public override void Act()
-        {
-            Debug.Log(msg);
-        }
-
-        public override IAction Duplicate()
-        {
-            return new DebugAction(msg);
-        }
     }
 
     class WeaponControl : IAction

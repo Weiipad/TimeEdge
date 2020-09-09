@@ -24,5 +24,10 @@ namespace GamePlay.Actions
         }
 
         public void Update() { }
+
+        public LoopAction.LoopCondition Duplicate()
+        {
+            return new LoopWhileActing(target);
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Diagnostics;
 using UnityEditor;
 using UnityEngine.Animations;
 using UnityEngine;
+using System.CodeDom;
 
 namespace GamePlay.Actions
 {
@@ -47,26 +48,27 @@ namespace GamePlay.Actions
 
     public class Branch : IAction
     {
-        protected Queue<IAction> actions = null;
+        private int ptr = 0;
+        protected List<IAction> actions = null;
 
         protected bool isFinish = false;
         public override bool Finished { get => isFinish; }
 
         public void AddSubAction(IAction action)
         {
-            if (actions == null) actions = new Queue<IAction>();
-            actions.Enqueue(action);
+            if (actions == null) actions = new List<IAction>();
+            actions.Add(action);
         }
 
         public override void Act()
         {
-            if (actions != null && actions.Count != 0)
+            if (actions != null && ptr < actions.Count)
             {
-                var ac = actions.Peek();
+                var ac = actions[ptr];
                 ac.Act();
                 if (ac.Finished)
                 {
-                    actions.Dequeue();
+                    ptr++;
                 }
                 return;
             }
@@ -80,10 +82,10 @@ namespace GamePlay.Actions
             branch.isFinish = false;
             if (actions != null)
             {
-                branch.actions = new Queue<IAction>();
+                branch.actions = new List<IAction>();
                 foreach (var ac in actions)
                 {
-                    actions.Enqueue(ac.Duplicate());
+                    branch.actions.Add(ac.Duplicate());
                 }
             }
             return branch;
@@ -129,7 +131,7 @@ namespace GamePlay.Actions
                 p.actions = new List<IAction>();
                 foreach (var ac in actions)
                 {
-                    actions.Add(ac.Duplicate());
+                    p.actions.Add(ac.Duplicate());
                 }
             }
             return p;
@@ -142,6 +144,8 @@ namespace GamePlay.Actions
         {
             bool Check();
             void Update();
+
+            LoopCondition Duplicate();
         }
 
         private bool isFinish;
@@ -155,6 +159,7 @@ namespace GamePlay.Actions
         {
             loopCondition = condition;
             actions = new List<IAction>();
+            isFinish = false;
         }
 
         public void PushAction(IAction action)
@@ -166,6 +171,7 @@ namespace GamePlay.Actions
         {
             if (loopCondition.Check())
             {
+
                 actions[ptr].Act();
                 if (actions[ptr].Finished)
                 {
@@ -186,12 +192,10 @@ namespace GamePlay.Actions
 
         public override IAction Duplicate()
         {
-            var p = new LoopAction(loopCondition);
-            p.isFinish = false;
-            p.actions = new List<IAction>();
+            var p = new LoopAction(loopCondition.Duplicate());
             foreach (var ac in actions)
             {
-                actions.Add(ac.Duplicate());
+                p.actions.Add(ac.Duplicate());
             }
             return p;
         }
