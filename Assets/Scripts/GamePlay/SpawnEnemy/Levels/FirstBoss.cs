@@ -28,8 +28,18 @@ public class FirstBoss : Level
     private BossLevel bossLevel = BossLevel.none;
 
     private Branch root;
+
+    public GameObject bossBar;
+
     public override void StartLevel(LevelList levelList)
     {
+        bossBar.SetActive(true);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            GameEntity entity = player.GetComponent<GameEntity>();
+            entity.currentHP = entity.maxHP;
+        }
         StartCoroutine(WaitTimeToStartFightBoss());
     }
 

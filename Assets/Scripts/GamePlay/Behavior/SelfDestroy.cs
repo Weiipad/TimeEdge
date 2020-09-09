@@ -15,6 +15,8 @@ public class SelfDestroy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameStatus.IsPauseGame())
+            return;
         timeElapsed += Time.deltaTime;
         if (timeElapsed > lifeDuration) {
             Destroy(gameObject);
