@@ -10,7 +10,8 @@ public class FirstBoss : Level
     {
         none,
         first,
-        second
+        second,
+        third
     }
     private GameObject boss;
     private GameEntity bossEntity;
@@ -29,9 +30,7 @@ public class FirstBoss : Level
     private Branch root;
     public override void StartLevel(LevelList levelList)
     {
-        //StartCoroutine(WaitTimeToStartFightBoss());
-        LevelInit();
-        ThirdLevelOfBoss();
+        StartCoroutine(WaitTimeToStartFightBoss());
     }
 
     private void LevelInit()
@@ -83,6 +82,10 @@ public class FirstBoss : Level
         if(bossLevel == BossLevel.first && bossEntity.currentHP/bossEntity.maxHP <= 2.0f/3.0f)
         {
             BeforeTurnToLevel(SecondLevelOfBoss);
+        }
+        else if(bossLevel == BossLevel.second && bossEntity.currentHP/bossEntity.maxHP <=1.0f/3.0f)
+        {
+            BeforeTurnToLevel(ThirdLevelOfBoss);
         }
     }
 
@@ -152,7 +155,10 @@ public class FirstBoss : Level
 
     private void BeforeTurnToLevel(EntityAction.ActionDelegate actionDelegate)
     {
-        bossLevel = BossLevel.second;
+        if (bossLevel == BossLevel.first)
+            bossLevel = BossLevel.second;
+        else
+            bossLevel = BossLevel.third;
         boss.GetComponent<Collider2D>().enabled = false;
         bossEnemy.RemoveWeapon();
         bossLeftGun.RemoveWeapon();
@@ -168,6 +174,10 @@ public class FirstBoss : Level
             bossEnemy.RemoveWeapon();
             bossEnemy.RemoveWeapon();
             bossLeftGun.RemoveWeapon();
+            if (bossLeftGun.transform.childCount > 0)
+                Destroy(bossLeftGun.transform.GetChild(0).gameObject);
+            if (bossRightGun.transform.childCount > 0)
+                Destroy(bossRightGun.transform.GetChild(0).gameObject);
         };
         moveToNewPoint.AfterActionDelegate += () => { boss.GetComponent<Collider2D>().enabled = true; };
         moveToNewPoint.AfterActionDelegate += () => { boss.transform.position = newPos; };
@@ -321,6 +331,8 @@ public class FirstBoss : Level
 
     private void ThirdLevelOfBoss()
     {
+        bossEnemy.actions = null;
+        bossEnemy.StartAction();
         root = new Branch();
         Branch wavaUp = new Branch();
         Branch rightDown = new Branch();
@@ -390,7 +402,18 @@ public class FirstBoss : Level
         loop.PushAction(rightDown);
         loop.PushAction(leftBottomAndUp);
 
-        root.AddSubAction(loop);
+        var generateBulletWarning = new LoopAction(new LoopWhileActing(loop));
+        generateBulletWarning.PushAction(new GeneraterObject(EnemyPrefabs[1], 2f, 0f, 2));
+        var generateFollow = new LoopAction(new LoopWhileActing(loop));
+        generateFollow.PushAction(new GeneraterObject(EnemyPrefabs[2], 4f, 0f, 1));
+
+        var action = new Parallel();
+        action.AddSubAction(loop);
+        if (GameDiffculty.diffculty == GameDiffculty.Diffculty.normal || GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
+            action.AddSubAction(generateBulletWarning);
+        if (GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
+            action.AddSubAction(generateFollow);
+        root.AddSubAction(action);
     }
 
     class EquipWeapon:IAction
@@ -440,6 +463,50 @@ public class FirstBoss : Level
         public override IAction Duplicate()
         {
             return new RemoveWeapon(enemy);
+        }
+    }
+
+    class GeneraterObject : IAction
+    {
+        private bool isFinish = false;
+        public override bool Finished => isFinish;
+
+        private GameObject ob;
+        private float maxLoad;
+        private float curLoad;
+        private int count;
+        public GeneraterObject(GameObject ob, float maxLoad, float curLoad, int count)
+        {
+            this.ob = ob;
+            this.maxLoad = maxLoad;
+            this.curLoad = curLoad;
+            this.count = count;
+        }
+
+        public override void Act()
+        {
+            curLoad += Time.deltaTime;
+            isFinish = curLoad >= maxLoad;
+            if (curLoad >= maxLoad)
+            {
+                curLoad = 0f;
+                for (int i = 0; i < count; i++)
+                {
+                    GameObject go = GameObject.Instantiate(ob);
+                    go.SetActive(true);
+                    float x = Random.Range(-5.5f, 5.5f);
+                    float y = Random.Range(-5.0f, 5.0f);
+                    go.transform.position = new Vector3(x, y, 0.0f);
+                    Enemy enemy = go.GetComponent<Enemy>();
+                    if (enemy != null)
+                        enemy.StartAction();
+                }
+            }
+        }
+
+        public override IAction Duplicate()
+        {
+            return new GeneraterObject(ob, maxLoad, curLoad, count);
         }
     }
 }
