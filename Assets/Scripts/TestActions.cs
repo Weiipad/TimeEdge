@@ -21,15 +21,12 @@ public class TestActions : MonoBehaviour
         float timeElapsed;
         float deltaTime;
 
-        int a;
-
-        public Shoot(Transform parent, BaseBullet bullet, float deltaTime, int a)
+        public Shoot(Transform parent, BaseBullet bullet, float deltaTime)
         {
             this.parent = parent;
             this.bullet = bullet;
             this.deltaTime = deltaTime;
             timeElapsed = 0;
-            this.a = a;
         }
 
         public override void Act()
@@ -37,14 +34,14 @@ public class TestActions : MonoBehaviour
             timeElapsed += Time.deltaTime;
             if (timeElapsed >= deltaTime)
             {
-                Instantiate(bullet, parent.position, Quaternion.Euler(0, 0, 180));
+                Instantiate(bullet, parent.position, Quaternion.Euler(0, 0, 90));
                 isFinish = true;
             }
         }
 
         public override IAction Duplicate()
         {
-            return new Shoot(parent, bullet, deltaTime, a + 1);
+            return new Shoot(parent, bullet, deltaTime);
         }
     }
 
@@ -54,15 +51,14 @@ public class TestActions : MonoBehaviour
 
         stageOne = new Branch();
 
-        var moveToTarget = new MoveTo(transform, new Vector2(0, 3), 10);
+        var moveToTarget = new MoveTo(transform, new Vector2(-8.5f, 3), 10);
 
         var p = new Parallel();
 
-        var waving = new LoopAction(new LoopInTimes(3));
-        waving.PushAction(new SinWave(transform, Vector2.right, 2f, 1f));
+        var waving = new SinWavingMoveTo(transform, Vector2.up, 2, 2, new Vector2(8.5f, 3), 1);
 
         var looper = new LoopAction(new LoopWhileActing(waving));
-        looper.PushAction(new Shoot(transform, bullet, 0.5f, 0));
+        looper.PushAction(new Shoot(transform, bullet, 0.1f));
 
         p.AddSubAction(looper);
         p.AddSubAction(waving);
