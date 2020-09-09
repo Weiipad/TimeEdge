@@ -7,34 +7,42 @@ using UnityEngine;
 
 namespace GamePlay.Actions
 {
-    public class SinWave : IAction
+    public class SinWavingMoveTo : IAction
     {
         private Transform target;
         private Vector3? pin;
         private readonly Vector3 dir;
         private readonly float a;
         private readonly float w;
+        private readonly Vector3 targetPos;
+        private readonly float speed;
+        private bool isFinish = false;
         private float t;
-        public override bool Finished => w * t >= 2f * Mathf.PI;
+        public override bool Finished => isFinish;
 
-        public SinWave(Transform target, Vector2 direction, float amplitude, float angularSpeed)
+        public SinWavingMoveTo(Transform target, Vector2 viberatingDirection, float amplitude, float angularSpeed, Vector2 targetPosition, float moveSpeed)
         {
             this.target = target;
             a = amplitude;
             w = angularSpeed;
-            dir = new Vector3(direction.x, direction.y, 0).normalized;
+            dir = new Vector3(viberatingDirection.x, viberatingDirection.y, 0).normalized;
             pin = null;
+            targetPos = targetPosition;
+            speed = moveSpeed;
             t = 0;
         }
 
         public override void Act()
         {
-            if (pin == null)
-            {
-                pin = target.position;
-            }
+            if (pin == null) pin = target.position;
             t += Time.deltaTime;
             target.position = pin.Value + dir * a * Mathf.Sin(w * t);
+
+            var direction = targetPos - pin.Value;
+            pin += speed * direction.normalized * Time.deltaTime;
+            var aDirection = targetPos - pin.Value;
+
+            isFinish = Vector3.Dot(direction, aDirection) <= 0;
         }
 
         public override IAction Duplicate()
