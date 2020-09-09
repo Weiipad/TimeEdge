@@ -377,9 +377,9 @@ public class FirstBoss : Level
 
         //先左走再向上走
         leftBottomAndUp.AddSubAction(equipLeftButtomWeapon);
-        leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(-5.5f, -3.5f), 10f));
+        leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(-5.5f, -3.5f), 5f));
         leftBottomAndUp.AddSubAction(equipLeftUpWeapon);
-        leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(-5.5f, 3.5f), 10f));
+        leftBottomAndUp.AddSubAction(new MoveTo(boss.transform, new Vector2(-5.5f, 3.5f), 5f));
 
         //回到原点
         leftBottomAndUp.AddSubAction(removeWeapon);
@@ -395,25 +395,31 @@ public class FirstBoss : Level
 
     class WeaponControl : IAction
     {
-        private bool isFinish;
+        private bool isFinish = false;
         public override bool Finished => isFinish;
 
+        private Weapon weapon;
+        private Enemy enemy;
+        private bool isRemoveWeapon = false;
         public WeaponControl(Enemy enemy, Weapon weapon)
         {
-            enemy.EquipWeapon(weapon);
-            isFinish = true;
+            this.enemy = enemy;
+            this.weapon = weapon;
         }
 
         public WeaponControl(Enemy enemy, bool isRemoveWeapon)
         {
-            if (isRemoveWeapon)
-                enemy.RemoveWeapon();
-            isFinish = true;
+            this.enemy = enemy;
+            this.isRemoveWeapon = isRemoveWeapon;
         }
 
         public override void Act()
         {
-
+            if (!isRemoveWeapon)
+                enemy.EquipWeapon(weapon);
+            if (isRemoveWeapon)
+                enemy.RemoveWeapon();
+            isFinish = true;
         }
 
         public override IAction Duplicate()
