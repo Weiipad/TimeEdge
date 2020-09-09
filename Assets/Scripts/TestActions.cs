@@ -70,7 +70,7 @@ public class TestActions : MonoBehaviour
         stageOne.AddSubAction(moveToTarget);
         stageOne.AddSubAction(p);
         root.AddSubAction(stageOne);
-        root.AddSubAction(new MoveTo(transform, new Vector2(0, 0), 10));
+        root.AddSubAction(new MoveCircle(transform, new Vector2(0, 0), 5f, 2f, 1, false));
     }
 
     private void Update()

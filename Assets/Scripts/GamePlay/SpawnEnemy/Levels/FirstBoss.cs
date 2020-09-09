@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Security.AccessControl;
 using UnityEngine;
 
 public class FirstBoss : Level
@@ -72,7 +71,7 @@ public class FirstBoss : Level
     {
         if(bossLevel == BossLevel.first && bossEntity.currentHP/bossEntity.maxHP <= 2.0f/3.0f)
         {
-            BeforeTurnToSecondLevel();
+            BeforeTurnToLevel(SecondLevelOfBoss);
         }
     }
 
@@ -140,7 +139,7 @@ public class FirstBoss : Level
         bossEnemy.StartAction();
     }
 
-    private void BeforeTurnToSecondLevel()
+    private void BeforeTurnToLevel(EntityAction.ActionDelegate actionDelegate)
     {
         bossLevel = BossLevel.second;
         boss.GetComponent<Collider2D>().enabled = false;
@@ -161,7 +160,7 @@ public class FirstBoss : Level
         };
         moveToNewPoint.AfterActionDelegate += () => { boss.GetComponent<Collider2D>().enabled = true; };
         moveToNewPoint.AfterActionDelegate += () => { boss.transform.position = newPos; };
-        moveToNewPoint.AfterActionDelegate += () => { SecondLevelOfBoss(); };
+        moveToNewPoint.AfterActionDelegate += actionDelegate;
         moveToNewPoint.IsStopSwitch = true;
         List<EntityAction> entityActions = new List<EntityAction>() { moveToNewPoint };
         bossEnemy.actions = entityActions;
@@ -307,5 +306,10 @@ public class FirstBoss : Level
         bossEnemy.actions = actions;
         bossEnemy.ActionLoop(true);
         bossEnemy.StartAction();
+    }
+
+    private void ThirdLevelOfBoss()
+    {
+
     }
 }
