@@ -40,8 +40,6 @@ public class TestActions : MonoBehaviour
 
         public Shoot(Transform parent, BaseBullet bullet, float deltaTime, int a)
         {
-            Debug.Log($"Create! : {a}");
-
             this.parent = parent;
             this.bullet = bullet;
             this.deltaTime = deltaTime;
@@ -51,11 +49,9 @@ public class TestActions : MonoBehaviour
 
         public override void Act()
         {
-            
             timeElapsed += Time.deltaTime;
             if (timeElapsed >= deltaTime)
             {
-                Debug.Log($"{a} : Shoot!!");
                 Instantiate(bullet, parent.position, Quaternion.Euler(0, 0, 180));
                 isFinish = true;
             }
@@ -63,7 +59,6 @@ public class TestActions : MonoBehaviour
 
         public override IAction Duplicate()
         {
-            Debug.Log($"Duplicate! : {a+1}");
             return new Shoot(parent, bullet, deltaTime, a + 1);
         }
     }
@@ -76,19 +71,19 @@ public class TestActions : MonoBehaviour
 
         var p = new Parallel();
 
-        var looper = new LoopAction(new LoopInTimes(3));
+        var waving = new LoopAction(new LoopInTimes(2));
+        waving.PushAction(new MoveTo(transform, new Vector2(-8.42f, 3), 10));
+        waving.PushAction(new MoveTo(transform, new Vector2(8.42f, 3), 10));
+
+        var looper = new LoopAction(new LoopWhileActing(waving));
         looper.PushAction(new Shoot(transform, bullet, 0.5f, 0));
-
-
-        var waving = new LoopAction(new LoopInTimes(4));
-        waving.PushAction(new MoveTo(transform, new Vector2(-8.42f, 3), 5));
-        waving.PushAction(new MoveTo(transform, new Vector2(8.42f, 3), 5));
 
         p.AddSubAction(looper);
         p.AddSubAction(waving);
 
         stageOne.AddSubAction(p);
         root.AddSubAction(stageOne);
+        root.AddSubAction(new MoveTo(transform, new Vector2(0, 3), 10));
     }
 
     private void Update()

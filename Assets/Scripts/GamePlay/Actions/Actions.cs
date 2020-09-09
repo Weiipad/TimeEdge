@@ -169,12 +169,12 @@ namespace GamePlay.Actions
                 actions[ptr].Act();
                 if (actions[ptr].Finished)
                 {
+                    actions[ptr] = actions[ptr].Duplicate();
                     ptr++;
                     if (ptr >= actions.Count)
                     {
                         ptr = 0;
                         loopCondition.Update();
-                        actions.ForEach(action => action = action.Duplicate());
                     }
                 }
             }
