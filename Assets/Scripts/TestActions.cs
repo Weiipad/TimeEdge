@@ -10,22 +10,6 @@ public class TestActions : MonoBehaviour
 
     public BaseBullet bullet;
 
-    class LoopWhileActing : LoopAction.LoopCondition
-    {
-        IAction target;
-        public LoopWhileActing(IAction target)
-        {
-            this.target = target;
-        }
-
-        public bool Check()
-        {
-            return !target.Finished;
-        }
-
-        public void Update() { }
-    }
-
     class Shoot : IAction
     {
         bool isFinish = false;
@@ -71,7 +55,7 @@ public class TestActions : MonoBehaviour
 
         var p = new Parallel();
 
-        var waving = new LoopAction(new LoopInTimes(2));
+        var waving = new LoopAction(new LoopInTimes(4));
         waving.PushAction(new MoveTo(transform, new Vector2(-8.42f, 3), 10));
         waving.PushAction(new MoveTo(transform, new Vector2(8.42f, 3), 10));
 
@@ -83,11 +67,11 @@ public class TestActions : MonoBehaviour
 
         stageOne.AddSubAction(p);
         root.AddSubAction(stageOne);
-        root.AddSubAction(new MoveTo(transform, new Vector2(0, 3), 10));
+        root.AddSubAction(new MoveTo(transform, new Vector2(0, 0), 10));
     }
 
     private void Update()
     {
-        if (!root.Finished) root.Act();
+        if (!root.Finished && !GameStatus.IsPauseGame()) root.Act();
     }
 }
