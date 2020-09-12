@@ -173,10 +173,10 @@ public class FirstBoss : Level
         bossEnemy.RemoveWeapon();
         bossLeftGun.RemoveWeapon();
         if (bossLeftGun.transform.childCount > 0)
-            Destroy(bossLeftGun.transform.GetChild(0));
+            Destroy(bossLeftGun.transform.GetChild(0).gameObject);
         bossRightGun.RemoveWeapon();
         if (bossRightGun.transform.childCount > 0)
-            Destroy(bossRightGun.transform.GetChild(0));
+            Destroy(bossRightGun.transform.GetChild(0).gameObject);
         Vector2 newPos = new Vector2(0.0f, 3.5f);
         MoveVectorByTime moveToNewPoint = ActionMaker.MakeActionMoveVectorByTime(newPos - (Vector2)boss.transform.position, 1.0f);
         moveToNewPoint.BeforeActionDelegate += () =>
@@ -413,9 +413,9 @@ public class FirstBoss : Level
         loop.PushAction(leftBottomAndUp);
 
         var generateBulletWarning = new LoopAction(new LoopWhileActing(loop));
-        generateBulletWarning.PushAction(new GeneraterObject(EnemyPrefabs[1], 2f, 0f, 2));
+        generateBulletWarning.PushAction(new GenerateObject(EnemyPrefabs[1], 2f, 0f, 2));
         var generateFollow = new LoopAction(new LoopWhileActing(loop));
-        generateFollow.PushAction(new GeneraterObject(EnemyPrefabs[2], 4f, 0f, 1));
+        generateFollow.PushAction(new GenerateObject(EnemyPrefabs[2], 4f, 0f, 1));
 
         var action = new Parallel();
         action.AddSubAction(loop);
@@ -424,99 +424,5 @@ public class FirstBoss : Level
         if (GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
             action.AddSubAction(generateFollow);
         root.AddSubAction(action);
-    }
-
-    class EquipWeapon:IAction
-    {
-        private bool isFinish = false;
-        public override bool Finished => isFinish;
-
-        private Weapon weapon;
-        private Enemy enemy;
-
-        public EquipWeapon(Enemy enemy, Weapon weapon)
-        {
-            this.enemy = enemy;
-            this.weapon = weapon;
-        }
-
-        public override void Act()
-        {
-            enemy.EquipWeapon(weapon);
-            isFinish = true;
-        }
-
-        public override IAction Duplicate()
-        {
-            return new EquipWeapon(enemy, weapon);
-        }
-    }
-
-    class RemoveWeapon : IAction
-    {
-        private bool isFinish = false;
-        public override bool Finished => isFinish;
-
-        private Enemy enemy;
-
-        public RemoveWeapon(Enemy enemy)
-        {
-            this.enemy = enemy;
-        }
-
-        public override void Act()
-        {
-            enemy.RemoveWeapon();
-            isFinish = true;
-        }
-
-        public override IAction Duplicate()
-        {
-            return new RemoveWeapon(enemy);
-        }
-    }
-
-    class GeneraterObject : IAction
-    {
-        private bool isFinish = false;
-        public override bool Finished => isFinish;
-
-        private GameObject ob;
-        private float maxLoad;
-        private float curLoad;
-        private int count;
-        public GeneraterObject(GameObject ob, float maxLoad, float curLoad, int count)
-        {
-            this.ob = ob;
-            this.maxLoad = maxLoad;
-            this.curLoad = curLoad;
-            this.count = count;
-        }
-
-        public override void Act()
-        {
-            curLoad += Time.deltaTime;
-            isFinish = curLoad >= maxLoad;
-            if (curLoad >= maxLoad)
-            {
-                curLoad = 0f;
-                for (int i = 0; i < count; i++)
-                {
-                    GameObject go = GameObject.Instantiate(ob);
-                    go.SetActive(true);
-                    float x = Random.Range(-5.5f, 5.5f);
-                    float y = Random.Range(-5.0f, 5.0f);
-                    go.transform.position = new Vector3(x, y, 0.0f);
-                    Enemy enemy = go.GetComponent<Enemy>();
-                    if (enemy != null)
-                        enemy.StartAction();
-                }
-            }
-        }
-
-        public override IAction Duplicate()
-        {
-            return new GeneraterObject(ob, maxLoad, curLoad, count);
-        }
     }
 }

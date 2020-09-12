@@ -4480,7 +4480,7 @@ SpriteRenderer:
   m_SortingLayerID: -915091841
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5c4117527c873284588df37e39a3d02d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: de2264dc7f8a99642a99c376d727f9cf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4506,6 +4506,7 @@ GameObject:
   - component: {fileID: 8929886533316545553}
   - component: {fileID: 8929886533316545555}
   - component: {fileID: 8470238158152957531}
+  - component: {fileID: 8929886533316545560}
   m_Layer: 0
   m_Name: FollowPlayerSpiker
   m_TagString: Enemy
@@ -4513,3 +4514,16 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &8929886533316545560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8929886533316545559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc218610371c9bd4b89d7e7911084539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SuicideTime: 30
