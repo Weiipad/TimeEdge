@@ -10,7 +10,8 @@ public class FirstBoss : Level
     {
         none,
         first,
-        second
+        second,
+        third
     }
     private GameObject boss;
     private GameEntity bossEntity;
@@ -27,11 +28,19 @@ public class FirstBoss : Level
     private BossLevel bossLevel = BossLevel.none;
 
     private Branch root;
+
+    public GameObject bossBar;
+
     public override void StartLevel(LevelList levelList)
     {
-        //StartCoroutine(WaitTimeToStartFightBoss());
-        LevelInit();
-        ThirdLevelOfBoss();
+        bossBar.SetActive(true);
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            GameEntity entity = player.GetComponent<GameEntity>();
+            entity.currentHP = entity.maxHP;
+        }
+        StartCoroutine(WaitTimeToStartFightBoss());
     }
 
     private void LevelInit()
@@ -83,6 +92,10 @@ public class FirstBoss : Level
         if(bossLevel == BossLevel.first && bossEntity.currentHP/bossEntity.maxHP <= 2.0f/3.0f)
         {
             BeforeTurnToLevel(SecondLevelOfBoss);
+        }
+        else if(bossLevel == BossLevel.second && bossEntity.currentHP/bossEntity.maxHP <=1.0f/3.0f)
+        {
+            BeforeTurnToLevel(ThirdLevelOfBoss);
         }
     }
 
@@ -152,15 +165,18 @@ public class FirstBoss : Level
 
     private void BeforeTurnToLevel(EntityAction.ActionDelegate actionDelegate)
     {
-        bossLevel = BossLevel.second;
+        if (bossLevel == BossLevel.first)
+            bossLevel = BossLevel.second;
+        else
+            bossLevel = BossLevel.third;
         boss.GetComponent<Collider2D>().enabled = false;
         bossEnemy.RemoveWeapon();
         bossLeftGun.RemoveWeapon();
         if (bossLeftGun.transform.childCount > 0)
-            Destroy(bossLeftGun.transform.GetChild(0));
+            Destroy(bossLeftGun.transform.GetChild(0).gameObject);
         bossRightGun.RemoveWeapon();
         if (bossRightGun.transform.childCount > 0)
-            Destroy(bossRightGun.transform.GetChild(0));
+            Destroy(bossRightGun.transform.GetChild(0).gameObject);
         Vector2 newPos = new Vector2(0.0f, 3.5f);
         MoveVectorByTime moveToNewPoint = ActionMaker.MakeActionMoveVectorByTime(newPos - (Vector2)boss.transform.position, 1.0f);
         moveToNewPoint.BeforeActionDelegate += () =>
@@ -168,6 +184,10 @@ public class FirstBoss : Level
             bossEnemy.RemoveWeapon();
             bossEnemy.RemoveWeapon();
             bossLeftGun.RemoveWeapon();
+            if (bossLeftGun.transform.childCount > 0)
+                Destroy(bossLeftGun.transform.GetChild(0).gameObject);
+            if (bossRightGun.transform.childCount > 0)
+                Destroy(bossRightGun.transform.GetChild(0).gameObject);
         };
         moveToNewPoint.AfterActionDelegate += () => { boss.GetComponent<Collider2D>().enabled = true; };
         moveToNewPoint.AfterActionDelegate += () => { boss.transform.position = newPos; };
@@ -321,6 +341,8 @@ public class FirstBoss : Level
 
     private void ThirdLevelOfBoss()
     {
+        bossEnemy.actions = null;
+        bossEnemy.StartAction();
         root = new Branch();
         Branch wavaUp = new Branch();
         Branch rightDown = new Branch();
@@ -332,21 +354,21 @@ public class FirstBoss : Level
 
         //徘徊时，后两门副炮装备圆形弹，前两门装备V型弹
         var equipWaveUpWeapon = new Parallel();
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[2]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[7]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[7]));
-        equipWaveUpWeapon.AddSubAction(new WeaponControl(bossEnemy, true));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[2]));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[2]));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[7]));
+        equipWaveUpWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[7]));
+        equipWaveUpWeapon.AddSubAction(new RemoveWeapon(bossEnemy));
 
         wavaUp.AddSubAction(equipWaveUpWeapon);
         wavaUp.AddSubAction(wave);
 
         //从右边下去时，左边的两门副炮装备V型弹，右边两门圆形弹
         var equipRightDownWeapon = new Parallel();
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[4]));
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[4]));
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[2]));
-        equipRightDownWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[4]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[4]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[2]));
+        equipRightDownWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[2]));
 
         //先到达指定位置再向下走
         rightDown.AddSubAction(equipRightDownWeapon);
@@ -355,25 +377,25 @@ public class FirstBoss : Level
 
         //在下部向左边走，上面两门副炮装备V型弹，下面的装备圆形弹
         var equipLeftButtomWeapon = new Parallel();
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[8]));
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[8]));
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[2]));
-        equipLeftButtomWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[2]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[8]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[8]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[2]));
+        equipLeftButtomWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[2]));
 
         //从左边上去时，左边两门圆形弹，右边两门V型弹
         var equipLeftUpWeapon = new Parallel();
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, Weapons[2]));
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, Weapons[2]));
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossLeftGun, Weapons[5]));
-        equipLeftUpWeapon.AddSubAction(new WeaponControl(bossRightGun, Weapons[5]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossLeftBehindGun, Weapons[2]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossRightBehindGun, Weapons[2]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossLeftGun, Weapons[5]));
+        equipLeftUpWeapon.AddSubAction(new EquipWeapon(bossRightGun, Weapons[5]));
 
         //回到原点前停止攻击
         var removeWeapon = new Parallel();
-        removeWeapon.AddSubAction(new WeaponControl(bossLeftBehindGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossRightBehindGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossLeftGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossRightGun, true));
-        removeWeapon.AddSubAction(new WeaponControl(bossEnemy, Weapons[2]));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossLeftBehindGun));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossRightBehindGun));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossLeftGun));
+        removeWeapon.AddSubAction(new RemoveWeapon(bossRightGun));
+        removeWeapon.AddSubAction(new EquipWeapon(bossEnemy, Weapons[2]));
 
         //先左走再向上走
         leftBottomAndUp.AddSubAction(equipLeftButtomWeapon);
@@ -390,44 +412,17 @@ public class FirstBoss : Level
         loop.PushAction(rightDown);
         loop.PushAction(leftBottomAndUp);
 
-        root.AddSubAction(loop);
-    }
+        var generateBulletWarning = new LoopAction(new LoopWhileActing(loop));
+        generateBulletWarning.PushAction(new GenerateObject(EnemyPrefabs[1], 2f, 0f, 2));
+        var generateFollow = new LoopAction(new LoopWhileActing(loop));
+        generateFollow.PushAction(new GenerateObject(EnemyPrefabs[2], 4f, 0f, 1));
 
-    class WeaponControl : IAction
-    {
-        private bool isFinish = false;
-        public override bool Finished => isFinish;
-
-        private Weapon weapon;
-        private Enemy enemy;
-        private bool isRemoveWeapon = false;
-        public WeaponControl(Enemy enemy, Weapon weapon)
-        {
-            this.enemy = enemy;
-            this.weapon = weapon;
-        }
-
-        public WeaponControl(Enemy enemy, bool isRemoveWeapon)
-        {
-            this.enemy = enemy;
-            this.isRemoveWeapon = isRemoveWeapon;
-        }
-
-        public override void Act()
-        {
-            if (!isRemoveWeapon)
-                enemy.EquipWeapon(weapon);
-            if (isRemoveWeapon)
-                enemy.RemoveWeapon();
-            isFinish = true;
-        }
-
-        public override IAction Duplicate()
-        {
-            if (weapon == null)
-                return new WeaponControl(enemy, isRemoveWeapon);
-            else
-                return new WeaponControl(enemy, weapon);
-        }
+        var action = new Parallel();
+        action.AddSubAction(loop);
+        if (GameDiffculty.diffculty == GameDiffculty.Diffculty.normal || GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
+            action.AddSubAction(generateBulletWarning);
+        if (GameDiffculty.diffculty == GameDiffculty.Diffculty.hard)
+            action.AddSubAction(generateFollow);
+        root.AddSubAction(action);
     }
 }
