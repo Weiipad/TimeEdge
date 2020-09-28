@@ -35,10 +35,13 @@ public class FirstBoss : Level
     {
         bossBar.SetActive(true);
         GameObject player = GameObject.FindGameObjectWithTag("Player");
+        var healPrefab = Resources.Load<GameObject>("Prefabs/Buff");
         if (player != null)
         {
-            GameEntity entity = player.GetComponent<GameEntity>();
-            entity.currentHP = entity.maxHP;
+            var healing = Instantiate(healPrefab, new Vector3(0, 0, transform.position.z), Quaternion.identity).GetComponent<FloatItem>();
+            var effect = new HealOverTime(player.GetComponent<GameEntity>(), 20);
+            healing.effect = effect;
+            healing.sr.sprite = effect.data.image;
         }
         StartCoroutine(WaitTimeToStartFightBoss());
     }

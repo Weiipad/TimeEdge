@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FloatItem : MonoBehaviour
 {
+    public SpriteRenderer sr;
     private Vector2 direction = new Vector2();
     private Rigidbody2D body;
     public Effect effect;
@@ -11,6 +12,7 @@ public class FloatItem : MonoBehaviour
     void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Start()
